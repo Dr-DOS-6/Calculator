@@ -2,7 +2,7 @@ import time
 import sys
 import math
 print('Calculator')
-ver = '1.3.5'
+ver = '1.3.5.1_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 print('Version', ver)
