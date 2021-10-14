@@ -158,11 +158,36 @@ def all_calc_code():
                 if cal_mode_3_1_1 == 'n':
                     cal_mode_3_1_1 = '0'
                 if cal_mode_3_1_1 == '1':
-                    cal_mode_3_1_1_val = int(input('1辺の長さを入力してください。:'))
+                    cal_mode_3_1_1_val = float(input('1辺の長さを入力してください。:'))
                     cal_n_1 = cal_mode_3_1_1_val
-                    cal_n_2 = float(((cal_n_1 * 3)/2))
+                    cal_n_2 = float((cal_n_1 * 3)/2)
                     cal_n_3 = float(math.sqrt(cal_n_2*(3(cal_n_2 - cal_n_1))))
                     area = str(cal_n_3)
                     print('面積:',area)
+                elif cal_mode_3_1_1 =='0':
+                    cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
+                    cal_mode_3_1_1_val_2 = float(input('2つ目の辺の長さを入力してください。:'))
+                    cal_mode_3_1_1_val_3 = float(input('3つ目の辺の長さを入力してください。:'))
+                    cal_n_1_1 = cal_mode_3_1_1_val_1
+                    cal_n_1_2 = cal_mode_3_1_1_val_2
+                    cal_n_1_3 = cal_mode_3_1_1_val_3
+                    cal_n_2 = float((cal_n_1_1 + cal_n_1_2 + cal_n_1_3)/2)
+                    cal_n_3 = float(math.sqrt(cal_n_2*(cal_n_2 - cal_n_1_1)*(cal_n_2 - cal_n_1_2)*(cal_n_2 - cal_n_1_3)))
+                    area = str(cal_n_3)
+                    print('面積',area)
+                else:
+                    print('深刻なエラーが発生しました。プログラムを再起動します。')
+                    time.sleep(1)
+                    all_calc_code()
+            elif cal_mode_3_1 == '0':
+                cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
+                cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
+                       
+            else:
+                print('深刻なエラーが発生しました。プログラムを再起動します。')
+                time.sleep(1)
+                all_calc_code()
+                
+                
                     
 all_calc_code()
