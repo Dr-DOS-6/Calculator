@@ -2,13 +2,13 @@ import time
 import sys
 import math
 print('Calculator')
-ver = '1.3.6.1.2_Dev'
+ver = '1.3.6:1.3_Dev'
 builder = 'Aya0_Mi5on0'
 year = '2021'
-month = 'Oct.'
+month = 'Oct'
 day = '16'
 print('Version', ver)
-print(builder,'/',year,month,day)
+print(builder,'/',month,day,year)
 
 # 代入コード1
 def all_calc_code():
