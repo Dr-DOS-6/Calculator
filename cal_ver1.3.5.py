@@ -2,7 +2,7 @@ import time
 import sys
 import math
 print('Calculator')
-ver = '1.3.6:1.3_Dev'
+ver = '1.3.6:1.3.1_Dev'
 builder = 'Aya0_Mi5on0'
 year = '2021'
 month = 'Oct'
@@ -160,8 +160,8 @@ def all_calc_code():
                 if cal_mode_3_1_1 == 'n':
                     cal_mode_3_1_1 = '0'
                 if cal_mode_3_1_1 == '1':
-                    cal_mode_3_1_1_val = float(input('1辺の長さを入力してください。:'))
-                    cal_n_1 = cal_mode_3_1_1_val
+                    cal_mode_3_1_1_val = (input('1辺の長さを入力してください。:'))
+                    cal_n_1 = float(cal_mode_3_1_1_val)
                     cal_n_2 = float((cal_n_1 * 3)/2)
                     cal_n_3 = float(math.sqrt(cal_n_2*(3(cal_n_2 - cal_n_1))))
                     area = str(cal_n_3)
