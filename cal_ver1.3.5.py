@@ -182,11 +182,16 @@ def all_calc_code():
             elif cal_mode_3_1 == '0':
                 cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
                 cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
-                       
+                cal_n_1_1 = cal_mode_3_1_2_val_1
+                cal_n_1_2 = cal_mode_3_1_2_val_2
+                cal_n_2 = float((cal_n_1_1 * cal_n_1_2)/2)
+                area = str(cal_n_2)
+                print('面積:',area)
             else:
                 print('深刻なエラーが発生しました。プログラムを再起動します。')
                 time.sleep(1)
                 all_calc_code()
+        
                 
                 
                     
