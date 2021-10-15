@@ -4,9 +4,11 @@ import math
 print('Calculator')
 ver = '1.3.6.1.1_Dev'
 builder = 'Aya0_Mi5on0'
-year = 2021
+year = '2021'
+month = 'Oct.'
+day = '16'
 print('Version', ver)
-print(builder,'/',year)
+print(builder,'/',year,month,day)
 
 # 代入コード1
 def all_calc_code():
