@@ -163,7 +163,7 @@ def all_calc_code():
                     cal_mode_3_1_1_val = (input('1辺の長さを入力してください。:'))
                     cal_n_1 = float(cal_mode_3_1_1_val)
                     cal_n_2 = float((cal_n_1 * 3)/2)
-                    cal_n_3 = float(math.sqrt(cal_n_2*(3(cal_n_2 - cal_n_1))))
+                    cal_n_3 = float(math.sqrt(cal_n_2*(float(3)(cal_n_2 - cal_n_1))))
                     area = str(cal_n_3)
                     print('面積:',area)
                     time.sleep(1)
