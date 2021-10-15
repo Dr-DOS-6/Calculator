@@ -203,8 +203,4 @@ def all_calc_code():
                 print('深刻なエラーが発生しました。プログラムを再起動します。')
                 time.sleep(1)
                 all_calc_code()
-        
-                
-                
-                    
 all_calc_code()
