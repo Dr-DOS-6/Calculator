@@ -266,4 +266,6 @@ def all_calc_code():
                 print('計算を終了します。')
                 time.sleep(1)
                 sys.exit()
+            elif cal_mode_3_2 == '6':
+                cal_mode_3_2_1 = (input('使用したい計算方法を入力してください。1:4つの辺と対角線の長さ 2:2本の対角線の長さとその交わる角度 3:ブレートシュナイダーの公式:'))
 all_calc_code()
