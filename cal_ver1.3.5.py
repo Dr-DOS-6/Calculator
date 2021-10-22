@@ -2,7 +2,7 @@ import time
 import sys
 import math
 print('Calculator')
-ver = '1.3.6.1.1_Dev'
+ver = '1.3.6.2_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 print('Version', ver)
@@ -275,4 +275,12 @@ def all_calc_code():
                     cal_n_3 = float(input('3つ目の辺の長さを入力してください。:'))
                     cal_n_4 = float(input('4つ目の辺の長さを入力してください。:'))
                     cal_n_5 = (input('対角線の向きを入力してください。左上から右下:0 右上から左下:1 :'))
+                    if cal_n_5 == '0':
+                        cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
+                        cal_n_6 = float((cal_n_1 + cal_n_2 + cal_n_5_1)/float(2))
+                        area_1 = float(math.sqrt(cal_n_6(cal_n_6 - cal_n_1)(cal_n_6 - cal_n_2)(cal_n_6 - cal_n_5_1)))
+                        cal_n_7 = float((cal_n_3 + cal_n_4 + cal_n_5_1)/float(2))
+                        area_2 = float(math.sqrt(cal_n_7(cal_n_7 - cal_n_3)(cal_n_7 - cal_n_4)(cal_n_7 - cal_n_5_1)))
+                        area_all = area_1 + area_2
+                        print('面積:',area_all)
 all_calc_code()
