@@ -159,10 +159,11 @@ def all_calc_code():
                     cal_mode_3_1_1 = '0'
                 if cal_mode_3_1_1 == '1':
                     cal_mode_3_1_1_val = float(input('1辺の長さを入力してください。:'))
-                    cal_n_1 = cal_mode_3_1_1_val
+                    cal_n_1 = float(cal_mode_3_1_1_val)
                     cal_n_2 = float((cal_n_1 * 3)/2)
-                    cal_n_3 = float(math.sqrt(cal_n_2*(3(cal_n_2 - cal_n_1))))
-                    area = str(cal_n_3)
+                    cal_n_3 = float(math.sqrt(cal_n_2*(float(3)(cal_n_2 - cal_n_1))))
+                    cal_n_3_1 = str(cal_n_3)
+                    area = cal_n_3_1
                     print('面積:',area)
                     time.sleep(1)
                     print('計算を終了します。')
@@ -205,4 +206,38 @@ def all_calc_code():
                 all_calc_code()
         if cal_mode_3 == '2':
             cal_mode_3_2 = (input('面積を計算したい四角形の種類を入力してください。1:正方形 2:長方形 3:平行四辺形 4:台形 5:菱形 6:それ以外の四角形:'))
+            if cal_mode_3_2 == '1':
+                cal_mode_3_2_1 = float(input('1辺の長さを入力してください。:'))
+                cal_n_1 = cal_mode_3_2_1
+                cal_n_2 = cal_n_1 ** 2
+                area = str(cal_n_2)
+                print('面積:',area)
+                time.sleep(1)
+                print('計算を終了します。')
+                time.sleep(1)
+                sys.exit()
+            elif cal_mode_3_2 == '2':
+                cal_mode_3_2_1 = float(input('高さを入力してください。:'))
+                cal_mode_3_2_2 = float(input('横幅を入力してください。:'))
+                cal_n_1 = cal_mode_3_2_1
+                cal_n_2 = cal_mode_3_2_2 
+                cal_n_3 = cal_n_1 * cal_n_2
+                area = cal_n_3
+                print('面積:',area)
+                time.sleep(1)
+                print('計算を終了します。')
+                time.sleep(1)
+                sys.exit()
+            elif cal_mode_3_2 == '3':
+                cal_mode_3_2_1 = float(input('高さを入力してください。:'))
+                cal_mode_3_2_2 = float(input('上底/下底どちらかの長さを入力してください。'))
+                cal_n_1 = cal_mode_3_2_1
+                cal_n_2 = cal_mode_3_2_2 
+                cal_n_3 = cal_n_1 * cal_n_2
+                area = cal_n_3
+                print('面積:',area)
+                time.sleep(1)
+                print('計算を終了します。')
+                time.sleep(1)
+                sys.exit()
 all_calc_code()
