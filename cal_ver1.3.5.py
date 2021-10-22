@@ -275,5 +275,4 @@ def all_calc_code():
                     cal_n_3 = float(input('3つ目の辺の長さを入力してください。:'))
                     cal_n_4 = float(input('4つ目の辺の長さを入力してください。:'))
                     cal_n_5 = (input('対角線の向きを入力してください。左上から右下:0 右上から左下:1 :'))
-                    if cal_n_5 == '0':
 all_calc_code()
