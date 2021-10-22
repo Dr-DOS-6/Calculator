@@ -240,4 +240,30 @@ def all_calc_code():
                 print('計算を終了します。')
                 time.sleep(1)
                 sys.exit()
+            elif cal_mode_3_2 == '4':
+                cal_mode_3_2_1 = float(input('高さを入力してください。'))
+                cal_mode_3_2_2 = float(input('上底の長さを入力してください。'))
+                cal_mode_3_2_3 = float(input('下底の長さを入力してください。'))
+                cal_n_1 = cal_mode_3_2_1
+                cal_n_2 = cal_mode_3_2_2
+                cal_n_3 = cal_mode_3_2_3
+                cal_n_4 = ((cal_n_2 + cal_n_3)*cal_n_1)/2
+                area = cal_n_4
+                print('面積:',area)
+                time.sleep(1)
+                print('計算を終了します。')
+                time.sleep(1)
+                sys.exit()
+            elif cal_mode_3_2 == '5':
+                cal_mode_3_2_1 = float(input('縦の対角線の長さを入力してください。:'))
+                cal_mode_3_2_2 = float(input('横の対角線の長さを入力してください。:'))
+                cal_n_1 = cal_mode_3_2_1
+                cal_n_2 = cal_mode_3_2_2
+                cal_n_3 = (cal_n_1 * cal_n_2)/2
+                area = cal_n_3
+                print('面積:',area)
+                time.sleep(1)
+                print('計算を終了します。')
+                time.sleep(1)
+                sys.exit()
 all_calc_code()
