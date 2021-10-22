@@ -2,7 +2,7 @@ import time
 import sys
 import math
 print('Calculator')
-ver = '1.3.6.1_Dev'
+ver = '1.3.6.1.1_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 print('Version', ver)
@@ -144,9 +144,9 @@ def all_calc_code():
     elif cal_mode == '2':
         print('面積計算モードで起動します。')
         time.sleep(1)
-        cal_mode_3 = (input('面積を計算したい図形を入力してください。1は三角形、2は四角形、3は五角形、4は六角形、5は任意の角数の図形、6は円、7は楕円です。:'))
+        cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:六角形、5:任意の角数の図形、6:円、7:楕円:'))
         if cal_mode_3 == '1':
-            cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さを利用する場合:1/y 底辺の長さと高さを利用する場合:0/n:'))
+            cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さ:1/y 底辺の長さと高さ:0/n:'))
             if cal_mode_3_1 == 'y':
                 cal_mode_3_1 = '1'
             if cal_mode_3_1 == 'n':
@@ -203,4 +203,6 @@ def all_calc_code():
                 print('深刻なエラーが発生しました。プログラムを再起動します。')
                 time.sleep(1)
                 all_calc_code()
+        if cal_mode_3 == '2':
+            cal_mode_3_2 = (input('面積を計算したい四角形の種類を入力してください。1:正方形 2:長方形 3:平行四辺形 4:台形 5:菱形 6:それ以外の四角形:'))
 all_calc_code()
