@@ -299,5 +299,9 @@ def all_calc_code():
                         print('計算を終了します。')
                         time.sleep(1)
                         sys.exit()
-
+                elif cal_mode_3_2_1 == '2':
+                    cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
+                    cal_n_2 = float(input('2つ目の対角線の長さを入力してください。:'))
+                    cal_n_3 = float(input('対角線の交わる角度を入力してください。:'))
+                    area = cal_n_1 * cal_n_2
 all_calc_code()
