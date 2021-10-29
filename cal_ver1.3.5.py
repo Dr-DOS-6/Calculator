@@ -2,7 +2,7 @@ import time
 import sys
 import math
 print('Calculator')
-ver = '1.3.6.2_Dev'
+ver = '1.3.6.3_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 print('Version', ver)
@@ -280,7 +280,7 @@ def all_calc_code():
                         cal_n_6 = float((cal_n_1 + cal_n_2 + cal_n_5_1)/float(2))
                         area_1 = float(math.sqrt(cal_n_6*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_2)*(cal_n_6 - cal_n_5_1)))
                         cal_n_7 = float((cal_n_3 + cal_n_4 + cal_n_5_1)/float(2))
-                        area_2 = float(math.sqrt(cal_n_7(cal_n_7 - cal_n_3)(cal_n_7 - cal_n_4)(cal_n_7 - cal_n_5_1)))
+                        area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1)))
                         area_all = str(area_1 + area_2)
                         print('面積:',area_all)
 all_calc_code()
