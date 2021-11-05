@@ -304,4 +304,8 @@ def all_calc_code():
                     cal_n_2 = float(input('2つ目の対角線の長さを入力してください。:'))
                     cal_n_3 = float(input('対角線の交わる角度を入力してください。:'))
                     area = cal_n_1 * cal_n_2
+                else:
+                    print('深刻なエラーが発生しました。プログラムを再起動します。')
+                    time.sleep(1)
+                    all_calc_code()
 all_calc_code()
