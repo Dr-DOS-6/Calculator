@@ -282,11 +282,6 @@ def all_calc_code():
                         cal_n_7 = float((cal_n_3 + cal_n_4 + cal_n_5_1)/float(2))
                         area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1)))
                         area_all = str(area_1 + area_2)
-                        print('面積:',area_all)
-                        time.sleep(1)
-                        print('計算を終了します。')
-                        time.sleep(1)
-                        sys.exit()
                     elif cal_n_5 == '1':
                         cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
                         cal_n_6 = float((cal_n_4 + cal_n_1 + cal_n_5_1)/float(2))
@@ -294,17 +289,22 @@ def all_calc_code():
                         cal_n_7 = float((cal_n_2 + cal_n_3 + cal_n_5_1)/float(2))
                         area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1)))
                         area_all = str(area_1 + area_2)
-                        print('面積:',area_all)
-                        time.sleep(1)
-                        print('計算を終了します。')
-                        time.sleep(1)
-                        sys.exit()
+                    print('面積:',area_all)
+                    time.sleep(1)
+                    print('計算を終了します。')
+                    time.sleep(1)
+                    sys.exit()
                 elif cal_mode_3_2_1 == '2':
                     cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
                     cal_n_2 = float(input('2つ目の対角線の長さを入力してください。:'))
-                    cal_n_3 = float(input('対角線の交わる角度を入力してください。:'))
                     cal_n_4 = input('θの大きさを選んでください。30°:0 45°:1 60°:2 :')
-                    area = cal_n_1 * cal_n_2
+                    if cal_n_4 == '0':
+                        area = float(0.5*cal_n_1*cal_n_2*0.5)
+                    elif cal_n_4 == '1':
+                        area = float(0.5*cal_n_1*cal_n_2*(math.sqrt(2)/2))
+                    elif cal_n_4 == '2':
+                        area = float(0.5*cal_n_1*cal_n_2*(math.sqrt(3)/2))
+                    print('面積:',area)
                 else:
                     print('深刻なエラーが発生しました。プログラムを再起動します。')
                     time.sleep(1)
