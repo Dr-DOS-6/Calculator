@@ -320,17 +320,42 @@ def all_calc_code():
                     time.sleep(1)
                     sys.exit()
                 elif cal_mode_3_2_1 == '3':
-                    cal_n_1 = float(input('1つ目の辺の長さを入力してください。:'))
-                    cal_n_2 = float(input('2つ目の辺の長さを入力してください。:'))
-                    cal_n_3 = float(input('3つ目の辺の長さを入力してください。:'))
-                    cal_n_4 = float(input('4つ目の辺の長さを入力してください。:'))
-                    cal_n_5 = input('1つ目の角の大きさを指定してください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5:')
-                    cal_n_6 = input('2つ目の角の大きさを指定してください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5:')
-                    #cal_n_7の値と整数の一覧:30°:0 45°:1 60°:2 75°:3 90°:4 105°:5 120°:6 135°:7 150°:8 165°:9 180°:10
-                    #90°を超える場合、角度をθとした場合、(sin or cos)90° + (sin or cos)θ-90°
-                    if cal_n_5 == '0' and cal_n_6 == '0':
-                        cal_n_7 =  '0'
-                    if {cal_n_5 == '0' and cal_n_6 == '1'} or {cal_n_5 == '1' and cal_n_6 == '0'}
+                    def first_input():
+                        cal_n_1 = float(input('1つ目の辺の長さを入力してください。:'))
+                        cal_n_2 = float(input('2つ目の辺の長さを入力してください。:'))
+                        cal_n_3 = float(input('3つ目の辺の長さを入力してください。:'))
+                        cal_n_4 = float(input('4つ目の辺の長さを入力してください。:'))
+                        cal_n_5 = input('1つ目の角の大きさを指定してください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5:')
+                        cal_n_6 = input('2つ目の角の大きさを指定してください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5:')
+                        #cal_n_7の値と整数の一覧:30°:0 45°:1 60°:2 75°:3 90°:4 105°:5 120°:6 135°:7 150°:8 165°:9 180°:10
+                        #90°を超える場合、角度をθとした場合、(sin or cos)90° + (sin or cos)θ-90°
+                        if cal_n_5 == '0' and cal_n_6 == '0':
+                            cal_n_7 = '0'
+                        elif {cal_n_5 == '0' and cal_n_6 == '1'} or {cal_n_5 == '1' and cal_n_6 == '0'}:
+                            cal_n_7 = '1'
+                        elif {cal_n_5 == '0' and cal_n_6 == '2'} or {cal_n_5 == '1' and cal_n_6 == '1'} or {cal_n_5 == '2' and cal_n_6 == '0'}:
+                            cal_n_7 = '2'
+                        elif {cal_n_5 == '0' and cal_n_6 == '3'} or {cal_n_5 == '1' and cal_n_6 == '2'} or {cal_n_5 == '2' and cal_n_6 == '1'} or {cal_n_5 == '3' and cal_n_6 == '0'}:
+                            cal_n_7 = '3'
+                        elif {cal_n_5 == '0' and cal_n_6 == '4'} or {cal_n_5 == '1' and cal_n_6 == '3'} or {cal_n_5 == '2' and cal_n_6 == '2'} or {cal_n_5 == '3' and cal_n_6 == '1'} or {cal_n_5 == '4' and cal_n_6 == '0'}:
+                            cal_n_7 = '4'
+                        elif {cal_n_5 == '0' and cal_n_6 == '5'} or {cal_n_5 == '1' and cal_n_6 == '4'} or {cal_n_5 == '2' and cal_n_6 == '3'} or {cal_n_5 == '3' and cal_n_6 == '2'} or {cal_n_5 == '4' and cal_n_6 == '1'} or {cal_n_5 == '5' and cal_n_6 == '0'}:
+                            cal_n_7 = '5'
+                        elif {cal_n_5 == '1' and cal_n_6 == '5'} or {cal_n_5 == '2' and cal_n_6 == '4'} or {cal_n_5 == '3' and cal_n_6 == '3'} or {cal_n_5 == '4' and cal_n_6 == '2'} or {cal_n_5 == '5' and cal_n_6 == '1'}:
+                            cal_n_7 = '6'
+                        elif {cal_n_5 == '2' and cal_n_6 == '5'} or {cal_n_5 == '3' and cal_n_6 == '4'} or {cal_n_5 == '4' and cal_n_6 == '3'} or {cal_n_5 == '5' and cal_n_6 == '2'}:
+                            cal_n_7 = '7'
+                        elif {cal_n_5 == '3' and cal_n_6 == '5'} or {cal_n_5 == '4' and cal_n_6 == '4'} or {cal_n_5 == '5' and cal_n_6 == '3'}:
+                            cal_n_7 = '8'
+                        elif {cal_n_5 == '4' and cal_n_6 == '5'} or {cal_n_5 == '5' and cal_n_6 == '4'}:
+                            cal_n_7 = '9'
+                        elif cal_n_5 == '5' and cal_n_6 == '5':
+                            cal_n_7 = '10'
+                        else:
+                            print('値が無効です。もう一度入力してください。')
+                            time.sleep(1)
+                            first_input()
+                    return()
                 else:
                     print('深刻なエラーが発生しました。プログラムを再起動します。')
                     time.sleep(1)
