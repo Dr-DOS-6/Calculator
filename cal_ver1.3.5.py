@@ -1,6 +1,8 @@
 import time
 import sys
 import math
+import menu
+
 print('Calculator')
 ver = '1.3.7.2_Dev'
 builder = 'Aya0_Mi5on0'
