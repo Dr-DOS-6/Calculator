@@ -376,6 +376,11 @@ def all_calc_code():
                         all_calc_code()
                     s = ((cal_n_1 + cal_n_2 + cal_n_3 + cal_n_4)/2)
                     area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
+                    print('面積:',area_all)
+                    time.sleep(1)
+                    print('計算を終了します。')
+                    time.sleep(1)
+                    sys.exit()
                 else:
                     print('深刻なエラーが発生しました。プログラムを再起動します。')
                     time.sleep(1)
