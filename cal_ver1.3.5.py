@@ -1,10 +1,9 @@
 import time
 import sys
 import math
-import menu
 
 print('Calculator')
-ver = '1.3.7.2_Dev'
+ver = '1.3.7.4_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 Created_by_1 = 'Python 3.9.9'
@@ -43,6 +42,10 @@ def all_calc_code():
                 print('n - x =', n_x_2)
                 n_x_8 = n_x_2
             elif cal_mode_2 == '4':
+                if x == 0:
+                    print('Error:Division by zero is impossible.')
+                    time.sleep(1)
+                    all_calc_code()
                 n_x_3 = n / x
                 print('n / x =', n_x_3)
                 n_x_8 = n_x_3
