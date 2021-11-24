@@ -2,17 +2,21 @@ import cal_main
 import time
 import sys
 import math
-def end():
+def start_screen():
+    print('Calculator')
+    ver = '1.3.7.4_Dev'
+    builder = 'Aya0_Mi5on0'
+    year = 2021
+    Created_by_1 = 'Python 3.9.9'
+    Created_by_2 = 'Visual Studio Code 1.62.3'
+    time.sleep(0.3)
+    print('Version', ver)
+    time.sleep(0.3)
+    print(builder,year)
+    time.sleep(0.3)
+    print('Created by',Created_by_1,'and',Created_by_2)
     time.sleep(1)
-    print('Finish the calculation.')
-    time.sleep(1)
-    sys.exit()
-#エラー時再起動コード
-def error_end():
-    error = 'A serious error has occurred. Restart the program.'
-    print(error)
-    time.sleep(1)
-    cal_main.all_calc_code()
+
 def Bret_formula():
     cal_n_1 = float(input('1つ目の辺の長さを入力してください。:'))
     cal_n_2 = float(input('2つ目の辺の長さを入力してください。:'))
@@ -59,8 +63,8 @@ def Bret_formula():
     elif cal_n_7 == '10':
         cal_n_7 = 1
     else:
-        error_end()
+        cal_main.error_end()
     s = ((cal_n_1 + cal_n_2 + cal_n_3 + cal_n_4)/2)
     area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
     print('面積:',area_all)
-    end()
+    cal_main.end()
