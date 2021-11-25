@@ -2,21 +2,7 @@ import cal_main
 import time
 import sys
 import math
-def start_screen():
-    print('Calculator')
-    ver = '1.3.7.4_Dev'
-    builder = 'Aya0_Mi5on0'
-    year = 2021
-    Created_by_1 = 'Python 3.9.9'
-    Created_by_2 = 'Visual Studio Code 1.62.3'
-    time.sleep(0.3)
-    print('Version', ver)
-    time.sleep(0.3)
-    print(builder,year)
-    time.sleep(0.3)
-    print('Created by',Created_by_1,'and',Created_by_2)
-    time.sleep(1)
-    
+
 def cal_mode_3_2_1_1():
     print('辺の長さは、上→右→下→左の順に入力してください。')
     cal_n_1 = float(input('1つ目の辺の長さを入力してください。:'))
