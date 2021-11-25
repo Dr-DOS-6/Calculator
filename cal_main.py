@@ -299,18 +299,17 @@ def all_calc_code():
                     #cal_n_7の値と整数の一覧:30°:0 45°:1 60°:2 75°:3 90°:4 105°:5 120°:6 135°:7 150°:8 165°:9 180°:10
                     #90°を超える場合、角度をθとした場合、(sin or cos)90° + (sin or cos)θ-90°
                     cal_n_7 = cal_n_5 + cal_n_6 
-                    str(cal_n_7)
-                    if cal_n_7 == '0' or cal_n_7 == '8':
+                    if cal_n_7 == 0 or cal_n_7 == 8:
                         cal_n_7 = 1/2
-                    elif cal_n_7 == '1' or cal_n_7 == '7':
+                    elif cal_n_7 == 1 or cal_n_7 == 7:
                         cal_n_7 = 0
-                    elif cal_n_7 == '2' or cal_n_7 == '6':
+                    elif cal_n_7 == 2 or cal_n_7 == 6:
                         cal_n_7 = -1/2
-                    elif cal_n_7 == '3' or cal_n_7 == '5':
+                    elif cal_n_7 == 3 or cal_n_7 == 5:
                         cal_n_7 = (-1*(math.sqrt(3)/2))
-                    elif cal_n_7 == '4':
+                    elif cal_n_7 == 4:
                         cal_n_7 = -1
-                    elif cal_n_7 == '9':
+                    elif cal_n_7 == 9:
                         cal_n_7 = (math.sqrt(3)/2)
                     elif cal_n_7 == '10':
                         cal_n_7 = 1
