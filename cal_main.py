@@ -322,4 +322,6 @@ def all_calc_code():
                     end()
                 else:
                     error_end()
+        elif cal_mode_3 == '3':
+            cal_mode_3_2 = input('面積を求めたい五角形の種類を指定してください。正五角形:1 五角形:2')
 all_calc_code()
