@@ -16,6 +16,33 @@ def start_screen():
     time.sleep(0.3)
     print('Created by',Created_by_1,'and',Created_by_2)
     time.sleep(1)
+    
+def cal_mode_3_2_1_1():
+    print('辺の長さは、上→右→下→左の順に入力してください。')
+    cal_n_1 = float(input('1つ目の辺の長さを入力してください。:'))
+    cal_n_2 = float(input('2つ目の辺の長さを入力してください。:'))
+    cal_n_3 = float(input('3つ目の辺の長さを入力してください。:'))
+    cal_n_4 = float(input('4つ目の辺の長さを入力してください。:'))
+    cal_n_5 = (input('対角線の向きを入力してください。左上から右下:0 右上から左下:1 :'))
+    if cal_n_5 == '0':
+        cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
+        cal_n_6 = float((cal_n_1 + cal_n_2 + cal_n_5_1)/float(2))
+        area_1 = float(math.sqrt(cal_n_6*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_2)*(cal_n_6 - cal_n_5_1)))
+        cal_n_7 = float((cal_n_3 + cal_n_4 + cal_n_5_1)/float(2))
+        area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1)))
+        area_all = str(area_1 + area_2)
+    elif cal_n_5 == '1':
+        cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
+        cal_n_6 = float((cal_n_4 + cal_n_1 + cal_n_5_1)/float(2))
+        area_1 = float(math.sqrt(cal_n_6*(cal_n_6 - cal_n_4)*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_5_1)))
+        cal_n_7 = float((cal_n_2 + cal_n_3 + cal_n_5_1)/float(2))
+        area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1)))
+        area_all = str(area_1 + area_2)
+    else:
+        cal_main.error_end()
+    print('面積:',area_all)
+    cal_main.end()
+
 def cal_mode_3_2_1_2():
     cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
     cal_n_2 = float(input('2つ目の対角線の長さを入力してください。:'))
