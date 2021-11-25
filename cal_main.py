@@ -272,19 +272,20 @@ def all_calc_code():
                 elif cal_mode_3_2_1 == '2':
                     cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
                     cal_n_2 = float(input('2つ目の対角線の長さを入力してください。:'))
-                    cal_n_4 = input('θの大きさを選んでください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5 :')
-                    if cal_n_4 == '0':
-                        area = float(0.5*cal_n_1*cal_n_2*(((math.sqrt(6))-(math.sqrt(2)))/4))
-                    elif cal_n_4 == '1':
-                        area = float(0.5*cal_n_1*cal_n_2*0.5)
-                    elif cal_n_4 == '2':
-                        area = float(0.5*cal_n_1*cal_n_2*(math.sqrt(2)/2))
-                    elif cal_n_4 == '3':
-                        area = float(0.5*cal_n_1*cal_n_2*(math.sqrt(3)/2))
-                    elif cal_n_4 == '4':
-                        area = float(0.5*cal_n_1*cal_n_2*(((math.sqrt(2))+(math.sqrt(6)))/4))
-                    elif cal_n_4 == '5':
-                        area = float(0.5*cal_n_1*cal_n_2)
+                    cal_n_3 = input('θの大きさを選んでください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5 :')
+                    cal_n_4 = (cal_n_1*cal_n_2)
+                    if cal_n_3 == '0':
+                        area = float(0.5*cal_n_4*(((math.sqrt(6))-(math.sqrt(2)))/4))
+                    elif cal_n_3 == '1':
+                        area = float(0.5*cal_n_4*0.5)
+                    elif cal_n_3 == '2':
+                        area = float(0.5*cal_n_4*(math.sqrt(2)/2))
+                    elif cal_n_3 == '3':
+                        area = float(0.5*cal_n_4*(math.sqrt(3)/2))
+                    elif cal_n_3 == '4':
+                        area = float(0.5*cal_n_4*(((math.sqrt(2))+(math.sqrt(6)))/4))
+                    elif cal_n_3 == '5':
+                        area = float(0.5*cal_n_4)
                     else:
                         error_end()
                     print('面積:',area)
