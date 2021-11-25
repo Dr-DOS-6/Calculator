@@ -15,7 +15,7 @@ def error_end():
     all_calc_code()
 
 print('Calculator')
-ver = '1.3.7.4_Dev'
+ver = '1.3.7.8_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 Created_by_1 = 'Python 3.9.9'
