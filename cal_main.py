@@ -15,7 +15,7 @@ def error_end():
     all_calc_code()
 
 print('Calculator')
-ver = '1.3.8.0_Dev'
+ver = '1.3.8.5_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 Created_by_1 = 'Python 3.9.9'
@@ -347,6 +347,8 @@ def all_calc_code():
                 area_4 = ((cal_n_7 * cal_n_8)/2)
                 area_5 = ((cal_n_9 * cal_n_10)/2)
                 area_all = area_1 + area_2 + area_3 + area_4 + area_5
+            else:
+                error_end()
             print('面積:',area)
             end()
 all_calc_code()
