@@ -15,7 +15,7 @@ def error_end():
     all_calc_code()
 
 print('Calculator')
-ver = '1.3.7.8_Dev'
+ver = '1.3.8.0_Dev'
 builder = 'Aya0_Mi5on0'
 year = 2021
 Created_by_1 = 'Python 3.9.9'
@@ -29,7 +29,7 @@ print('Created by',Created_by_1,'and',Created_by_2)
 time.sleep(1)
 # 代入コード1
 def all_calc_code():
-    cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4です。'))
+    cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5です。'))
     if cal_mode == '1':
         print('通常計算モードで起動します。')
         time.sleep(1)
