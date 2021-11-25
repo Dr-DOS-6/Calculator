@@ -324,4 +324,29 @@ def all_calc_code():
                     error_end()
         elif cal_mode_3 == '3':
             cal_mode_3_2 = input('面積を求めたい五角形の種類を指定してください。正五角形:1 五角形:2')
+            if cal_mode_3_2 == '1':
+                cal_n_1 = float(input('一辺の長さを入力してください。:'))
+                cal_n_2 = float(input('中心までの距離を入力してください。:'))
+                area_pre = ((cal_n_1 * cal_n_2)/2)
+                area = area_pre *5
+            elif cal_mode_3_2 == '2':
+                print('五角形を5つの三角形に分け、上から時計周りに入力してください。')
+                cal_n_1 = float(input('1つ目の三角形の一辺の長さを入力してください。'))
+                cal_n_2 = float(input('1つ目の三角形の頂点までの距離を入力してください。'))
+                cal_n_3 = float(input('2つ目の三角形の一辺の長さを入力してください。'))
+                cal_n_4 = float(input('2つ目の三角形の頂点までの距離を入力してください。'))
+                cal_n_5 = float(input('3つ目の三角形の一辺の長さを入力してください。'))
+                cal_n_6 = float(input('3つ目の三角形の頂点までの距離を入力してください。'))
+                cal_n_7 = float(input('4つ目の三角形の一辺の長さを入力してください。'))
+                cal_n_8 = float(input('4つ目の三角形の頂点までの距離を入力してください。'))
+                cal_n_9 = float(input('5つ目の三角形の一辺の長さを入力してください。'))
+                cal_n_10 = float(input('5つ目の三角形の頂点までの距離を入力してください。'))
+                area_1 = ((cal_n_1 * cal_n_2)/2)
+                area_2 = ((cal_n_3 * cal_n_4)/2)
+                area_3 = ((cal_n_5 * cal_n_6)/2)
+                area_4 = ((cal_n_7 * cal_n_8)/2)
+                area_5 = ((cal_n_9 * cal_n_10)/2)
+                area_all = area_1 + area_2 + area_3 + area_4 + area_5
+            print('面積:',area)
+            end()
 all_calc_code()
