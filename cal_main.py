@@ -15,7 +15,8 @@ def error_end():
     all_calc_code()
 
 print('Calculator')
-ver = '1.3.8.5_Dev'
+ver = '1.3.9.0_Dev'
+#税計算モジュール実装
 builder = 'Aya0_Mi5on0'
 year = 2021
 Created_by_1 = 'Python 3.9.9'
@@ -29,7 +30,7 @@ print('Created by',Created_by_1,'and',Created_by_2)
 time.sleep(1)
 # 代入コード1
 def all_calc_code():
-    cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5です。'))
+    cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5、税計算モードは6です。'))
     if cal_mode == '1':
         print('通常計算モードで起動します。')
         time.sleep(1)
@@ -351,4 +352,28 @@ def all_calc_code():
                 error_end()
             print('面積:',area)
             end()
+    elif cal_mode == '6':
+        cal = float(input('どの値を求めたいですか？ 税込みの金額なら1、税抜きの金額なら2、税率なら3、税として加算されている金額なら4を入力してください。'))
+        if cal == 1:
+            tax_free_price = float(input('原価(円):'))
+            tax_percent = float(input('税率(%):'))
+            tax_include_price = str((tax_free_price + (tax_free_price * (tax_percent * 0.01))))
+            print('¥'+tax_include_price)
+        elif cal == 2:
+            tax_include_price = float(input('税込みの値段(円):'))
+            tax_percent = float(input('税率(%):'))
+            tax_free_price = str(int(tax_include_price - (tax_include_price / (((tax_percent * 0.01) + 1)* 100)* tax_percent)))
+            print('¥'+tax_free_price)
+        elif cal == 3:
+            tax_include_price = float(input('税込みの値段:'))
+            tax_free_price = float(input('原価:'))
+            tax_percent = str(int(((tax_include_price / tax_free_price)- 1)* 100))
+            print(tax_percent+'%')
+        elif cal == 4:
+            tax_include_price = float(input('税込みの値段:'))
+            tax_free_price = float(input('原価:'))
+            tax_price = str(int(tax_include_price - tax_free_price))
+            print('¥'+tax_price)
+        else:
+            error_end()
 all_calc_code()
