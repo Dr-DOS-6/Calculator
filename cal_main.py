@@ -1,22 +1,26 @@
 import time
 import sys
 import math
+import os
 #終了コード
 def end():
     time.sleep(1)
     print('Finish the calculation.')
     time.sleep(1)
+    os.system('cls')
     sys.exit()
 #エラー時再起動コード
 def error_end():
     error = 'A serious error has occurred. Restarting the program.'
     print(error)
     time.sleep(1)
+    os.system('cls')
     all_calc_code()
 def error_end_2():
     error_2 = 'This feature is currently not implemented and cannot be activated. Restarting the program.'
     print(error_2)
     time.sleep(1)
+    os.system('cls')
     all_calc_code()
 error = 'A serious error has occurred. Restarting the program.'
 print('Calculator')
