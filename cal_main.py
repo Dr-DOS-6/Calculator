@@ -347,7 +347,7 @@ def all_calc_code():
                 area_3 = ((cal_n_5 * cal_n_6)/2)
                 area_4 = ((cal_n_7 * cal_n_8)/2)
                 area_5 = ((cal_n_9 * cal_n_10)/2)
-                area_all = area_1 + area_2 + area_3 + area_4 + area_5
+                area_all = area_1+area_2+area_3+area_4+area_5
             else:
                 error_end()
             print('面積:',area)
@@ -357,23 +357,24 @@ def all_calc_code():
         if cal == 1:
             tax_free_price = float(input('原価(円):'))
             tax_percent = float(input('税率(%):'))
-            tax_include_price = str((tax_free_price + (tax_free_price * (tax_percent * 0.01))))
+            tax_include_price = str((tax_free_price+(tax_free_price*(tax_percent*0.01))))
             print('¥'+tax_include_price)
         elif cal == 2:
             tax_include_price = float(input('税込みの値段(円):'))
             tax_percent = float(input('税率(%):'))
-            tax_free_price = str(int(tax_include_price - (tax_include_price / (((tax_percent * 0.01) + 1)* 100)* tax_percent)))
+            tax_free_price = str(int(tax_include_price-(tax_include_price/(((tax_percent*0.01)+1)*100)*tax_percent)))
             print('¥'+tax_free_price)
         elif cal == 3:
             tax_include_price = float(input('税込みの値段:'))
             tax_free_price = float(input('原価:'))
-            tax_percent = str(int(((tax_include_price / tax_free_price)- 1)* 100))
+            tax_percent = str(int(((tax_include_price/tax_free_price)-1)*100))
             print(tax_percent+'%')
         elif cal == 4:
             tax_include_price = float(input('税込みの値段:'))
             tax_free_price = float(input('原価:'))
-            tax_price = str(int(tax_include_price - tax_free_price))
+            tax_price = str(int(tax_include_price-tax_free_price))
             print('¥'+tax_price)
         else:
             error_end()
+        end()
 all_calc_code()
