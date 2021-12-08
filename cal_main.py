@@ -15,28 +15,32 @@ def error_end():
     print(error)
     time.sleep(1)
     os.system('cls')
+    startup()
     all_calc_code()
 def error_end_2():
     error_2 = 'This feature is currently not implemented and cannot be activated. Restarting the program.'
     print(error_2)
     time.sleep(1)
     os.system('cls')
+    startup()
     all_calc_code()
 error = 'A serious error has occurred. Restarting the program.'
-print('Calculator')
-ver = '1.3.9.5_Dev'
-#税計算モジュール実装
-builder = 'Aya0_Mi5on0'
-year = 2021
-Created_by_1 = 'Python 3.9.9'
-Created_by_2 = 'Visual Studio Code 1.62.3'
-time.sleep(0.3)
-print('Version', ver)
-time.sleep(0.3)
-print(builder,year)
-time.sleep(0.3)
-print('Created by',Created_by_1,'and',Created_by_2)
-time.sleep(1)
+def startup():
+    print('Calculator')
+    ver = '1.3.9.5_Dev'
+    #税計算モジュール実装
+    builder = 'Aya0_Mi5on0'
+    year = 2021
+    Created_by_1 = 'Python 3.9.9'
+    Created_by_2 = 'Visual Studio Code 1.62.3'
+    time.sleep(0.3)
+    print('Version', ver)
+    time.sleep(0.3)
+    print(builder,year)
+    time.sleep(0.3)
+    print('Created by',Created_by_1,'and',Created_by_2)
+    time.sleep(1)
+startup()
 # 代入コード1
 def all_calc_code():
     cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5、税計算モードは6です。'))
