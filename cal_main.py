@@ -9,13 +9,18 @@ def end():
     sys.exit()
 #エラー時再起動コード
 def error_end():
-    error = 'A serious error has occurred. Restart the program.'
+    error = 'A serious error has occurred. Restarting the program.'
     print(error)
     time.sleep(1)
     all_calc_code()
-
+def error_end_2():
+    error_2 = 'This feature is currently not implemented and cannot be activated. Restarting the program.'
+    print(error_2)
+    time.sleep(1)
+    all_calc_code()
+error = 'A serious error has occurred. Restarting the program.'
 print('Calculator')
-ver = '1.3.9.0_Dev'
+ver = '1.3.9.5_Dev'
 #税計算モジュール実装
 builder = 'Aya0_Mi5on0'
 year = 2021
@@ -35,7 +40,8 @@ def all_calc_code():
         print('通常計算モードで起動します。')
         time.sleep(1)
         n = float(input('nに代入する数字を入力してください。'))
-        def rep(n):           
+        def rep(n):
+            error = 'A serious error has occurred. Restarting the program.'
             x = float(input('xに代入する数字を入力してください。'))
             print('nに代入された数字= ', n)
             print('xに代入された数字= ', x)
@@ -146,7 +152,7 @@ def all_calc_code():
                 error_end()
         rep(n)
     elif cal_mode == '2':
-        error = 'A serious error has occurred. Restart the program.'
+        error = 'A serious error has occurred. Restarting the program.'
         print('面積計算モードで起動します。')
         time.sleep(1)
         cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:六角形、5:任意の角数の図形、6:円、7:楕円:'))
@@ -317,7 +323,7 @@ def all_calc_code():
                         cal_n_7 = 1
                     else:
                         error_end()
-                    s = ((cal_n_1 + cal_n_2 + cal_n_3 + cal_n_4)/2)
+                    s = ((cal_n_1+cal_n_2+cal_n_3+cal_n_4)/2)
                     area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
                     print('面積:',area_all)
                     end()
@@ -328,8 +334,8 @@ def all_calc_code():
             if cal_mode_3_2 == '1':
                 cal_n_1 = float(input('一辺の長さを入力してください。:'))
                 cal_n_2 = float(input('中心までの距離を入力してください。:'))
-                area_pre = ((cal_n_1 * cal_n_2)/2)
-                area = area_pre *5
+                area_pre = ((cal_n_1*cal_n_2)/2)
+                area = area_pre*5
             elif cal_mode_3_2 == '2':
                 print('五角形を5つの三角形に分け、上から時計周りに入力してください。')
                 cal_n_1 = float(input('1つ目の三角形の一辺の長さを入力してください。'))
@@ -342,16 +348,25 @@ def all_calc_code():
                 cal_n_8 = float(input('4つ目の三角形の頂点までの距離を入力してください。'))
                 cal_n_9 = float(input('5つ目の三角形の一辺の長さを入力してください。'))
                 cal_n_10 = float(input('5つ目の三角形の頂点までの距離を入力してください。'))
-                area_1 = ((cal_n_1 * cal_n_2)/2)
-                area_2 = ((cal_n_3 * cal_n_4)/2)
-                area_3 = ((cal_n_5 * cal_n_6)/2)
-                area_4 = ((cal_n_7 * cal_n_8)/2)
-                area_5 = ((cal_n_9 * cal_n_10)/2)
+                area_1 = ((cal_n_1*cal_n_2)/2)
+                area_2 = ((cal_n_3*cal_n_4)/2)
+                area_3 = ((cal_n_5*cal_n_6)/2)
+                area_4 = ((cal_n_7*cal_n_8)/2)
+                area_5 = ((cal_n_9*cal_n_10)/2)
                 area_all = area_1+area_2+area_3+area_4+area_5
             else:
                 error_end()
             print('面積:',area)
             end()
+    elif cal_mode == '3':
+        #体積計算モード実装後に363行は削除
+        error_end_2()
+    elif cal_mode == '4':
+        #表面積計算モード実装後に365行は削除
+        error_end_2()
+    elif cal_mode == '5':
+        #数値変換モード実装後に368行は削除
+        error_end_2()
     elif cal_mode == '6':
         cal = float(input('どの値を求めたいですか？ 税込みの金額なら1、税抜きの金額なら2、税率なら3、税として加算されている金額なら4を入力してください。'))
         if cal == 1:
@@ -377,4 +392,6 @@ def all_calc_code():
         else:
             error_end()
         end()
+    else:
+        error_end()
 all_calc_code()
