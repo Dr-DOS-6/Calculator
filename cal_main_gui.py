@@ -29,7 +29,7 @@ def error_end_2():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.3.9.5_Dev'
+    ver = '1.3.9.5_GUI_Dev'
     #税計算モジュール実装
     builder = 'Aya0_Mi5on0'
     year = 2021
