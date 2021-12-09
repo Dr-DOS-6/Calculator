@@ -4,7 +4,7 @@ import math
 import os
 import tkinter as tk
 #終了コード
-root = tk.Tk()
+
 def end():
     time.sleep(1)
     print('Finish the calculation.')
@@ -28,23 +28,31 @@ def error_end_2():
     all_calc_code()
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
-    print('Calculator')
-    ver = '1.3.9.5_GUI_Dev'
+    name = 'Calculator'
+    ver = '1.3.9.6_GUI_Dev'
+    ver = 'Version',ver
     #税計算モジュール実装
     builder = 'Aya0_Mi5on0'
-    year = 2021
+    year = '2021'
+    built = builder,year
     Created_by_1 = 'Python 3.9.9'
     Created_by_2 = 'Visual Studio Code 1.62.3'
+    Created_by = 'Created by',Created_by_1,'and',Created_by_2
+    name = tk.Label(text=name)
+    name.pack()
     time.sleep(0.3)
-    print('Version', ver)
+    ver = tk.Label(text=ver)
     time.sleep(0.3)
-    print(builder,year)
+    builder = tk.Label(text=built)
     time.sleep(0.3)
-    print('Created by',Created_by_1,'and',Created_by_2)
+    Created_by = tk.Label(text=Created_by)
     time.sleep(1)
+root = tk.Tk()
+root.title(u"Calculator 1.3.9.5_GUI_Dev")
+root.geometry("800x600")
 startup()
 # 代入コード1
-def all_calc_code():
+def all_calc_code():    
     cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5、税計算モードは6です。'))
     if cal_mode == '1':
         print('通常計算モードで起動します。')
