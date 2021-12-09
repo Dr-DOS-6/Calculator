@@ -30,14 +30,14 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     name = 'Calculator'
     ver = '1.3.9.6_GUI_Dev'
-    ver = 'Version',ver
+    ver = 'Version'+' '+ver
     #税計算モジュール実装
     builder = 'Aya0_Mi5on0'
     year = '2021'
-    built = builder,year
+    built = builder+' '+year
     Created_by_1 = 'Python 3.9.9'
     Created_by_2 = 'Visual Studio Code 1.62.3'
-    Created_by = 'Created by',Created_by_1,'and',Created_by_2
+    Created_by =  ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
     name = tk.Label(text=name)
     name.pack()
     time.sleep(0.3)
