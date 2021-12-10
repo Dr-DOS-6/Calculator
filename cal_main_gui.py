@@ -3,6 +3,7 @@ import sys
 import math
 import os
 import tkinter as tk
+from tkinter.constants import CENTER
 #終了コード
 
 def end():
@@ -38,22 +39,26 @@ def startup():
     Created_by_1 = 'Python 3.9.9'
     Created_by_2 = 'Visual Studio Code 1.62.3'
     Created_by =  ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
-    name = tk.Label(text=name)
-    name.pack()
-    time.sleep(0.3)
-    ver = tk.Label(text=ver)
-    time.sleep(0.3)
-    builder = tk.Label(text=built)
-    time.sleep(0.3)
-    Created_by = tk.Label(text=Created_by)
+    credit_1 = tk.Label(root,text=name,font=(None,20))
+    credit_1.pack(anchor='center')
+    credit_2 = tk.Label(root,text=ver,font=(None,20))
+    credit_2.pack(anchor='center')
+    credit_3 = tk.Label(root,text=built,font=(None,20))
+    credit_3.pack(anchor='center')
+    credit_4 = tk.Label(root,text=Created_by,font=(None,20))
+    credit_4.pack(anchor='center')
     time.sleep(1)
 root = tk.Tk()
 root.title(u"Calculator 1.3.9.5_GUI_Dev")
 root.geometry("800x600")
 startup()
+time.sleep(5)
 # 代入コード1
-def all_calc_code():    
-    cal_mode = (input('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5、税計算モードは6です。'))
+def all_calc_code():
+    sel = tk.Entry(width=1)
+    cal_mode = tk.Label('使用するモードを選択してください。通常計算モードは1、面積計算モードは2、体積計算モードは3、表面積計算モードは4、数値変換モードは5、税計算モードは6です。')
+    cal_mode.pack()
+    sel.place(anchor='center')
     if cal_mode == '1':
         print('通常計算モードで起動します。')
         time.sleep(1)
@@ -142,14 +147,14 @@ def all_calc_code():
                 else:
                     error_end()
             # 再計算するかの確認
-            rep2 = (input('もう一回計算したいですか？　y/n or 1/0:'))
+            rep2 = (input('もう一回計算したいですか? y/n or 1/0:'))
             if rep2 == "1":
                 rep2 = 'y'
             elif rep2 == "0":
                 rep2 = 'n'
             if rep2 == 'y':
                 # 計算結果の引継ぎの確認
-                rep3 = (input('計算結果を引継ぎますか？ y/n or 1/0:'))
+                rep3 = (input('計算結果を引継ぎますか? y/n or 1/0:'))
                 if rep3 == "1":
                     rep3 = 'y'
                 elif rep3 == "0":
