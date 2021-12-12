@@ -27,9 +27,9 @@ def error_end_2():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.0.0_CUI_Alpha'
+    ver = '1.4.1.0_CUI_Alpha'
     ver = 'Version'+' '+ver
-    #税計算モジュール実装
+    #正円面積計算モジュール実装
     builder = 'Aya0_Mi5on0'
     year = '2021'
     built = builder+' '+year
@@ -166,7 +166,7 @@ def all_calc_code():
         error = 'A serious error has occurred. Restarting the program.'
         print('面積計算モードで起動します。')
         time.sleep(1)
-        cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:六角形、5:任意の角数の図形、6:円、7:楕円:'))
+        cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円、5:楕円:'))
         if cal_mode_3 == '1':
             cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さ:1/y 底辺の長さと高さ:0/n:'))
             if cal_mode_3_1 == 'y':
@@ -369,6 +369,22 @@ def all_calc_code():
                 error_end()
             print('面積:',area)
             end()
+        elif cal_mode_3 == '4':
+            cal_mode_3_2 = input('面積の求め方を指定してください。半径と円周率:1 半径と円周率:2')
+            if cal_mode_3_2 == '1':
+                cal_n_1 = float(input('半径の長さを入力してください。'))
+                area = math.pi*(cal_n_1*cal_n_1)
+                print('面積:',area)
+                end()
+            elif cal_mode_3_2 == '2':
+                cal_n_1 = float(input('半径の長さを入力してください。'))
+                cal_n_2 = float(input('円周の長さを入力してください。'))
+                area_pre = cal_n_2/math.pi/2
+                area = area_pre*area_pre*math.pi
+                print('面積:',area)
+                end()
+            else:
+                error_end()
     elif cal_mode == '3':
         #体積計算モード実装後に363行は削除
         error_end_2()
