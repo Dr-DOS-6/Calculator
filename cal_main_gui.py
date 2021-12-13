@@ -30,7 +30,7 @@ def error_end_2():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     name = 'Calculator'
-    ver = '1.3.9.6_GUI_Dev'
+    ver = '1.3.9.7_GUI_Dev'
     ver = 'Version'+' '+ver
     #税計算モジュール実装
     builder = 'Aya0_Mi5on0'
@@ -381,6 +381,22 @@ def all_calc_code():
                 error_end()
             print('面積:',area)
             end()
+        elif cal_mode_3 == '4':
+            cal_mode_3_2 = input('面積の求め方を指定してください。半径と円周率:1 半径と円周率:2')
+            if cal_mode_3_2 == '1':
+                cal_n_1 = float(input('半径の長さを入力してください。'))
+                area = math.pi*(cal_n_1*cal_n_1)
+                print('面積:',area)
+                end()
+            elif cal_mode_3_2 == '2':
+                cal_n_1 = float(input('半径の長さを入力してください。'))
+                cal_n_2 = float(input('円周の長さを入力してください。'))
+                area_pre = cal_n_2/math.pi/2
+                area = area_pre*area_pre*math.pi
+                print('面積:',area)
+                end()
+            else:
+                error_end()
     elif cal_mode == '3':
         #体積計算モード実装後に363行は削除
         error_end_2()

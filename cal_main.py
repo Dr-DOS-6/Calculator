@@ -135,7 +135,7 @@ def all_calc_code():
                 else:
                     error_end()
             # 再計算するかの確認
-            rep2 = (input('もう一回計算したいですか？　y/n or 1/0:'))
+            rep2 = (input('もう一回計算したいですか？ y/n or 1/0:'))
             if rep2 == "1":
                 rep2 = 'y'
             elif rep2 == "0":
