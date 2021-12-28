@@ -53,6 +53,8 @@ def startup():
     time.sleep(0.3)
     print(Created_by)
     time.sleep(1)
+    if not pf_s == 'Windows' or 'Linux' or 'Darwin':
+        print("I'm sorry. This calculator is available for Windows, Linux, and MacOS. Please make sure that your OS is supported.")
 startup()
 # 代入コード1
 def all_calc_code():
