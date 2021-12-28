@@ -5,6 +5,12 @@ import os
 import platform as pf
 pf_s = pf.system()
 #終了コード
+def sys_info():
+    print ('system   :', pf.system())
+    print ('release  :', pf.release())
+    print ('version  :', pf.version())
+    print ('machine  :', pf.machine())
+    print ('processor:', pf.processor())
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -17,9 +23,14 @@ def end():
     clear()
     sys.exit()
 #エラー時再起動コード
-def error_end():
+def error_end(cnt=[0]):
     error = 'A serious error has occurred. Restarting the program.'
     print(error)
+    cnt[0] += 1
+    if cnt > 5:
+        print('Multiple serious errors have occurred. Kill the program.')
+        time.sleep(0.5)
+        sys.exit()
     time.sleep(1)
     clear()
     startup()
@@ -31,6 +42,13 @@ def error_end_2():
     clear()
     startup()
     all_calc_code()
+def error_end_3():
+    error_3 = 'This program will not run on this computer.'
+    print(error_3)
+    time.sleep(1)
+    print ('System information for this computer:')
+    sys_info()
+    sys.exit()
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
@@ -53,8 +71,14 @@ def startup():
     time.sleep(0.3)
     print(Created_by)
     time.sleep(1)
-    if not pf_s == 'Windows' or 'Linux' or 'Darwin':
+    if pf_s == 'Windows' or 'Linux' or 'Darwin':
+        return
+    else:
         print("I'm sorry. This calculator is available for Windows, Linux, and MacOS. Please make sure that your OS is supported.")
+    #if not pf_s == 'Linux':
+    #    print("I'm sorry. This calculator is available for Windows. Please make sure that your OS is supported.")
+        time.sleep(0.5)
+        error_end_3()
 startup()
 # 代入コード1
 def all_calc_code():
