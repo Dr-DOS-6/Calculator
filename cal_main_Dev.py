@@ -2,20 +2,29 @@ import time
 import sys
 import math
 import os
+import datetime
 import platform as pf
 pf_s = pf.system()
-#終了コード
+ver = pf.python_version()
+date = datetime.datetime.today()
+date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 def sys_info():
     print ('system   :', pf.system())
     print ('release  :', pf.release())
-    print ('version  :', pf.version())
+    print ('system_version  :', pf.version())
     print ('machine  :', pf.machine())
     print ('processor:', pf.processor())
+    print ('python_version:',ver)
+    f = open('error.log', 'w', encoding='UTF-8')
+    datalist = ['System: ',pf.system()+'\n','Release: ',pf.release()+'\n','System_version: ',pf.version()+'\n','Machine: ',pf.machine()+'\n','Processor: ',pf.processor()+'\n','Python_version: ',ver+'\n','Generated_Date: ',date_1+'\n']
+    f.writelines(datalist)
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
     elif pf_s == 'Linux' or 'Darwin':
         os.system('clear')
+    else:
+        error_end_3()
 def end():
     time.sleep(1)
     print('Finish the calculation.')
@@ -23,11 +32,11 @@ def end():
     clear()
     sys.exit()
 #エラー時再起動コード
-def error_end(cnt=[0]):
+def error_end(error_cnt=[0]):
     error = 'A serious error has occurred. Restarting the program.'
     print(error)
-    cnt[0] += 1
-    if cnt > 5:
+    error_cnt[0] += 1
+    if error_cnt[0] == 5:
         print('Multiple serious errors have occurred. Kill the program.')
         time.sleep(0.5)
         sys.exit()
@@ -35,9 +44,14 @@ def error_end(cnt=[0]):
     clear()
     startup()
     all_calc_code()
-def error_end_2():
+def error_end_2(error_cnt=[0]):
     error_2 = 'This feature is currently not implemented and cannot be activated. Restarting the program.'
     print(error_2)
+    error_cnt[0] += 1
+    if error_cnt[0] == 5:
+        print('Multiple serious errors have occurred. Kill the program.')
+        time.sleep(0.5)
+        sys.exit()
     time.sleep(1)
     clear()
     startup()
@@ -52,7 +66,7 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.3.0_CUI_Dev'
+    ver = '1.4.3.2_CUI_Dev'
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
@@ -80,6 +94,7 @@ def startup():
         time.sleep(0.5)
         error_end_3()
 startup()
+#error_end_3()
 # 代入コード1
 def all_calc_code():
     cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。'))
