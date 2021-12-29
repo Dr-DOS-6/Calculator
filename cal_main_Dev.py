@@ -451,7 +451,7 @@ def all_calc_code():
         error_end_2()
     elif cal_mode == '4':
         clear()
-        cal = float(input('どの値を求めますか？ 1:税込み金額、2:税抜き金額、3:税率、4:税額 :1'))
+        cal = float(input('どの値を求めますか？ 1:税込み金額、2:税抜き金額、3:税率、4:税額 :'))
         if cal == 1:
             tax_free_price = float(input('原価(円):'))
             tax_percent = float(input('税率(%):'))
