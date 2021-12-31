@@ -165,7 +165,6 @@ def all_calc_code():
                 error_end()
         rep(n)
     elif cal_mode == '2':
-        error = 'A serious error has occurred. Restarting the program.'
         print('面積計算モードで起動します。')
         time.sleep(1)
         cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円、5:楕円:'))

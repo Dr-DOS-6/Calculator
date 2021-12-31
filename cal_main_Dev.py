@@ -33,11 +33,15 @@ def end():
     clear()
     sys.exit()
 #エラー時再起動コード
-def error_end(error_cnt=[0]):
+def error_end():
+    if 'error_cnt' in locals():
+        return
+    else:
+        error_cnt = 0
     error = 'A serious error has occurred. Restarting the program.'
     print(error)
-    error_cnt[0] += 1
-    if error_cnt[0] == 5:
+    error_cnt += 1
+    if error_cnt == 5:
         print('Multiple serious errors have occurred. Kill the program.')
         os.system('PAUSE')
         sys.exit()
@@ -45,11 +49,15 @@ def error_end(error_cnt=[0]):
     clear()
     startup()
     all_calc_code()
-def error_end_2(error_cnt=[0]):
+def error_end_2():
+    if 'error_cnt' in locals():
+        return
+    else:
+        error_cnt = 0
     error_2 = 'This feature is currently not implemented and cannot be activated. Restarting the program.'
     print(error_2)
-    error_cnt[0] += 1
-    if error_cnt[0] == 5:
+    error_cnt += 1
+    if error_cnt == 5:
         print('Multiple serious errors have occurred. Kill the program.')
         time.sleep(0.5)
         sys.exit()
@@ -67,7 +75,7 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.3.4_CUI_Dev_20211231'
+    ver = '1.4.3.5_CUI_Dev_20211231'
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
@@ -76,7 +84,7 @@ def startup():
     #細部の修正
     builder = 'Dr.DOS'
     year = '2021'
-    built = builder+' '+year
+    built = builder+'/'+year
     Created_by_1 = 'Python 3.9.9'
     Created_by_2 = 'Visual Studio Code 1.62.3'
     Created_by = ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
