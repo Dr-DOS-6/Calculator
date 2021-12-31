@@ -15,9 +15,10 @@ def sys_info():
     print ('machine  :', pf.machine())
     print ('processor:', pf.processor())
     print ('python_version:',ver)
-    f = open('error.log', 'w', encoding='UTF-8')
-    datalist = ['System: ',pf.system()+'\n','Release: ',pf.release()+'\n','System_version: ',pf.version()+'\n','Machine: ',pf.machine()+'\n','Processor: ',pf.processor()+'\n','Python_version: ',ver+'\n','Generated_Date: ',date_1+'\n']
-    f.writelines(datalist)
+    with open('error.log', 'w', encoding='UTF-8') as f:
+        datalist = ['System: ',pf.system()+'\n','Release: ',pf.release()+'\n','System_version: ',pf.version()+'\n','Machine: ',pf.machine()+'\n','Processor: ',pf.processor()+'\n','Python_version: ',ver+'\n','Generated_Date: ',date_1+'\n']
+        f.writelines(datalist)
+        f.close()
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -38,9 +39,9 @@ def error_end(error_cnt=[0]):
     error_cnt[0] += 1
     if error_cnt[0] == 5:
         print('Multiple serious errors have occurred. Kill the program.')
-        time.sleep(0.5)
+        os.system('PAUSE')
         sys.exit()
-    time.sleep(1)
+    os.system('PAUSE')
     clear()
     startup()
     all_calc_code()
@@ -52,7 +53,7 @@ def error_end_2(error_cnt=[0]):
         print('Multiple serious errors have occurred. Kill the program.')
         time.sleep(0.5)
         sys.exit()
-    time.sleep(1)
+    os.system('PAUSE')
     clear()
     startup()
     all_calc_code()
@@ -66,12 +67,13 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.3.2_CUI_Dev'
+    ver = '1.4.3.4_CUI_Dev'
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
     #モード1，2の名称変更
     #マルチプラットフォームへの対応
+    #細部の修正
     builder = 'Aya0_Mi5on0'
     year = '2021'
     built = builder+' '+year
@@ -85,7 +87,7 @@ def startup():
     time.sleep(0.3)
     print(Created_by)
     time.sleep(1)
-    if pf_s == 'Windows' or 'Linux' or 'Darwin':
+    if pf_s == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
         return
     else:
         print("I'm sorry. This calculator is available for Windows, Linux, and MacOS. Please make sure that your OS is supported.")
