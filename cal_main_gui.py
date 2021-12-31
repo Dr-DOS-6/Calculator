@@ -33,7 +33,7 @@ def startup():
     ver = '1.3.9.7_GUI_Dev'
     ver = 'Version'+' '+ver
     #税計算モジュール実装
-    builder = 'Aya0_Mi5on0'
+    builder = 'Dr.DOS'
     year = '2021'
     built = builder+' '+year
     Created_by_1 = 'Python 3.9.9'

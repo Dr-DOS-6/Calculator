@@ -67,14 +67,14 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.3.4_CUI_Dev'
+    ver = '1.4.3.4_CUI_Dev_20211231'
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
     #モード1，2の名称変更
     #マルチプラットフォームへの対応
     #細部の修正
-    builder = 'Aya0_Mi5on0'
+    builder = 'Dr.DOS'
     year = '2021'
     built = builder+' '+year
     Created_by_1 = 'Python 3.9.9'
@@ -144,7 +144,7 @@ def all_calc_code():
                 print('n^x =',n_x_6)
                 n_x_8 = n_x_6
             elif cal_mode_2 == '8':
-                cal_mode_2_1 = (input('平方根を求めたい値はどちらですか？n/x or 0/1:'))
+                cal_mode_2_1 = (input('平方根を求めたい値はどちらですか？n/x or 1/2:'))
                 if cal_mode_2_1 == 'n':
                     cal_mode_2_1 = '1'
                 if cal_mode_2_1 == 'x':

@@ -32,7 +32,7 @@ def startup():
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モード、数値変換モード削除
     #GUI開発開始(2021/12/22)
-    builder = 'Aya0_Mi5on0'
+    builder = 'Dr.DOS'
     year = '2021'
     built = builder+' '+year
     Created_by_1 = 'Python 3.9.9'

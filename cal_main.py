@@ -30,7 +30,7 @@ def startup():
     ver = '1.4.1.0_CUI_Alpha'
     ver = 'Version'+' '+ver
     #正円面積計算モジュール実装
-    builder = 'Aya0_Mi5on0'
+    builder = 'Dr.DOS'
     year = '2021'
     built = builder+' '+year
     Created_by_1 = 'Python 3.9.9'
