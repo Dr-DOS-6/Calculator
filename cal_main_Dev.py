@@ -33,41 +33,43 @@ def end():
     clear()
     sys.exit()
 #エラー時再起動コード
-def error_end():
+def error_end(error_code):
     if 'error_cnt' in locals():
         return
     else:
         error_cnt = 0
-    error = 'A serious error has occurred. Restarting the program.'
-    print(error)
+    print('A serious error has occurred. Restarting the program.')
+    print('Error code:',error_code)
     error_cnt += 1
     if error_cnt == 5:
         print('Multiple serious errors have occurred. Kill the program.')
+        print('Error code: 0x000F')
         os.system('PAUSE')
         sys.exit()
     os.system('PAUSE')
     clear()
     startup()
     all_calc_code()
-def error_end_2():
+def error_end_2(error_code):
     if 'error_cnt' in locals():
         return
     else:
         error_cnt = 0
-    error_2 = 'This feature is currently not implemented and cannot be activated. Restarting the program.'
-    print(error_2)
+    print('This feature is currently not implemented and cannot be activated. Restarting the program.')
+    print('Error code:',error_code)
     error_cnt += 1
     if error_cnt == 5:
         print('Multiple serious errors have occurred. Kill the program.')
-        time.sleep(0.5)
+        print('Error code: 0x000F')
+        os.system('PAUSE')
         sys.exit()
     os.system('PAUSE')
     clear()
     startup()
     all_calc_code()
 def error_end_3():
-    error_3 = 'This program will not run on this computer.'
-    print(error_3)
+    print('This program will not run on this computer.')
+    print('Error code: 0x000E')
     time.sleep(1)
     print ('System information for this computer:')
     sys_info()
@@ -75,13 +77,14 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.3.5_CUI_Dev_20211231'
+    ver = '1.4.4.0_CUI_Dev_20211231'
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
     #モード1，2の名称変更
     #マルチプラットフォームへの対応
     #細部の修正
+    #直接計算モード搭載
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -107,7 +110,7 @@ startup()
 #error_end_3()
 # 代入コード1
 def all_calc_code():
-    cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。'))
+    cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。'))
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
@@ -135,7 +138,7 @@ def all_calc_code():
                 n_x_8 = n_x_2
             elif cal_mode_2 == '4':
                 if x == 0:
-                    error_end()
+                    error_end('0x0001')
                 n_x_3 = n / x
                 print('n / x =', n_x_3)
                 n_x_8 = n_x_3
@@ -166,7 +169,7 @@ def all_calc_code():
                     print('√x =',n_x_7,'√',x)
                     n_x_8 = n_x_7
                 else:
-                    error_end()
+                    error_end('0x0002')
             else:
                 n_x_8 = n
                 time.sleep(1)
@@ -190,7 +193,7 @@ def all_calc_code():
                     elif rep4_2 == 'n':
                         n = float(input('nに代入する数字を入力してください。:'))
                     else:
-                        error_end()
+                        error_end('0x0003')
                     rep(n)
                 elif rep4 == 'n':
                     end()
@@ -219,14 +222,13 @@ def all_calc_code():
                     n = float(input('nに代入する数字を入力してください。:'))
                     rep(n)
                 else:
-                    error_end()
+                    error_end('0x0003')
             elif rep2 == ('n'):
                 end()
             else:
-                error_end()
+                error_end('0x0004')
         rep(n)
     elif cal_mode == '2':
-        error = 'A serious error has occurred. Restarting the program.'
         clear()
         print('幾何計算モードで起動します。')
         time.sleep(1)
@@ -267,7 +269,7 @@ def all_calc_code():
                         print('面積',area)
                         end()
                     else:
-                        error_end()
+                        error_end('0x0004')
                 elif cal_mode_3_1 == '0':
                     cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
                     cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
@@ -278,7 +280,7 @@ def all_calc_code():
                     print('面積:',area)
                     end()
                 else:
-                    error_end()
+                    error_end('0x0004')
             if cal_mode_3 == '2':
                 cal_mode_3_2 = (input('面積を計算したい四角形の種類を入力してください。1:正方形 2:長方形 3:平行四辺形 4:台形 5:菱形 6:それ以外の四角形:'))
                 if cal_mode_3_2 == '1':
@@ -350,7 +352,7 @@ def all_calc_code():
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
                         else:
-                            error_end()
+                            error_end('0x0004')
                         print('面積:',area_all)
                         end()
                     elif cal_mode_3_2_1 == '2':
@@ -371,7 +373,7 @@ def all_calc_code():
                         elif cal_n_3 == '5':
                             area = float(0.5*cal_n_4)
                         else:
-                            error_end()
+                            error_end('0x0004')
                         print('面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '3':
@@ -399,13 +401,13 @@ def all_calc_code():
                         elif cal_n_7 == '10':
                             cal_n_7 = 1
                         else:
-                            error_end()
+                            error_end('0x0004')
                         s = ((cal_n_1+cal_n_2+cal_n_3+cal_n_4)/2)
                         area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
                         print('面積:',area_all)
                         end()
                     else:
-                        error_end()
+                        error_end('0x0004')
             elif cal_mode_3 == '3':
                 cal_mode_3_2 = input('面積を求めたい五角形の種類を指定してください。正五角形:1 五角形:2')
                 if cal_mode_3_2 == '1':
@@ -432,7 +434,7 @@ def all_calc_code():
                     area_5 = ((cal_n_9*cal_n_10)/2)
                     area_all = area_1+area_2+area_3+area_4+area_5
                 else:
-                    error_end()
+                    error_end('0x0004')
                 print('面積:',area)
                 end()
             elif cal_mode_3 == '4':
@@ -450,17 +452,20 @@ def all_calc_code():
                     print('面積:',area)
                     end()
                 else:
-                    error_end()
+                    error_end('0x0004')
         elif cal_mode_int == '2':
-            error_end_2()
+            error_end_2('0x1001')
         elif cal_mode_int == '3':
-            error_end_2()
-        error_end_2()
+            error_end_2('0x1001')
+        else:
+            error_end_2('0x1002')
     elif cal_mode == '3':
         clear()
-        error_end_2()
+        print('数値変換モードで起動します。')
+        error_end_2('0x1001')
     elif cal_mode == '4':
         clear()
+        print('税計算モードで起動します。')
         cal = float(input('どの値を求めますか？ 1:税込み金額、2:税抜き金額、3:税率、4:税額 :'))
         if cal == 1:
             tax_free_price = float(input('原価(円):'))
@@ -483,8 +488,14 @@ def all_calc_code():
             tax_price = str(int(tax_include_price-tax_free_price))
             print('¥'+tax_price)
         else:
-            error_end()
+            error_end('0x0004')
         end()
+    elif cal_mode == '5':
+        clear()
+        print('直接計算モードで起動します。')
+        cal = (input('計算を行いたい式を入力してください。'))
+        cal_int = eval(cal)
+        print('結果:',cal_int)
     else:
-        error_end()
+        error_end('0x0004')
 all_calc_code()
