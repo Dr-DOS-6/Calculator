@@ -77,7 +77,8 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.4.0_CUI_Dev_20211231'
+    ver = '1.4.4.0_CUI_Dev_20220101'
+    #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
