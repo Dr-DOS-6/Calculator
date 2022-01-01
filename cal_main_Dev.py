@@ -497,6 +497,8 @@ def all_calc_code():
         cal = (input('計算を行いたい式を入力してください。'))
         cal_int = eval(cal)
         print('結果:',cal_int)
+    elif cal_mode == '2022':
+        error_end('Happy new year!')
     else:
         error_end('0x0004')
 all_calc_code()
