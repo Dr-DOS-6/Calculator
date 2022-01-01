@@ -34,14 +34,10 @@ def end():
     sys.exit()
 #エラー時再起動コード
 def error_end(error_code):
-    if 'error_cnt' in locals():
-        return
-    else:
-        error_cnt = 0
     print('A serious error has occurred. Restarting the program.')
     print('Error code:',error_code)
-    error_cnt += 1
-    if error_cnt == 5:
+    error_cnt[0] += 1
+    if error_cnt[0] > 5:
         print('Multiple serious errors have occurred. Kill the program.')
         print('Error code: 0x000F')
         os.system('PAUSE')
@@ -51,14 +47,10 @@ def error_end(error_code):
     startup()
     all_calc_code()
 def error_end_2(error_code):
-    if 'error_cnt' in locals():
-        return
-    else:
-        error_cnt = 0
     print('This feature is currently not implemented and cannot be activated. Restarting the program.')
     print('Error code:',error_code)
-    error_cnt += 1
-    if error_cnt == 5:
+    error_cnt[0] += 1
+    if error_cnt[0] > 5:
         print('Multiple serious errors have occurred. Kill the program.')
         print('Error code: 0x000F')
         os.system('PAUSE')
@@ -77,7 +69,7 @@ def error_end_3():
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.4.0_CUI_Dev_20220101'
+    ver = '1.4.4.1_CUI_Dev_20220101'
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -110,6 +102,7 @@ def startup():
 startup()
 #error_end_3()
 # 代入コード1
+error_cnt = [0]
 def all_calc_code():
     cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。'))
     if cal_mode == '1':
