@@ -9,16 +9,19 @@ ver = pf.python_version()
 date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 def sys_info():
+    print ('System information for this computer:')
     print ('system   :', pf.system())
     print ('release  :', pf.release())
     print ('system_version  :', pf.version())
     print ('machine  :', pf.machine())
     print ('processor:', pf.processor())
     print ('python_version:',ver)
-    with open('error.log', 'w', encoding='UTF-8') as f:
-        datalist = ['System: ',pf.system()+'\n','Release: ',pf.release()+'\n','System_version: ',pf.version()+'\n','Machine: ',pf.machine()+'\n','Processor: ',pf.processor()+'\n','Python_version: ',ver+'\n','Generated_Date: ',date_1+'\n']
+    print ('Software_version:',soft_ver)
+    with open('error.log', mode='a', encoding='UTF-8') as f:
+        datalist = ['\n','System: ',pf.system()+'\n','Release: ',pf.release()+'\n','System_version: ',pf.version()+'\n','Machine: ',pf.machine()+'\n','Processor: ',pf.processor()+'\n','Python_version: ',ver+'\n','Generated_Date: ',date_1+'\n','Software_version: ',soft_ver+'\n']
         f.writelines(datalist)
         f.close()
+        print('An error log was output:',os.path.abspath('error.log'))
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -40,6 +43,7 @@ def error_end(error_code):
     if error_cnt[0] > 5:
         print('Multiple serious errors have occurred. Kill the program.')
         print('Error code: 0x000F')
+        sys_info()
         os.system('PAUSE')
         sys.exit()
     os.system('PAUSE')
@@ -53,6 +57,7 @@ def error_end_2(error_code):
     if error_cnt[0] > 5:
         print('Multiple serious errors have occurred. Kill the program.')
         print('Error code: 0x000F')
+        sys_info()
         os.system('PAUSE')
         sys.exit()
     os.system('PAUSE')
@@ -63,21 +68,22 @@ def error_end_3():
     print('This program will not run on this computer.')
     print('Error code: 0x000E')
     time.sleep(1)
-    print ('System information for this computer:')
     sys_info()
     sys.exit()
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
-    ver = '1.4.4.1_CUI_Dev_20220101'
+    global soft_ver
+    soft_ver = '1.4.4.2_CUI_Dev_20220105'
     #Hallo 2022, Happy new year!!
-    ver = 'Version'+' '+ver
+    ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
     #数値変換モードを復帰
     #モード1，2の名称変更
     #マルチプラットフォームへの対応
     #細部の修正
     #直接計算モード搭載
+    #エラーログ出力機能の改修
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -94,7 +100,7 @@ def startup():
     if pf_s == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
         return
     else:
-        print("I'm sorry. This calculator is available for Windows, Linux, and MacOS. Please make sure that your OS is supported.")
+        print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that your OS is supported.")
     #if not pf_s == 'Linux':
     #    print("I'm sorry. This calculator is available for Windows. Please make sure that your OS is supported.")
         time.sleep(0.5)

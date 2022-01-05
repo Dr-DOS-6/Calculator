@@ -5,3 +5,30 @@ Machine: AMD64
 Processor: Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
 Python_version: 3.9.9
 Generated_Date: 2021/12/29 10:00:52
+
+System: Windows
+Release: 10
+System_version: 10.0.22000
+Machine: AMD64
+Processor: Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+Python_version: 3.9.9
+Generated_Date: 2022/01/05 18:53:44
+Software_version: 1.4.4.1_CUI_Dev_20220101
+
+System: Windows
+Release: 10
+System_version: 10.0.22000
+Machine: AMD64
+Processor: Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+Python_version: 3.9.9
+Generated_Date: 2022/01/05 18:56:46
+Software_version: 1.4.4.2_CUI_Dev_20220105
+
+System: Windows
+Release: 10
+System_version: 10.0.22000
+Machine: AMD64
+Processor: Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+Python_version: 3.9.9
+Generated_Date: 2022/01/05 18:58:35
+Software_version: 1.4.4.2_CUI_Dev_20220105
