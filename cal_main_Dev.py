@@ -22,6 +22,26 @@ def sys_info():
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
+def output_1():
+    #代数計算モード用
+    with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
+        datalist = ['\n',]
+    print('An result was output:',os.path.abspath('result.txt'))
+def output_2():
+    #幾何計算モード{面積/表面積}用
+    with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
+        datalist = ['\n',]
+    print('An result was output:',os.path.abspath('result.txt'))
+def output_3():
+    #幾何計算モード{体積}用
+    with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
+        datalist = ['\n',]
+    print('An result was output:',os.path.abspath('result.txt'))
+def output_4():
+    #税計算モード用
+    with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
+        datalist = ['\n',]
+    print('An result was output:',os.path.abspath('result.txt'))
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -33,7 +53,6 @@ def end():
     time.sleep(1)
     print('Finish the calculation.')
     time.sleep(1)
-    clear()
     sys.exit()
 #エラー時再起動コード
 def error_end(error_code):
@@ -74,7 +93,7 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = '1.4.4.2_CUI_Dev_20220105'
+    soft_ver = '1.4.4.4_CUI_Dev_20220113'
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -84,6 +103,7 @@ def startup():
     #細部の修正
     #直接計算モード搭載
     #エラーログ出力機能の改修
+    #結果出力機能実装準備
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -344,6 +364,7 @@ def all_calc_code():
                             cal_n_7 = float((cal_n_3 + cal_n_4 + cal_n_5_1)/float(2))
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
+                            area = area_all
                         elif cal_n_5 == '1':
                             cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
                             cal_n_6 = float((cal_n_4 + cal_n_1 + cal_n_5_1)/float(2))
@@ -351,9 +372,10 @@ def all_calc_code():
                             cal_n_7 = float((cal_n_2 + cal_n_3 + cal_n_5_1)/float(2))
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
+                            area = area_all
                         else:
                             error_end('0x0004')
-                        print('面積:',area_all)
+                        print('面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '2':
                         cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
@@ -404,7 +426,8 @@ def all_calc_code():
                             error_end('0x0004')
                         s = ((cal_n_1+cal_n_2+cal_n_3+cal_n_4)/2)
                         area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
-                        print('面積:',area_all)
+                        area = area_all
+                        print('面積:',area)
                         end()
                     else:
                         error_end('0x0004')
@@ -433,6 +456,7 @@ def all_calc_code():
                     area_4 = ((cal_n_7*cal_n_8)/2)
                     area_5 = ((cal_n_9*cal_n_10)/2)
                     area_all = area_1+area_2+area_3+area_4+area_5
+                    area = area_all
                 else:
                     error_end('0x0004')
                 print('面積:',area)
