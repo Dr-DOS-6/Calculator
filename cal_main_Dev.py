@@ -22,25 +22,33 @@ def sys_info():
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
-def output_1():
+def output_1(formula,answer):
     #代数計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',]
+        datalist = ['\n',formula,answer,'\n','答え:',answer]
+        f.writelines(datalist)
+        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_2():
+def output_2(formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',]
+        datalist = ['\n',formula,answer,'\n','解:',answer,unit]
+        f.writelines(datalist)
+        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_3():
+def output_3(formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',]
+        datalist = ['\n',formula,answer,'\n','解:',answer,unit]
+        f.writelines(datalist)
+        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_4():
+def output_4(formula,answer,unit):
     #税計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',]
+        datalist = ['\n',formula,answer,'\n','答え:',unit,answer]
+        f.writelines(datalist)
+        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def clear():
     if pf_s == 'Windows':
@@ -93,7 +101,7 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = '1.4.4.4_CUI_Dev_20220113'
+    soft_ver = '1.4.5.0_CUI_Dev_20220113'
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -103,7 +111,7 @@ def startup():
     #細部の修正
     #直接計算モード搭載
     #エラーログ出力機能の改修
-    #結果出力機能実装準備
+    #代数計算モードに結果出力機能実装
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -148,20 +156,24 @@ def all_calc_code():
                 n_x_0 = n + x
                 print('n + x =', n_x_0)
                 n_x_8 = n_x_0
+                formula = 'n + x ='
             elif cal_mode_2 == '2':
                 n_x_1 = n * x
                 print('n * x =', n_x_1)
                 n_x_8 = n_x_1
+                formula = 'n * x ='
             elif cal_mode_2 == '3':
                 n_x_2 = n - x
                 print('n - x =', n_x_2)
                 n_x_8 = n_x_2
+                formula = 'n - x ='
             elif cal_mode_2 == '4':
                 if x == 0:
                     error_end('0x0001')
                 n_x_3 = n / x
                 print('n / x =', n_x_3)
                 n_x_8 = n_x_3
+                formula = 'n ÷ x ='
             elif cal_mode_2 == '5':
                 n_x_4 = n // x
                 print('n // x =',n_x_4)
@@ -219,6 +231,7 @@ def all_calc_code():
                     end()
                 else:
                     error_end()
+            output_1(formula,n_x_8)
             # 再計算するかの確認
             rep2 = (input('もう一回計算したいですか？ y/n or 1/0:'))
             if rep2 == "1":
