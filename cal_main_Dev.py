@@ -274,7 +274,7 @@ def all_calc_code():
                         cal_n_3 = float(math.sqrt(cal_n_2*(float(3)(cal_n_2 - cal_n_1))))
                         cal_n_3_1 = str(cal_n_3)
                         area = cal_n_3_1
-                        print('面積:',area)
+                        print('面積:','1辺の長さ*3',area)
                         end()
                     elif cal_mode_3_1_1 =='0':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
