@@ -438,7 +438,7 @@ def all_calc_code():
                 print('面積:',area)
                 end()
             elif cal_mode_3 == '4':
-                cal_mode_3_2 = input('面積の求め方を指定してください。半径と円周率:1 半径と円周率:2')
+                cal_mode_3_2 = input('面積の求め方を指定してください。半径と円周率:1 半径と円周:2')
                 if cal_mode_3_2 == '1':
                     cal_n_1 = float(input('半径の長さを入力してください。'))
                     area = math.pi*(cal_n_1*cal_n_1)
