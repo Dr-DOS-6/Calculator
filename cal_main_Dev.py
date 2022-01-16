@@ -25,14 +25,14 @@ def sys_info():
 def output_1(input,formula,answer):
     #代数計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','入力:',input,'\n',formula,answer,'\n','答え:',answer,'\n']
+        datalist = ['\n','使用モード: 代数計算モード','\n','入力:',input,'\n',formula,answer,'\n','答え:',answer,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_2(formula,answer,unit):
+def output_2(input,formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',formula,answer,'\n','解:',answer,unit]
+        datalist = ['\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
@@ -101,7 +101,7 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = '1.4.5.2_CUI_Dev_20220113'
+    soft_ver = '1.4.5.3_CUI_Dev_20220113'
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -151,7 +151,7 @@ def all_calc_code():
             print('xに代入された数字= ', x)
             input_pre_1 = str(n)
             input_pre_2 = str(x)
-            input_ = 'n =',input_pre_1,'x =',input_pre_2
+            input_ = str(' '+'n ='+' '+input_pre_1+' '+'x ='+' '+input_pre_2)
             input_str =str(input_)
             # 演算子の指定
             cal_mode_2 = (input('どの計算がしたいですか？加算は1、乗算は2、減算は3、除算は4、除算の商は5、除算の剰余は6、べき乗は7、平方根は8です。:'))
@@ -160,36 +160,39 @@ def all_calc_code():
                 n_x_0 = n + x
                 print('n + x =', n_x_0)
                 n_x_8 = n_x_0
-                formula = 'n + x ='
+                formula = 'n + x = '
             elif cal_mode_2 == '2':
                 n_x_1 = n * x
                 print('n * x =', n_x_1)
                 n_x_8 = n_x_1
-                formula = 'n * x ='
+                formula = 'n * x = '
             elif cal_mode_2 == '3':
                 n_x_2 = n - x
                 print('n - x =', n_x_2)
                 n_x_8 = n_x_2
-                formula = 'n - x ='
+                formula = 'n - x = '
             elif cal_mode_2 == '4':
                 if x == 0:
                     error_end('0x0001')
                 n_x_3 = n / x
-                print('n / x =', n_x_3)
+                print('n ÷ x =', n_x_3)
                 n_x_8 = n_x_3
-                formula = 'n ÷ x ='
+                formula = 'n ÷ x = '
             elif cal_mode_2 == '5':
                 n_x_4 = n // x
-                print('n // x =',n_x_4)
+                print('(余りがある場合、商のみ) n ÷ x =',n_x_4)
                 n_x_8 = n_x_4
+                formula = '(余りがある場合、商のみ) n ÷ x = '
             elif cal_mode_2 == '6':
                 n_x_5 = n % x
-                print('n % x =',n_x_5)
+                print('(余りがある場合、余りのみ) n ÷ x =',n_x_5)
                 n_x_8 = n_x_5
+                formula = '(余りがある場合、余りのみ) n ÷ x = '
             elif cal_mode_2 == '7':
                 n_x_6 = n ** x
                 print('n^x =',n_x_6)
                 n_x_8 = n_x_6
+                formula = 'n ^ x = '
             elif cal_mode_2 == '8':
                 cal_mode_2_1 = (input('平方根を求めたい値はどちらですか？n/x or 1/2:'))
                 if cal_mode_2_1 == 'n':
@@ -200,10 +203,12 @@ def all_calc_code():
                     n_x_7 = math.sqrt(n)
                     print('√n =',n_x_7,'√',n)
                     n_x_8 = n_x_7
+                    formula = '√n = '
                 elif cal_mode_2_1 == '2':
                     n_x_7 = math.sqrt(x)
                     print('√x =',n_x_7,'√',x)
                     n_x_8 = n_x_7
+                    formula = '√x = '
                 else:
                     error_end('0x0002')
             else:
