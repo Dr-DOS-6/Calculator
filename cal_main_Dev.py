@@ -22,10 +22,10 @@ def sys_info():
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
-def output_1(formula,answer):
+def output_1(input,formula,answer):
     #代数計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',formula,answer,'\n','答え:',answer]
+        datalist = ['\n','入力:',input,'\n',formula,answer,'\n','答え:',answer,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
@@ -101,7 +101,7 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = '1.4.5.0_CUI_Dev_20220113'
+    soft_ver = '1.4.5.1_CUI_Dev_20220113'
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -149,6 +149,10 @@ def all_calc_code():
             x = float(input('xに代入する数字を入力してください。'))
             print('nに代入された数字= ', n)
             print('xに代入された数字= ', x)
+            input_pre_1 = str(n)
+            input_pre_2 = str(x)
+            input_ = 'n =',input_pre_1,'x =',input_pre_2
+            input_str =str(input_)
             # 演算子の指定
             cal_mode_2 = (input('どの計算がしたいですか？加算は1、乗算は2、減算は3、除算は4、除算の商は5、除算の剰余は6、べき乗は7、平方根は8です。:'))
             # 計算
@@ -231,7 +235,8 @@ def all_calc_code():
                     end()
                 else:
                     error_end()
-            output_1(formula,n_x_8)
+            answer = str(n_x_8)
+            output_1(input_str,formula,answer)
             # 再計算するかの確認
             rep2 = (input('もう一回計算したいですか？ y/n or 1/0:'))
             if rep2 == "1":
