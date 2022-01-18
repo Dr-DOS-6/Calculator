@@ -50,6 +50,10 @@ def output_4(formula,answer,unit):
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
+def output_5(input,formula,answer):
+    #直接計算モード用
+    with open('result.txt', mode = 'a', encording = 'UTF-8') as f:
+        datalist = ['\n',]
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
