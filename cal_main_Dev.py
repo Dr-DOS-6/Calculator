@@ -36,24 +36,27 @@ def output_2(input,formula,answer,unit):
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_3(formula,answer,unit):
+def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',formula,answer,'\n','解:',answer,unit]
+        datalist = ['\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit]
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_4(formula,answer,unit):
+def output_4(input,formula,answer,unit):
     #税計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n',formula,answer,'\n','答え:',unit,answer]
+        datalist = ['\n','入力:',input,formula,answer,'\n','答え:',unit,answer]
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_5(input,formula,answer):
+def output_5(input,answer):
     #直接計算モード用
-    with open('result.txt', mode = 'a', encording = 'UTF-8') as f:
-        datalist = ['\n',]
+    with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
+        datalist = ['\n','入力:',input,'\n','答え:',answer]
+        f.writelines(datalist)
+        f.close()
+    print('An result was output:',os.path.abspath('result.txt'))
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -262,6 +265,7 @@ def all_calc_code():
         time.sleep(1)
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
+            unit = input('使用する単位を入力して下さい。:')
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
                 cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さ:1/y 底辺の長さと高さ:0/n :'))
@@ -270,11 +274,13 @@ def all_calc_code():
                     if cal_mode_3_1_1 == '1' or 'y':
                         cal_mode_3_1_1_val = float(input('1辺の長さを入力してください。:'))
                         cal_n_1 = float(cal_mode_3_1_1_val)
-                        cal_n_2 = float((cal_n_1 * 3)/2)
-                        cal_n_3 = float(math.sqrt(cal_n_2*(float(3)(cal_n_2 - cal_n_1))))
-                        cal_n_3_1 = str(cal_n_3)
-                        area = cal_n_3_1
-                        print('面積:','1辺の長さ*3',area)
+                        area = cal_n_1 * cal_n_1 /4
+                        area_2 = ((cal_n_1 * cal_n_1)*(math.sqrt(3)))/4
+                        area = (str(area)+'√3')
+                        input_str = str(cal_mode_3_1_1_val)
+                        formula_str = '1辺の長さ^2*√3÷4'
+                        answer_str = str(area),'/',str(area_2)
+                        print('面積:','1辺の長さ*3',area,'/',area_2,unit)
                         end()
                     elif cal_mode_3_1_1 =='0' or 'n':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
