@@ -105,7 +105,7 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = '1.4.5.3_CUI_Dev_20220113'
+    soft_ver = '1.4.5.4_CUI_Dev_20220120'
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -116,6 +116,7 @@ def startup():
     #直接計算モード搭載
     #エラーログ出力機能の改修
     #代数計算モードに結果出力機能実装
+    #選択コードの修正
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -199,16 +200,12 @@ def all_calc_code():
                 formula = 'n ^ x = '
             elif cal_mode_2 == '8':
                 cal_mode_2_1 = (input('平方根を求めたい値はどちらですか？n/x or 1/2:'))
-                if cal_mode_2_1 == 'n':
-                    cal_mode_2_1 = '1'
-                if cal_mode_2_1 == 'x':
-                    cal_mode_2_1 = '2'
-                if cal_mode_2_1 == '1':
+                if cal_mode_2_1 == '1' or 'n':
                     n_x_7 = math.sqrt(n)
                     print('√n =',n_x_7,'√',n)
                     n_x_8 = n_x_7
                     formula = '√n = '
-                elif cal_mode_2_1 == '2':
+                elif cal_mode_2_1 == '2' or 'x':
                     n_x_7 = math.sqrt(x)
                     print('√x =',n_x_7,'√',x)
                     n_x_8 = n_x_7
@@ -221,26 +218,18 @@ def all_calc_code():
                 print(error)
                 time.sleep(3)
                 rep4 = (input('嘘です。計算をやり直しますか？ y/n or 1/0:'))
-                if rep4 == '1':
-                    rep4 = 'y'
-                elif rep4 == '0':
-                    rep4 = 'n'
-                if rep4 == 'y':
+                if rep4 == 'y' or '1':
                     rep4_2 = (input('nに代入した数を残しますか？ y/n or 1/0:'))
-                    if rep4_2 == '1':
-                        rep4_2 = 'y'
-                    elif rep4_2 == '0':
-                        rep4_2 = 'n'
-                    if rep4_2 == 'y':
+                    if rep4_2 == 'y' or '1':
                         print('nの数字を引き継ぎます。')
                         print('引き継いだ数字:', n_x_8)
                         rep(n)
-                    elif rep4_2 == 'n':
+                    elif rep4_2 == 'n' or '0':
                         n = float(input('nに代入する数字を入力してください。:'))
                     else:
                         error_end('0x0003')
                     rep(n)
-                elif rep4 == 'n':
+                elif rep4 == 'n' or '0':
                     end()
                 else:
                     error_end()
@@ -248,29 +237,21 @@ def all_calc_code():
             output_1(input_str,formula,answer)
             # 再計算するかの確認
             rep2 = (input('もう一回計算したいですか？ y/n or 1/0:'))
-            if rep2 == "1":
-                rep2 = 'y'
-            elif rep2 == "0":
-                rep2 = 'n'
-            if rep2 == 'y':
+            if rep2 == 'y' or '1':
                 # 計算結果の引継ぎの確認
                 rep3 = (input('計算結果を引継ぎますか？ y/n or 1/0:'))
-                if rep3 == "1":
-                    rep3 = 'y'
-                elif rep3 == "0":
-                    rep3 = 'n'
-                if rep3 == 'y':
+                if rep3 == 'y' or '1':
                     clear()
                     n = n_x_8
                     print('nに結果を引き継ぎます。引き継いだ結果:', n_x_8)
                     rep(n)
-                elif rep3 == 'n':
+                elif rep3 == 'n' or '0':
                     # 再代入
                     n = float(input('nに代入する数字を入力してください。:'))
                     rep(n)
                 else:
                     error_end('0x0003')
-            elif rep2 == ('n'):
+            elif rep2 == 'n' or '0':
                 end()
             else:
                 error_end('0x0004')
@@ -284,17 +265,9 @@ def all_calc_code():
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
                 cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さ:1/y 底辺の長さと高さ:0/n :'))
-                if cal_mode_3_1 == 'y':
-                    cal_mode_3_1 = '1'
-                if cal_mode_3_1 == 'n':
-                    cal_mode_3_1 = '0'
-                if cal_mode_3_1 == '1':
+                if cal_mode_3_1 == '1' or 'y':
                     cal_mode_3_1_1 =(input('面積を計算したい三角形の種類を選択してください。正三角形:1/y それ以外:0/n:'))
-                    if cal_mode_3_1_1 == 'y':
-                        cal_mode_3_1_1 ='1'
-                    if cal_mode_3_1_1 == 'n':
-                        cal_mode_3_1_1 = '0'
-                    if cal_mode_3_1_1 == '1':
+                    if cal_mode_3_1_1 == '1' or 'y':
                         cal_mode_3_1_1_val = float(input('1辺の長さを入力してください。:'))
                         cal_n_1 = float(cal_mode_3_1_1_val)
                         cal_n_2 = float((cal_n_1 * 3)/2)
@@ -303,7 +276,7 @@ def all_calc_code():
                         area = cal_n_3_1
                         print('面積:','1辺の長さ*3',area)
                         end()
-                    elif cal_mode_3_1_1 =='0':
+                    elif cal_mode_3_1_1 =='0' or 'n':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_2 = float(input('2つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_3 = float(input('3つ目の辺の長さを入力してください。:'))
@@ -317,7 +290,7 @@ def all_calc_code():
                         end()
                     else:
                         error_end('0x0004')
-                elif cal_mode_3_1 == '0':
+                elif cal_mode_3_1 == '0' or 'n':
                     cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
                     cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
                     cal_n_1_1 = cal_mode_3_1_2_val_1
