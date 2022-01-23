@@ -265,6 +265,9 @@ def all_calc_code():
         time.sleep(1)
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
+            global input_1
+            global formula_1
+            global answer_1
             unit = input('使用する単位を入力して下さい。:')
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
@@ -277,9 +280,9 @@ def all_calc_code():
                         area = cal_n_1 * cal_n_1 /4
                         area_2 = ((cal_n_1 * cal_n_1)*(math.sqrt(3)))/4
                         area = (str(area)+'√3')
-                        input_str = str(cal_mode_3_1_1_val)
-                        formula_str = '1辺の長さ^2*√3÷4'
-                        answer_str = str(area),'/',str(area_2)
+                        input_1 = str(cal_mode_3_1_1_val)
+                        formula_1 = '1辺の長さ^2*√3÷4'
+                        answer_1 = str(area),'/',str(area_2)
                         print('面積:','1辺の長さ*3',area,'/',area_2,unit)
                         end()
                     elif cal_mode_3_1_1 =='0' or 'n':
@@ -445,16 +448,16 @@ def all_calc_code():
                     area_pre = ((cal_n_1*cal_n_2)/2)
                     area = area_pre*5
                 elif cal_mode_3_2 == '2':
-                    print('五角形を5つの三角形に分け、上から時計周りに入力してください。')
-                    cal_n_1 = float(input('1つ目の三角形の一辺の長さを入力してください。'))
+                    print('五角形を5つの三角形に分け、上から時計周りに入力してください。「底辺」は、五角形にした時に一番外側に来る辺のことを言います。')
+                    cal_n_1 = float(input('1つ目の三角形の底辺の長さを入力してください。'))
                     cal_n_2 = float(input('1つ目の三角形の頂点までの距離を入力してください。'))
-                    cal_n_3 = float(input('2つ目の三角形の一辺の長さを入力してください。'))
+                    cal_n_3 = float(input('2つ目の三角形の底辺の長さを入力してください。'))
                     cal_n_4 = float(input('2つ目の三角形の頂点までの距離を入力してください。'))
-                    cal_n_5 = float(input('3つ目の三角形の一辺の長さを入力してください。'))
+                    cal_n_5 = float(input('3つ目の三角形の底辺の長さを入力してください。'))
                     cal_n_6 = float(input('3つ目の三角形の頂点までの距離を入力してください。'))
-                    cal_n_7 = float(input('4つ目の三角形の一辺の長さを入力してください。'))
+                    cal_n_7 = float(input('4つ目の三角形の底辺の長さを入力してください。'))
                     cal_n_8 = float(input('4つ目の三角形の頂点までの距離を入力してください。'))
-                    cal_n_9 = float(input('5つ目の三角形の一辺の長さを入力してください。'))
+                    cal_n_9 = float(input('5つ目の三角形の底辺の長さを入力してください。'))
                     cal_n_10 = float(input('5つ目の三角形の頂点までの距離を入力してください。'))
                     area_1 = ((cal_n_1*cal_n_2)/2)
                     area_2 = ((cal_n_3*cal_n_4)/2)
@@ -524,6 +527,9 @@ def all_calc_code():
         clear()
         print('直接計算モードで起動します。')
         cal = (input('計算を行いたい式を入力してください。'))
+        cal_tst_1 = str(cal)
+        if '+' or '-' or '/' or '*' or '//' or '**' or '%' or '√' or '÷' not in cal_tst_1:
+            error_end('input_is_not_calculation_formula')
         cal_int = eval(cal)
         print('結果:',cal_int)
     elif cal_mode == '2022':
