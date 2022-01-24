@@ -1,24 +1,30 @@
+from asyncio.windows_events import NULL
 import time
 import sys
 import math
 import os
 import datetime
+import argparse
 import platform as pf
+parser = argparse.ArgumentParser()
+parser.add_argument('debug',nargs="?")
+args = parser.parse_args( )
+argv = args.debug
 pf_s = pf.system()
 ver = pf.python_version()
 date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 def sys_info():
     print ('System information for this computer:')
-    print ('system   :', pf.system())
-    print ('release  :', pf.release())
+    print ('system          :', pf.system())
+    print ('release         :', pf.release())
     print ('system_version  :', pf.version())
-    print ('machine  :', pf.machine())
-    print ('processor:', pf.processor())
-    print ('python_version:',ver)
+    print ('machine         :', pf.machine())
+    print ('processor       :', pf.processor())
+    print ('python_version  :',ver)
     print ('Software_version:',soft_ver)
     with open('error.log', mode='a', encoding='UTF-8') as f:
-        datalist = ['\n','System: ',pf.system()+'\n','Release: ',pf.release()+'\n','System_version: ',pf.version()+'\n','Machine: ',pf.machine()+'\n','Processor: ',pf.processor()+'\n','Python_version: ',ver+'\n','Generated_Date: ',date_1+'\n','Software_version: ',soft_ver+'\n']
+        datalist = ['\n','System          : ',pf.system()+'\n','Release         : ',pf.release()+'\n','System_version  : ',pf.version()+'\n','Machine         : ',pf.machine()+'\n','Processor       : ',pf.processor()+'\n','Python_version  : ',ver+'\n','Generated_Date: ',date_1+'\n','Software_version: ',soft_ver+'\n']
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
@@ -108,7 +114,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = '1.4.5.4_CUI_Dev_20220120'
+    soft_ver = ('1.4.5.5_CUI_Dev_20220120')
+    str(soft_ver)
+    if argv == 'debug':
+        soft_ver = ('1.4.5.4_CUI_Dev_20220120'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -120,6 +129,7 @@ def startup():
     #エラーログ出力機能の改修
     #代数計算モードに結果出力機能実装
     #選択コードの修正
+    #デバッグ機能実装
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -134,13 +144,17 @@ def startup():
     print(Created_by)
     time.sleep(1)
     if pf_s == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
+        if args.debug == 'debug':
+            print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
+            time.sleep(0.5)
+            error_end_3()
         return
     else:
-        print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that your OS is supported.")
-    #if not pf_s == 'Linux':
-    #    print("I'm sorry. This calculator is available for Windows. Please make sure that your OS is supported.")
+        print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
         time.sleep(0.5)
         error_end_3()
+    #if not pf_s == 'Linux':
+    #    print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
 startup()
 #error_end_3()
 # 代入コード1
@@ -265,9 +279,6 @@ def all_calc_code():
         time.sleep(1)
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
-            global input_1
-            global formula_1
-            global answer_1
             unit = input('使用する単位を入力して下さい。:')
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
