@@ -144,10 +144,10 @@ def startup():
     time.sleep(0.3)
     print(Created_by)
     time.sleep(1)
-    if pf_s == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
+    if pf_s == 'Windows' or 'Linux' or 'Darwin':
         if argv == 'debug':
             sysinfo_tst = input('Enter the name of the OS you want to test. :')
-            if not sysinfo_tst == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
+            if not sysinfo_tst == 'Windows' or 'Linux' or 'Darwin':
                 print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
                 time.sleep(0.5)
                 error_end_3()
