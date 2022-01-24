@@ -541,9 +541,6 @@ def all_calc_code():
         clear()
         print('直接計算モードで起動します。')
         cal = (input('計算を行いたい式を入力してください。'))
-        cal_tst_1 = str(cal)
-        if '+' or '-' or '/' or '*' or '//' or '**' or '%' or '√' or '÷' not in cal_tst_1:
-            error_end('input_is_not_calculation_formula')
         cal_int = eval(cal)
         print('結果:',cal_int)
     elif cal_mode == '2022':
