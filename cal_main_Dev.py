@@ -23,8 +23,9 @@ def sys_info():
     print ('processor       :', pf.processor())
     print ('python_version  :',ver)
     print ('Software_version:',soft_ver)
+    print ('Mode            : ',argv)
     with open('error.log', mode='a', encoding='UTF-8') as f:
-        datalist = ['\n','System          : ',pf.system()+'\n','Release         : ',pf.release()+'\n','System_version  : ',pf.version()+'\n','Machine         : ',pf.machine()+'\n','Processor       : ',pf.processor()+'\n','Python_version  : ',ver+'\n','Generated_Date: ',date_1+'\n','Software_version: ',soft_ver+'\n']
+        datalist = ['\n','System          : ',pf.system()+'\n','Release         : ',pf.release()+'\n','System_version  : ',pf.version()+'\n','Machine         : ',pf.machine()+'\n','Processor       : ',pf.processor()+'\n','Python_version  : ',ver+'\n','Generated_Date  : ',date_1+'\n','Software_version: ',soft_ver+'\n','Mode            : ',argv+'_mode'+'\n']
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
@@ -144,10 +145,12 @@ def startup():
     print(Created_by)
     time.sleep(1)
     if pf_s == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
-        if args.debug == 'debug':
-            print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
-            time.sleep(0.5)
-            error_end_3()
+        if argv == 'debug':
+            sysinfo_tst = input('Enter the name of the OS you want to test. :')
+            if not sysinfo_tst == 'Windows' or pf_s == 'Linux' or pf_s == 'Darwin':
+                print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
+                time.sleep(0.5)
+                error_end_3()
         return
     else:
         print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
