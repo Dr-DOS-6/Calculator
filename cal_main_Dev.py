@@ -14,6 +14,8 @@ pf_s = pf.system()
 ver = pf.python_version()
 date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
+error = None
+error_cnt = [0,0]
 def sys_info():
     print ('System information for this computer:')
     print ('system          :', pf.system())
@@ -77,7 +79,7 @@ def end():
     time.sleep(1)
     sys.exit()
 #エラー時再起動コード
-def error_end(error_code):
+def error_end(error_code,error):
     print('A serious error has occurred. Restarting the program.')
     print('Error code:',error_code)
     error_cnt[0] += 1
@@ -87,6 +89,8 @@ def error_end(error_code):
         sys_info()
         os.system('PAUSE')
         sys.exit()
+    if error == 'error':
+        error_cnt[1] += 1
     os.system('PAUSE')
     clear()
     startup()
@@ -115,10 +119,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.5.5_CUI_Dev_20220120')
+    soft_ver = ('1.4.5.6_CUI_Dev_20220120')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.5.4_CUI_Dev_20220120'+' '+'debug_mode')
+        soft_ver = ('1.4.5.6_CUI_Dev_20220120'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -134,7 +138,7 @@ def startup():
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
-    Created_by_1 = 'Python 3.9.9'
+    Created_by_1 = 'Python 3.10.1'
     Created_by_2 = 'Visual Studio Code 1.62.3'
     Created_by = ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
     time.sleep(0.3)
@@ -161,9 +165,11 @@ def startup():
 startup()
 #error_end_3()
 # 代入コード1
-error_cnt = [0]
 def all_calc_code():
-    cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。'))
+    if error_cnt[1] > 0:
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。'))
+    else:    
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。'))
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
@@ -537,10 +543,24 @@ def all_calc_code():
         else:
             error_end('0x0004')
         end()
+    elif cal_mode == '5' and error_cnt[1] == 1:
+        print('直接計算モードは現在利用できません。計算機を再起動してください。')
+        error_end_2('0x1001')
     elif cal_mode == '5':
         clear()
+        cal = None
+        cal_str = None
+        cal_int = None
         print('直接計算モードで起動します。')
         cal = (input('計算を行いたい式を入力してください。'))
+        cal_str = str(cal)
+        if 'os.system' in cal_str:
+            error_end('input_is_not_calculation_formula','error')
+        #if 'print(' in cal:
+        #    error_end('input_is_not_calculation_formula')
+        #cal_int_2 = str(eval(cal))
+        #if not eval(cal_int_2) * 0 == 0:
+        #    error_end('input_is_not_calculation_formula')
         cal_int = eval(cal)
         print('結果:',cal_int)
     elif cal_mode == '2022':
