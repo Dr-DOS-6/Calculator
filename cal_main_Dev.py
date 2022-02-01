@@ -16,6 +16,10 @@ date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 error = None
 error_cnt = [0,0]
+block_low = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+block_cap = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+block_sym = ['~','`',';',':',',','?','|','!','@','#','$','&','_','"',"'"]
+allow = [1,2,3,4,5,6,7,8,9,0,'1','2','3','4','5','6','7','8','9','0','.','<','>','/','+','-','*','^','%','÷','×','√','=','(',')','[',']','{','}']
 def sys_info():
     print ('System information for this computer:')
     print ('system          :', pf.system())
@@ -119,10 +123,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.5.6_CUI_Dev_20220131')
+    soft_ver = ('1.4.5.7_CUI_Dev_20220201')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.5.6_CUI_Dev_20220131'+' '+'debug_mode')
+        soft_ver = ('1.4.5.7_CUI_Dev_20220201'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -135,7 +139,7 @@ def startup():
     #代数計算モードに結果出力機能実装
     #選択コードの修正
     #デバッグ機能実装
-    #任意コード実行防止機能搭載
+    #任意コード実行防止機能改良
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -549,21 +553,27 @@ def all_calc_code():
         error_end_2('0x1001')
     elif cal_mode == '5':
         clear()
+        global cal_error
         cal = None
-        cal_str = None
         cal_int = None
+        cal_error = 0
         print('直接計算モードで起動します。')
         cal = (input('計算を行いたい式を入力してください。'))
         cal_str = str(cal)
-        if 'os.system' in cal_str:
+        for i in range (0,25):
+            if block_cap[i] in cal_str:
+                cal_error += 1
+        for i in range (0,25):
+            if block_low[i] in cal_str:
+                cal_error += 1
+        for i in range (0,14):
+            if block_sym[i] in cal_str:
+                cal_error += 1
+        if cal_error > 0:
             error_end('input_is_not_calculation_formula','error')
-        #if 'print(' in cal:
-        #    error_end('input_is_not_calculation_formula')
-        #cal_int_2 = str(eval(cal))
-        #if not eval(cal_int_2) * 0 == 0:
-        #    error_end('input_is_not_calculation_formula')
         cal_int = eval(cal)
         print('結果:',cal_int)
+        end()
     elif cal_mode == '2022':
         error_end('Happy new year!')
     else:
