@@ -553,7 +553,6 @@ def all_calc_code():
         error_end_2('0x1001')
     elif cal_mode == '5':
         clear()
-        global cal_error
         cal = None
         cal_int = None
         cal_error = 0
