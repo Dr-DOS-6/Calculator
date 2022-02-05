@@ -16,6 +16,11 @@ date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 error = None
 error_cnt = [0,0]
+deg = [0,30,45,60,90,120,135,150,180]
+deg_2 = [0,1,2,3,4,5,6,7,8,9]
+sintheta = ['0','1/2','1/√2','√3/2','1','√3/2','1/√2','1/2','0']
+costheta = ['1','√3/2','1/√2','1/2','0','-(1/2)','-(1/√2)','-(√3/2)','-1']
+tantheta = ['0','1/√3','1','√3','定義無し','-√3','-1','-(1/√3)','0']
 block_low = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 block_cap = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 block_sym = ['~','`',';',':',',','?','|','!','@','#','$','&','_','"',"'"]
@@ -123,10 +128,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.5.7_CUI_Dev_20220201')
+    soft_ver = ('1.4.6.0_CUI_Dev_20220205')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.5.7_CUI_Dev_20220201'+' '+'debug_mode')
+        soft_ver = ('1.4.6.0_CUI_Dev_20220205'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -140,6 +145,7 @@ def startup():
     #選択コードの修正
     #デバッグ機能実装
     #任意コード実行防止機能改良
+    #数値変換モード実装
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -190,7 +196,7 @@ def all_calc_code():
             input_ = str(' '+'n ='+' '+input_pre_1+' '+'x ='+' '+input_pre_2)
             input_str =str(input_)
             # 演算子の指定
-            cal_mode_2 = (input('どの計算がしたいですか？加算は1、乗算は2、減算は3、除算は4、除算の商は5、除算の剰余は6、べき乗は7、平方根は8です。:'))
+            cal_mode_2 = (input('どの計算がしたいですか?加算は1、乗算は2、減算は3、除算は4、除算の商は5、除算の剰余は6、べき乗は7、平方根は8です。:'))
             # 計算
             if cal_mode_2 == '1':
                 n_x_0 = n + x
@@ -230,7 +236,7 @@ def all_calc_code():
                 n_x_8 = n_x_6
                 formula = 'n ^ x = '
             elif cal_mode_2 == '8':
-                cal_mode_2_1 = (input('平方根を求めたい値はどちらですか？n/x or 1/2:'))
+                cal_mode_2_1 = (input('平方根を求めたい値はどちらですか?n/x or 1/2:'))
                 if cal_mode_2_1 == '1' or 'n':
                     n_x_7 = math.sqrt(n)
                     print('√n =',n_x_7,'√',n)
@@ -248,9 +254,9 @@ def all_calc_code():
                 time.sleep(1)
                 print(error)
                 time.sleep(3)
-                rep4 = (input('嘘です。計算をやり直しますか？ y/n or 1/0:'))
+                rep4 = (input('嘘です。計算をやり直しますか? y/n or 1/0:'))
                 if rep4 == 'y' or '1':
-                    rep4_2 = (input('nに代入した数を残しますか？ y/n or 1/0:'))
+                    rep4_2 = (input('nに代入した数を残しますか? y/n or 1/0:'))
                     if rep4_2 == 'y' or '1':
                         print('nの数字を引き継ぎます。')
                         print('引き継いだ数字:', n_x_8)
@@ -267,10 +273,10 @@ def all_calc_code():
             answer = str(n_x_8)
             output_1(input_str,formula,answer)
             # 再計算するかの確認
-            rep2 = (input('もう一回計算したいですか？ y/n or 1/0:'))
+            rep2 = (input('もう一回計算したいですか? y/n or 1/0:'))
             if rep2 == 'y' or '1':
                 # 計算結果の引継ぎの確認
-                rep3 = (input('計算結果を引継ぎますか？ y/n or 1/0:'))
+                rep3 = (input('計算結果を引継ぎますか? y/n or 1/0:'))
                 if rep3 == 'y' or '1':
                     clear()
                     n = n_x_8
@@ -296,7 +302,7 @@ def all_calc_code():
             unit = input('使用する単位を入力して下さい。:')
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
-                cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さ:1/y 底辺の長さと高さ:0/n :'))
+                cal_mode_3_1 = (input('どちらの計算方法を利用しますか?3辺の長さ:1/y 底辺の長さと高さ:0/n :'))
                 if cal_mode_3_1 == '1' or 'y':
                     cal_mode_3_1_1 =(input('面積を計算したい三角形の種類を選択してください。正三角形:1/y それ以外:0/n:'))
                     if cal_mode_3_1_1 == '1' or 'y':
@@ -520,11 +526,30 @@ def all_calc_code():
     elif cal_mode == '3':
         clear()
         print('数値変換モードで起動します。')
-        error_end_2('0x1001')
+        tri = int(input('角度から変換する先を選んでください。sin:0 cos:1 tan:2'))
+        if tri == 0:
+            tri = sintheta
+            ans_2 = 'sin'
+        elif tri == 1:
+            tri = costheta
+            ans_2 = 'cos'
+        elif  tri == 2:
+            tri = tantheta
+            ans_2 = 'tan'
+        else:
+            error_end('0x0001')
+        deg_sel_1 = int(input('角度を入力してください。'))
+        deg_sel_2 = deg.index(deg_sel_1)
+        if not 0 <= deg_sel_2 < len(deg):
+            error_end('0x0001')
+        ans = tri[deg_sel_2]
+        ans_3 = str(deg_sel_1)
+        print(ans_2+ans_3+'°','=',ans)
+        end()
     elif cal_mode == '4':
         clear()
         print('税計算モードで起動します。')
-        cal = float(input('どの値を求めますか？ 1:税込み金額、2:税抜き金額、3:税率、4:税額 :'))
+        cal = float(input('どの値を求めますか? 1:税込み金額、2:税抜き金額、3:税率、4:税額 :'))
         if cal == 1:
             tax_free_price = float(input('原価(円):'))
             tax_percent = float(input('税率(%):'))
