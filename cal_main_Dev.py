@@ -6,6 +6,7 @@ import os
 import datetime
 import argparse
 import platform as pf
+import lists as li
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
@@ -16,15 +17,6 @@ date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 error = None
 error_cnt = [0,0]
-deg = [0,30,45,60,90,120,135,150,180]
-deg_2 = [0,1,2,3,4,5,6,7,8,9]
-sintheta = ['0','1/2','1/√2','√3/2','1','√3/2','1/√2','1/2','0']
-costheta = ['1','√3/2','1/√2','1/2','0','-(1/2)','-(1/√2)','-(√3/2)','-1']
-tantheta = ['0','1/√3','1','√3','定義無し','-√3','-1','-(1/√3)','0']
-block_low = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-block_cap = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-block_sym = ['~','`',';',':',',','?','|','!','@','#','$','&','_','"',"'"]
-allow = [1,2,3,4,5,6,7,8,9,0,'1','2','3','4','5','6','7','8','9','0','.','<','>','/','+','-','*','^','%','÷','×','√','=','(',')','[',']','{','}']
 def sys_info():
     print ('System information for this computer:')
     print ('system          :', pf.system())
@@ -128,10 +120,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.6.0_CUI_Dev_20220205')
+    soft_ver = ('1.4.6.1_CUI_Dev_20220205')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.6.0_CUI_Dev_20220205'+' '+'debug_mode')
+        soft_ver = ('1.4.6.1_CUI_Dev_20220205'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -146,6 +138,7 @@ def startup():
     #デバッグ機能実装
     #任意コード実行防止機能改良
     #数値変換モード実装
+    #可読性の向上
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -528,19 +521,19 @@ def all_calc_code():
         print('数値変換モードで起動します。')
         tri = int(input('角度から変換する先を選んでください。sin:0 cos:1 tan:2'))
         if tri == 0:
-            tri = sintheta
+            tri = li.sintheta
             ans_2 = 'sin'
         elif tri == 1:
-            tri = costheta
+            tri = li.costheta
             ans_2 = 'cos'
         elif  tri == 2:
-            tri = tantheta
+            tri = li.tantheta
             ans_2 = 'tan'
         else:
             error_end('0x0001')
         deg_sel_1 = int(input('角度を入力してください。'))
-        deg_sel_2 = deg.index(deg_sel_1)
-        if not 0 <= deg_sel_2 < len(deg):
+        deg_sel_2 = li.deg.index(deg_sel_1)
+        if not 0 <= deg_sel_2 < len(li.deg):
             error_end('0x0001')
         ans = tri[deg_sel_2]
         ans_3 = str(deg_sel_1)
@@ -585,13 +578,13 @@ def all_calc_code():
         cal = (input('計算を行いたい式を入力してください。'))
         cal_str = str(cal)
         for i in range (0,25):
-            if block_cap[i] in cal_str:
+            if li.block_cap[i] in cal_str:
                 cal_error += 1
         for i in range (0,25):
-            if block_low[i] in cal_str:
+            if li.block_low[i] in cal_str:
                 cal_error += 1
         for i in range (0,14):
-            if block_sym[i] in cal_str:
+            if li.block_sym[i] in cal_str:
                 cal_error += 1
         if cal_error > 0:
             error_end('input_is_not_calculation_formula','error')
