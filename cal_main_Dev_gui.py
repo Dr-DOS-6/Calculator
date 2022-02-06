@@ -59,7 +59,7 @@ def all_calc_code():
             print('nに代入された数字= ', n)
             print('xに代入された数字= ', x)
             # 演算子の指定
-            cal_mode_2 = (input('どの計算がしたいですか？加算は1、乗算は2、減算は3、除算は4、除算の商は5、除算の剰余は6、べき乗は7、平方根は8です。:'))
+            cal_mode_2 = (input('どの計算がしたいですか?加算は1、乗算は2、減算は3、除算は4、除算の商は5、除算の剰余は6、べき乗は7、平方根は8です。:'))
             # 計算
             if cal_mode_2 == '1':
                 n_x_0 = n + x
@@ -92,7 +92,7 @@ def all_calc_code():
                 print('n^x =',n_x_6)
                 n_x_8 = n_x_6
             elif cal_mode_2 == '8':
-                cal_mode_2_1 = (input('平方根を求めたい値はどちらですか？n/x or 0/1:'))
+                cal_mode_2_1 = (input('平方根を求めたい値はどちらですか?n/x or 0/1:'))
                 if cal_mode_2_1 == 'n':
                     cal_mode_2_1 = '1'
                 if cal_mode_2_1 == 'x':
@@ -112,13 +112,13 @@ def all_calc_code():
                 time.sleep(1)
                 print(error)
                 time.sleep(3)
-                rep4 = (input('嘘です。計算をやり直しますか？ y/n or 1/0:'))
+                rep4 = (input('嘘です。計算をやり直しますか? y/n or 1/0:'))
                 if rep4 == '1':
                     rep4 = 'y'
                 elif rep4 == '0':
                     rep4 = 'n'
                 if rep4 == 'y':
-                    rep4_2 = (input('nに代入した数を残しますか？ y/n or 1/0:'))
+                    rep4_2 = (input('nに代入した数を残しますか? y/n or 1/0:'))
                     if rep4_2 == '1':
                         rep4_2 = 'y'
                     elif rep4_2 == '0':
@@ -137,14 +137,14 @@ def all_calc_code():
                 else:
                     error_end()
             # 再計算するかの確認
-            rep2 = (input('もう一回計算したいですか？ y/n or 1/0:'))
+            rep2 = (input('もう一回計算したいですか? y/n or 1/0:'))
             if rep2 == "1":
                 rep2 = 'y'
             elif rep2 == "0":
                 rep2 = 'n'
             if rep2 == 'y':
                 # 計算結果の引継ぎの確認
-                rep3 = (input('計算結果を引継ぎますか？ y/n or 1/0:'))
+                rep3 = (input('計算結果を引継ぎますか? y/n or 1/0:'))
                 if rep3 == "1":
                     rep3 = 'y'
                 elif rep3 == "0":
@@ -169,7 +169,7 @@ def all_calc_code():
         time.sleep(1)
         cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円、5:楕円:'))
         if cal_mode_3 == '1':
-            cal_mode_3_1 = (input('どちらの計算方法を利用しますか？3辺の長さ:1/y 底辺の長さと高さ:0/n:'))
+            cal_mode_3_1 = (input('どちらの計算方法を利用しますか?3辺の長さ:1/y 底辺の長さと高さ:0/n:'))
             if cal_mode_3_1 == 'y':
                 cal_mode_3_1 = '1'
             if cal_mode_3_1 == 'n':
@@ -388,7 +388,7 @@ def all_calc_code():
                 error_end()
         error_end_2()
     elif cal_mode == '3':
-        cal = float(input('どの値を求めたいですか？ 税込みの金額なら1、税抜きの金額なら2、税率なら3、税として加算されている金額なら4を入力してください。'))
+        cal = float(input('どの値を求めたいですか? 税込みの金額なら1、税抜きの金額なら2、税率なら3、税として加算されている金額なら4を入力してください。'))
         if cal == 1:
             tax_free_price = float(input('原価(円):'))
             tax_percent = float(input('税率(%):'))
