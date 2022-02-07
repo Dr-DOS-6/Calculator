@@ -11,12 +11,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
 argv = args.debug
+if argv == None:
+    argv = 'Normal'
 pf_s = pf.system()
 ver = pf.python_version()
 date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 error = None
 error_cnt = [0,0]
+sysin = pf.system()
+relin = pf.release()
+verin = pf.version()
+macin = pf.machine()
+proin = pf.processor()
 def sys_info():
     print ('System information for this computer:')
     print ('system          :', pf.system())
