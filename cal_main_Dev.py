@@ -28,7 +28,7 @@ def sys_info():
     print ('Software_version:',soft_ver)
     print ('Mode            : ',argv)
     with open('error.log', mode='a', encoding='UTF-8') as f:
-        datalist = ['\n','System          : ',pf.system()+'\n','Release         : ',pf.release()+'\n','System_version  : ',pf.version()+'\n','Machine         : ',pf.machine()+'\n','Processor       : ',pf.processor()+'\n','Python_version  : ',ver+'\n','Generated_Date  : ',date_1+'\n','Software_version: ',soft_ver+'\n','Mode            : ',argv+'_mode'+'\n']
+        datalist = ['\n','System          : ',pf.system(),'\n','Release         : ',pf.release(),'\n','System_version  : ',pf.version(),'\n','Machine         : ',pf.machine(),'\n','Processor       : ',pf.processor(),'\n','Python_version  : ',ver,'\n','Generated_Date  : ',date_1,'\n','Software_version: ',soft_ver,'\n','Mode            : ',argv,'_mode'+'\n']
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
@@ -208,7 +208,7 @@ def all_calc_code():
                 formula = 'n - x = '
             elif cal_mode_2 == '4':
                 if x == 0:
-                    error_end('0x0001')
+                    error_end('0x0001',None)
                 n_x_3 = n / x
                 print('n ÷ x =', n_x_3)
                 n_x_8 = n_x_3
@@ -241,7 +241,7 @@ def all_calc_code():
                     n_x_8 = n_x_7
                     formula = '√x = '
                 else:
-                    error_end('0x0002')
+                    error_end('0x0002',None)
             else:
                 n_x_8 = n
                 time.sleep(1)
@@ -257,12 +257,12 @@ def all_calc_code():
                     elif rep4_2 == 'n' or '0':
                         n = float(input('nに代入する数字を入力してください。:'))
                     else:
-                        error_end('0x0003')
+                        error_end('0x0003',None)
                     rep(n)
                 elif rep4 == 'n' or '0':
                     end()
                 else:
-                    error_end()
+                    error_end('0x0001',None)
             answer = str(n_x_8)
             output_1(input_str,formula,answer)
             # 再計算するかの確認
@@ -280,11 +280,11 @@ def all_calc_code():
                     n = float(input('nに代入する数字を入力してください。:'))
                     rep(n)
                 else:
-                    error_end('0x0003')
+                    error_end('0x0003',None)
             elif rep2 == 'n' or '0':
                 end()
             else:
-                error_end('0x0004')
+                error_end('0x0004',None)
         rep(n)
     elif cal_mode == '2':
         clear()
@@ -322,7 +322,7 @@ def all_calc_code():
                         print('面積',area)
                         end()
                     else:
-                        error_end('0x0004')
+                        error_end('0x0004',None)
                 elif cal_mode_3_1 == '0' or 'n':
                     cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
                     cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
@@ -333,7 +333,7 @@ def all_calc_code():
                     print('面積:',area)
                     end()
                 else:
-                    error_end('0x0004')
+                    error_end('0x0004',None)
             if cal_mode_3 == '2':
                 cal_mode_3_2 = (input('面積を計算したい四角形の種類を入力してください。1:正方形 2:長方形 3:平行四辺形 4:台形 5:菱形 6:それ以外の四角形:'))
                 if cal_mode_3_2 == '1':
@@ -407,7 +407,7 @@ def all_calc_code():
                             area_all = str(area_1 + area_2)
                             area = area_all
                         else:
-                            error_end('0x0004')
+                            error_end('0x0004',None)
                         print('面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '2':
@@ -428,7 +428,7 @@ def all_calc_code():
                         elif cal_n_3 == '5':
                             area = float(0.5*cal_n_4)
                         else:
-                            error_end('0x0004')
+                            error_end('0x0004',None)
                         print('面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '3':
@@ -456,14 +456,14 @@ def all_calc_code():
                         elif cal_n_7 == '10':
                             cal_n_7 = 1
                         else:
-                            error_end('0x0004')
+                            error_end('0x0004',None)
                         s = ((cal_n_1+cal_n_2+cal_n_3+cal_n_4)/2)
                         area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
                         area = area_all
                         print('面積:',area)
                         end()
                     else:
-                        error_end('0x0004')
+                        error_end('0x0004',None)
             elif cal_mode_3 == '3':
                 cal_mode_3_2 = input('面積を求めたい五角形の種類を指定してください。正五角形:1 五角形:2')
                 if cal_mode_3_2 == '1':
@@ -491,7 +491,7 @@ def all_calc_code():
                     area_all = area_1+area_2+area_3+area_4+area_5
                     area = area_all
                 else:
-                    error_end('0x0004')
+                    error_end('0x0004',None)
                 print('面積:',area)
                 end()
             elif cal_mode_3 == '4':
@@ -509,7 +509,7 @@ def all_calc_code():
                     print('面積:',area)
                     end()
                 else:
-                    error_end('0x0004')
+                    error_end('0x0004',None)
         elif cal_mode_int == '2':
             error_end_2('0x1001')
         elif cal_mode_int == '3':
@@ -519,24 +519,29 @@ def all_calc_code():
     elif cal_mode == '3':
         clear()
         print('数値変換モードで起動します。')
-        tri = int(input('角度から変換する先を選んでください。sin:0 cos:1 tan:2'))
-        if tri == 0:
-            tri = li.sintheta
-            ans_2 = 'sin'
-        elif tri == 1:
-            tri = li.costheta
-            ans_2 = 'cos'
-        elif  tri == 2:
-            tri = li.tantheta
-            ans_2 = 'tan'
-        else:
-            error_end('0x0001')
-        deg_sel_1 = int(input('角度を入力してください。'))
-        deg_sel_2 = li.deg.index(deg_sel_1)
-        if not 0 <= deg_sel_2 < len(li.deg):
-            error_end('0x0001')
-        ans = tri[deg_sel_2]
-        ans_3 = str(deg_sel_1)
+        sel = int(input('使用するモードを選択してください。 角度→三角比変換モード:0 三角比→角度変換モード:1 '))
+        if sel == 0:
+            tri = int(input('角度から変換する先を選択してください。sin:0 cos:1 tan:2 '))
+            if tri == 0:
+                tri = li.sintheta
+                ans_2 = 'sin'
+            elif tri == 1:
+                tri = li.costheta
+                ans_2 = 'cos'
+            elif  tri == 2:
+                tri = li.tantheta
+                ans_2 = 'tan'
+            else:
+                error_end('0x0001',None)
+            deg_sel_1 = int(input('角度を入力してください。'))
+            deg_sel_2 = li.deg.index(deg_sel_1)
+            if not 0 <= deg_sel_2 < len(li.deg):
+                error_end('0x0001',None)
+            ans = tri[deg_sel_2]
+            ans_3 = str(deg_sel_1)
+        elif sel == 1:
+            print('現在開発中につき、利用できません。')
+            error_end_2('0x1001')
         print(ans_2+ans_3+'°','=',ans)
         end()
     elif cal_mode == '4':
@@ -564,7 +569,7 @@ def all_calc_code():
             tax_price = str(int(tax_include_price-tax_free_price))
             print('¥'+tax_price)
         else:
-            error_end('0x0004')
+            error_end('0x0004',None)
         end()
     elif cal_mode == '5' and error_cnt[1] == 1:
         print('直接計算モードは現在利用できません。計算機を再起動してください。')
@@ -592,7 +597,7 @@ def all_calc_code():
         print('結果:',cal_int)
         end()
     elif cal_mode == '2022':
-        error_end('Happy new year!')
+        error_end('Happy new year!',None)
     else:
-        error_end('0x0004')
+        error_end('0x0004',None)
 all_calc_code()
