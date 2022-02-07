@@ -82,9 +82,7 @@ def clear():
     else:
         error_end_3()
 def end():
-    time.sleep(1)
     print('Finish the calculation.')
-    time.sleep(1)
     sys.exit()
 #エラー時再起動コード
 def error_end(error_code,error):
@@ -120,17 +118,16 @@ def error_end_2(error_code):
 def error_end_3():
     print('This program will not run on this computer.')
     print('Error code: 0x000E')
-    time.sleep(1)
     sys_info()
     sys.exit()
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.6.3_CUI_Dev_20220208')
+    soft_ver = ('1.4.6.4_CUI_Dev_20220208')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.6.3_CUI_Dev_20220208'+' '+'debug_mode')
+        soft_ver = ('1.4.6.4_CUI_Dev_20220208'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -146,30 +143,25 @@ def startup():
     #任意コード実行防止機能改良
     #数値変換モード実装
     #可読性の向上
+    #time.sleep()の全削除
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
     Created_by_1 = 'Python 3.10.1'
     Created_by_2 = 'Visual Studio Code 1.62.3'
     Created_by = ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
-    time.sleep(0.3)
     print(ver)
-    time.sleep(0.3)
     print(built)
-    time.sleep(0.3)
     print(Created_by)
-    time.sleep(1)
     if pf_s == 'Windows' or 'Linux' or 'Darwin':
         if argv == 'debug':
             sysinfo_tst = input('Enter the name of the OS you want to test. :')
             if not sysinfo_tst == 'Windows' or 'Linux' or 'Darwin':
                 print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
-                time.sleep(0.5)
                 error_end_3()
         return
     else:
         print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
-        time.sleep(0.5)
         error_end_3()
     #if not pf_s == 'Linux':
     #    print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
@@ -184,7 +176,6 @@ def all_calc_code():
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
-        time.sleep(1)
         n = float(input('nに代入する数字を入力してください。'))
         def rep(n):
             error = 'A serious error has occurred. Restarting the program.'
@@ -251,9 +242,7 @@ def all_calc_code():
                     error_end('0x0002',None)
             else:
                 n_x_8 = n
-                time.sleep(1)
                 print(error)
-                time.sleep(3)
                 rep4 = (input('嘘です。計算をやり直しますか? y/n or 1/0:'))
                 if rep4 == 'y' or '1':
                     rep4_2 = (input('nに代入した数を残しますか? y/n or 1/0:'))
@@ -296,7 +285,6 @@ def all_calc_code():
     elif cal_mode == '2':
         clear()
         print('幾何計算モードで起動します。')
-        time.sleep(1)
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
             unit = input('使用する単位を入力して下さい。:')
