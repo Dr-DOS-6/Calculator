@@ -127,10 +127,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.6.2_CUI_Dev_20220208')
+    soft_ver = ('1.4.6.3_CUI_Dev_20220208')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.6.2_CUI_Dev_20220208'+' '+'debug_mode')
+        soft_ver = ('1.4.6.3_CUI_Dev_20220208'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -178,9 +178,9 @@ startup()
 # 代入コード1
 def all_calc_code():
     if error_cnt[1] > 0:
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6を入力してください。'))
     else:    
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6を入力してください。'))
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
@@ -605,6 +605,8 @@ def all_calc_code():
         end()
     elif cal_mode == '2022':
         error_end('Happy new year!',None)
+    elif cal_mode == '6':
+        end()
     else:
         error_end('0x0004',None)
 all_calc_code()

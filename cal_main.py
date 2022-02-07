@@ -11,12 +11,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
 argv = args.debug
+if argv == None:
+    argv = 'Normal'
 pf_s = pf.system()
 ver = pf.python_version()
 date = datetime.datetime.today()
 date_1 = date.strftime("%Y/%m/%d %H:%M:%S")
 error = None
 error_cnt = [0,0]
+sysin = pf.system()
+relin = pf.release()
+verin = pf.version()
+macin = pf.machine()
+proin = pf.processor()
 def sys_info():
     print ('System information for this computer:')
     print ('system          :', pf.system())
@@ -28,7 +35,7 @@ def sys_info():
     print ('Software_version:',soft_ver)
     print ('Mode            : ',argv)
     with open('error.log', mode='a', encoding='UTF-8') as f:
-        datalist = ['\n','System          : ',pf.system()+'\n','Release         : ',pf.release()+'\n','System_version  : ',pf.version()+'\n','Machine         : ',pf.machine()+'\n','Processor       : ',pf.processor()+'\n','Python_version  : ',ver+'\n','Generated_Date  : ',date_1+'\n','Software_version: ',soft_ver+'\n','Mode            : ',argv+'_mode'+'\n']
+        datalist = ['\n','System          : ',pf.system(),'\n','Release         : ',pf.release(),'\n','System_version  : ',pf.version(),'\n','Machine         : ',pf.machine(),'\n','Processor       : ',pf.processor(),'\n','Python_version  : ',ver,'\n','Generated_Date  : ',date_1,'\n','Software_version: ',soft_ver,'\n','Mode            : ',argv,'_mode'+'\n']
         f.writelines(datalist)
         f.close()
         print('An error log was output:',os.path.abspath('error.log'))
@@ -75,9 +82,7 @@ def clear():
     else:
         error_end_3()
 def end():
-    time.sleep(1)
     print('Finish the calculation.')
-    time.sleep(1)
     sys.exit()
 #エラー時再起動コード
 def error_end(error_code,error):
@@ -113,17 +118,16 @@ def error_end_2(error_code):
 def error_end_3():
     print('This program will not run on this computer.')
     print('Error code: 0x000E')
-    time.sleep(1)
     sys_info()
     sys.exit()
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('2.0')
+    soft_ver = ('2.2')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('2.0'+' '+'debug_mode')
+        soft_ver = ('2.2'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -139,30 +143,25 @@ def startup():
     #任意コード実行防止機能改良
     #数値変換モード実装
     #可読性の向上
+    #time.sleep()の全削除
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
     Created_by_1 = 'Python 3.10.1'
     Created_by_2 = 'Visual Studio Code 1.62.3'
     Created_by = ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
-    time.sleep(0.3)
     print(ver)
-    time.sleep(0.3)
     print(built)
-    time.sleep(0.3)
     print(Created_by)
-    time.sleep(1)
     if pf_s == 'Windows' or 'Linux' or 'Darwin':
         if argv == 'debug':
             sysinfo_tst = input('Enter the name of the OS you want to test. :')
             if not sysinfo_tst == 'Windows' or 'Linux' or 'Darwin':
                 print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
-                time.sleep(0.5)
                 error_end_3()
         return
     else:
         print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
-        time.sleep(0.5)
         error_end_3()
     #if not pf_s == 'Linux':
     #    print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
@@ -171,13 +170,12 @@ startup()
 # 代入コード1
 def all_calc_code():
     if error_cnt[1] > 0:
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6を入力してください。'))
     else:    
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6を入力してください。'))
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
-        time.sleep(1)
         n = float(input('nに代入する数字を入力してください。'))
         def rep(n):
             error = 'A serious error has occurred. Restarting the program.'
@@ -208,7 +206,7 @@ def all_calc_code():
                 formula = 'n - x = '
             elif cal_mode_2 == '4':
                 if x == 0:
-                    error_end('0x0001')
+                    error_end('0x0001',None)
                 n_x_3 = n / x
                 print('n ÷ x =', n_x_3)
                 n_x_8 = n_x_3
@@ -241,12 +239,10 @@ def all_calc_code():
                     n_x_8 = n_x_7
                     formula = '√x = '
                 else:
-                    error_end('0x0002')
+                    error_end('0x0002',None)
             else:
                 n_x_8 = n
-                time.sleep(1)
                 print(error)
-                time.sleep(3)
                 rep4 = (input('嘘です。計算をやり直しますか? y/n or 1/0:'))
                 if rep4 == 'y' or '1':
                     rep4_2 = (input('nに代入した数を残しますか? y/n or 1/0:'))
@@ -257,12 +253,12 @@ def all_calc_code():
                     elif rep4_2 == 'n' or '0':
                         n = float(input('nに代入する数字を入力してください。:'))
                     else:
-                        error_end('0x0003')
+                        error_end('0x0003',None)
                     rep(n)
                 elif rep4 == 'n' or '0':
                     end()
                 else:
-                    error_end()
+                    error_end('0x0001',None)
             answer = str(n_x_8)
             output_1(input_str,formula,answer)
             # 再計算するかの確認
@@ -280,16 +276,15 @@ def all_calc_code():
                     n = float(input('nに代入する数字を入力してください。:'))
                     rep(n)
                 else:
-                    error_end('0x0003')
+                    error_end('0x0003',None)
             elif rep2 == 'n' or '0':
                 end()
             else:
-                error_end('0x0004')
+                error_end('0x0004',None)
         rep(n)
     elif cal_mode == '2':
         clear()
         print('幾何計算モードで起動します。')
-        time.sleep(1)
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
             unit = input('使用する単位を入力して下さい。:')
@@ -322,7 +317,7 @@ def all_calc_code():
                         print('面積',area)
                         end()
                     else:
-                        error_end('0x0004')
+                        error_end('0x0004',None)
                 elif cal_mode_3_1 == '0' or 'n':
                     cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
                     cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
@@ -333,7 +328,7 @@ def all_calc_code():
                     print('面積:',area)
                     end()
                 else:
-                    error_end('0x0004')
+                    error_end('0x0004',None)
             if cal_mode_3 == '2':
                 cal_mode_3_2 = (input('面積を計算したい四角形の種類を入力してください。1:正方形 2:長方形 3:平行四辺形 4:台形 5:菱形 6:それ以外の四角形:'))
                 if cal_mode_3_2 == '1':
@@ -407,7 +402,7 @@ def all_calc_code():
                             area_all = str(area_1 + area_2)
                             area = area_all
                         else:
-                            error_end('0x0004')
+                            error_end('0x0004',None)
                         print('面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '2':
@@ -428,7 +423,7 @@ def all_calc_code():
                         elif cal_n_3 == '5':
                             area = float(0.5*cal_n_4)
                         else:
-                            error_end('0x0004')
+                            error_end('0x0004',None)
                         print('面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '3':
@@ -456,14 +451,14 @@ def all_calc_code():
                         elif cal_n_7 == '10':
                             cal_n_7 = 1
                         else:
-                            error_end('0x0004')
+                            error_end('0x0004',None)
                         s = ((cal_n_1+cal_n_2+cal_n_3+cal_n_4)/2)
                         area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
                         area = area_all
                         print('面積:',area)
                         end()
                     else:
-                        error_end('0x0004')
+                        error_end('0x0004',None)
             elif cal_mode_3 == '3':
                 cal_mode_3_2 = input('面積を求めたい五角形の種類を指定してください。正五角形:1 五角形:2')
                 if cal_mode_3_2 == '1':
@@ -491,7 +486,7 @@ def all_calc_code():
                     area_all = area_1+area_2+area_3+area_4+area_5
                     area = area_all
                 else:
-                    error_end('0x0004')
+                    error_end('0x0004',None)
                 print('面積:',area)
                 end()
             elif cal_mode_3 == '4':
@@ -509,7 +504,7 @@ def all_calc_code():
                     print('面積:',area)
                     end()
                 else:
-                    error_end('0x0004')
+                    error_end('0x0004',None)
         elif cal_mode_int == '2':
             error_end_2('0x1001')
         elif cal_mode_int == '3':
@@ -519,24 +514,29 @@ def all_calc_code():
     elif cal_mode == '3':
         clear()
         print('数値変換モードで起動します。')
-        tri = int(input('角度から変換する先を選んでください。sin:0 cos:1 tan:2'))
-        if tri == 0:
-            tri = li.sintheta
-            ans_2 = 'sin'
-        elif tri == 1:
-            tri = li.costheta
-            ans_2 = 'cos'
-        elif  tri == 2:
-            tri = li.tantheta
-            ans_2 = 'tan'
-        else:
-            error_end('0x0001')
-        deg_sel_1 = int(input('角度を入力してください。'))
-        deg_sel_2 = li.deg.index(deg_sel_1)
-        if not 0 <= deg_sel_2 < len(li.deg):
-            error_end('0x0001')
-        ans = tri[deg_sel_2]
-        ans_3 = str(deg_sel_1)
+        sel = int(input('使用するモードを選択してください。 角度→三角比変換モード:0 三角比→角度変換モード:1 '))
+        if sel == 0:
+            tri = int(input('角度から変換する先を選択してください。sin:0 cos:1 tan:2 '))
+            if tri == 0:
+                tri = li.sintheta
+                ans_2 = 'sin'
+            elif tri == 1:
+                tri = li.costheta
+                ans_2 = 'cos'
+            elif  tri == 2:
+                tri = li.tantheta
+                ans_2 = 'tan'
+            else:
+                error_end('0x0001',None)
+            deg_sel_1 = int(input('角度を入力してください。'))
+            deg_sel_2 = li.deg.index(deg_sel_1)
+            if not 0 <= deg_sel_2 < len(li.deg):
+                error_end('0x0001',None)
+            ans = tri[deg_sel_2]
+            ans_3 = str(deg_sel_1)
+        elif sel == 1:
+            print('現在開発中につき、利用できません。')
+            error_end_2('0x1001')
         print(ans_2+ans_3+'°','=',ans)
         end()
     elif cal_mode == '4':
@@ -564,7 +564,7 @@ def all_calc_code():
             tax_price = str(int(tax_include_price-tax_free_price))
             print('¥'+tax_price)
         else:
-            error_end('0x0004')
+            error_end('0x0004',None)
         end()
     elif cal_mode == '5' and error_cnt[1] == 1:
         print('直接計算モードは現在利用できません。計算機を再起動してください。')
@@ -592,7 +592,9 @@ def all_calc_code():
         print('結果:',cal_int)
         end()
     elif cal_mode == '2022':
-        error_end('Happy new year!')
+        error_end('Happy new year!',None)
+    elif cal_mode == '6':
+        end()
     else:
-        error_end('0x0004')
+        error_end('0x0004',None)
 all_calc_code()
