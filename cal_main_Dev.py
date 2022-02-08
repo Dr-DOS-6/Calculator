@@ -127,10 +127,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.6.4_CUI_Dev_20220208')
+    soft_ver = ('1.4.7.0_CUI_Dev_20220208')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.6.4_CUI_Dev_20220208'+' '+'debug_mode')
+        soft_ver = ('1.4.7.0_CUI_Dev_20220208'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -147,6 +147,7 @@ def startup():
     #数値変換モード実装
     #可読性の向上
     #time.sleep()の全削除
+    #税計算モード完成
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -561,24 +562,34 @@ def all_calc_code():
             tax_include_price = float(input('税込み価格:'))
             unit = str(input('単位を入力してください。:'))
             tax_percent = float(input('税率(%):'))
+            tax_include_price_str = str(tax_include_price)
+            tax_percent_str = str(tax_percent)
+            input_ = tax_include_price_str+','+tax_percent_str
             tax_free_price = str(int(tax_include_price-(tax_include_price/(((tax_percent*0.01)+1)*100)*tax_percent)))
+            formula = '税込み価格-(税込み価格÷(((税率+1)*100)*税率))'
             print(unit+tax_free_price)
+            output_4(input_,formula,tax_free_price,unit,0)
         elif cal == 3:
             tax_include_price = float(input('税込み価格:'))
             tax_free_price = float(input('税抜き価格:'))
             tax_include_price_str = str(tax_include_price)
             tax_free_price_str = str(tax_free_price)
-            input_ = tax_free_price_str+','+tax_include_price_str 
+            input_ = tax_include_price_str+','+tax_free_price_str 
             tax_percent = str(int(((tax_include_price/tax_free_price)-1)*100))
-            formula = '税込み価格÷税抜き価格'
+            formula = '((税込み価格÷税抜き価格)-1)*100'
             print(tax_percent+'%')
-            output_4(input_,None,None,'%',1)
+            output_4(input_,formula,tax_percent,'%',1)
         elif cal == 4:
-            unit = str(input(''))
             tax_include_price = float(input('税込みの価格:'))
             tax_free_price = float(input('税抜き価格:'))
+            unit = str(input('単位を入力してください。:'))
+            tax_include_price_str = str(tax_include_price)
+            tax_free_price_str = str(tax_free_price)
+            input_ = tax_include_price_str+','+tax_free_price_str 
             tax_price = str(int(tax_include_price-tax_free_price))
-            print('¥'+tax_price)
+            formula = '税込み価格-税抜き価格'
+            print(unit+tax_price)
+            output_4(input_,formula,tax_price,unit,0)
         else:
             error_end('0x0004',None)
         end()
