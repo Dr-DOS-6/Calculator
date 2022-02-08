@@ -77,6 +77,12 @@ def output_5(input,answer):
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
+def output_6(input,answer):
+    with open('result.txt',mode='a',encoding='UTF-8') as f:
+        datalist = ['\n','使用モード: 数値変換モード','\n','入力:',input,'\n','結果:',answer,'\n']
+        f.writelines(datalist)
+        f.close()
+    print('An result was output:',os.path.abspath('result.txt'))
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -127,10 +133,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.7.0_CUI_Dev_20220208')
+    soft_ver = ('1.4.7.5_CUI_Dev_20220208')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.7.0_CUI_Dev_20220208'+' '+'debug_mode')
+        soft_ver = ('1.4.7.5_CUI_Dev_20220208'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -148,6 +154,7 @@ def startup():
     #可読性の向上
     #time.sleep()の全削除
     #税計算モード完成
+    #数値変換モード半完成
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -538,10 +545,12 @@ def all_calc_code():
                 error_end('0x0001',None)
             ans = tri[deg_sel_2]
             ans_3 = str(deg_sel_1)
+            input_ = ans_2+','+ans_3
         elif sel == 1:
             print('現在開発中につき、利用できません。')
             error_end_2('0x1001')
         print(ans_2+ans_3+'°','=',ans)
+        output_6(input_,ans)
         end()
     elif cal_mode == '4':
         clear()
