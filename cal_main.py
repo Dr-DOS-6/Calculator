@@ -49,28 +49,37 @@ def output_1(input,formula,answer):
 def output_2(input,formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit,'\n']
+        datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit]
+        datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
-def output_4(input,formula,answer,unit):
+def output_4(input,formula,answer,unit,sel):
     #税計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','入力:',input,formula,answer,'\n','答え:',unit,answer]
+        if sel == 0:
+            datalist = ['\n','使用モード: 税計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',unit,answer,'\n']
+        elif sel == 1:
+            datalist = ['\n','使用モード: 税計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_5(input,answer):
     #直接計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','入力:',input,'\n','答え:',answer]
+        datalist = ['\n','使用モード: 直接計算モード','\n','入力:',input,'\n','答え:',answer,'\n']
+        f.writelines(datalist)
+        f.close()
+    print('An result was output:',os.path.abspath('result.txt'))
+def output_6(input,answer):
+    with open('result.txt',mode='a',encoding='UTF-8') as f:
+        datalist = ['\n','使用モード: 数値変換モード','\n','入力:',input,'\n','結果:',answer,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
@@ -124,10 +133,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('2.2')
+    soft_ver = ('3.1')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('2.2'+' '+'debug_mode')
+        soft_ver = ('3.1'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -144,6 +153,8 @@ def startup():
     #数値変換モード実装
     #可読性の向上
     #time.sleep()の全削除
+    #税計算モード完成
+    #数値変換モード半完成
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -534,35 +545,60 @@ def all_calc_code():
                 error_end('0x0001',None)
             ans = tri[deg_sel_2]
             ans_3 = str(deg_sel_1)
+            input_ = ans_2+','+ans_3
         elif sel == 1:
             print('現在開発中につき、利用できません。')
             error_end_2('0x1001')
         print(ans_2+ans_3+'°','=',ans)
+        output_6(input_,ans)
         end()
     elif cal_mode == '4':
         clear()
         print('税計算モードで起動します。')
         cal = float(input('どの値を求めますか? 1:税込み金額、2:税抜き金額、3:税率、4:税額 :'))
         if cal == 1:
-            tax_free_price = float(input('原価(円):'))
+            tax_free_price = float(input('税抜き価格:'))
+            unit = str(input('単位を入力してください。:'))
             tax_percent = float(input('税率(%):'))
+            tax_free_price_str = str(tax_free_price)
+            tax_percent_str = str(tax_percent)
+            input_ = tax_free_price_str+','+tax_percent_str 
             tax_include_price = str((tax_free_price+(tax_free_price*(tax_percent*0.01))))
-            print('¥'+tax_include_price)
+            formula = '税抜き価格+(税抜き価格*税率(%))'
+            print(unit+tax_include_price)
+            output_4(input_,formula,tax_include_price,unit,0)
         elif cal == 2:
-            tax_include_price = float(input('税込みの値段(円):'))
+            tax_include_price = float(input('税込み価格:'))
+            unit = str(input('単位を入力してください。:'))
             tax_percent = float(input('税率(%):'))
+            tax_include_price_str = str(tax_include_price)
+            tax_percent_str = str(tax_percent)
+            input_ = tax_include_price_str+','+tax_percent_str
             tax_free_price = str(int(tax_include_price-(tax_include_price/(((tax_percent*0.01)+1)*100)*tax_percent)))
-            print('¥'+tax_free_price)
+            formula = '税込み価格-(税込み価格÷(((税率+1)*100)*税率))'
+            print(unit+tax_free_price)
+            output_4(input_,formula,tax_free_price,unit,0)
         elif cal == 3:
-            tax_include_price = float(input('税込みの値段:'))
-            tax_free_price = float(input('原価:'))
+            tax_include_price = float(input('税込み価格:'))
+            tax_free_price = float(input('税抜き価格:'))
+            tax_include_price_str = str(tax_include_price)
+            tax_free_price_str = str(tax_free_price)
+            input_ = tax_include_price_str+','+tax_free_price_str 
             tax_percent = str(int(((tax_include_price/tax_free_price)-1)*100))
+            formula = '((税込み価格÷税抜き価格)-1)*100'
             print(tax_percent+'%')
+            output_4(input_,formula,tax_percent,'%',1)
         elif cal == 4:
-            tax_include_price = float(input('税込みの値段:'))
-            tax_free_price = float(input('原価:'))
+            tax_include_price = float(input('税込みの価格:'))
+            tax_free_price = float(input('税抜き価格:'))
+            unit = str(input('単位を入力してください。:'))
+            tax_include_price_str = str(tax_include_price)
+            tax_free_price_str = str(tax_free_price)
+            input_ = tax_include_price_str+','+tax_free_price_str 
             tax_price = str(int(tax_include_price-tax_free_price))
-            print('¥'+tax_price)
+            formula = '税込み価格-税抜き価格'
+            print(unit+tax_price)
+            output_4(input_,formula,tax_price,unit,0)
         else:
             error_end('0x0004',None)
         end()
@@ -588,8 +624,9 @@ def all_calc_code():
                 cal_error += 1
         if cal_error > 0:
             error_end('input_is_not_calculation_formula','error')
-        cal_int = eval(cal)
+        cal_int = str(eval(cal))
         print('結果:',cal_int)
+        output_5(cal_str,cal_int)
         end()
     elif cal_mode == '2022':
         error_end('Happy new year!',None)
