@@ -78,6 +78,7 @@ def output_5(input,answer):
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_6(input,answer):
+    #数値変換モード用
     with open('result.txt',mode='a',encoding='UTF-8') as f:
         datalist = ['\n','使用モード: 数値変換モード','\n','入力:',input,'\n','結果:',answer,'\n']
         f.writelines(datalist)
@@ -133,7 +134,7 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('3.1')
+    soft_ver = ('4.0')
     str(soft_ver)
     if argv == 'debug':
         soft_ver = ('3.1'+' '+'debug_mode')
@@ -154,7 +155,7 @@ def startup():
     #可読性の向上
     #time.sleep()の全削除
     #税計算モード完成
-    #数値変換モード半完成
+    #数値変換モード完成
     builder = 'Dr.DOS'
     year = '2021'
     built = builder+'/'+year
@@ -547,9 +548,29 @@ def all_calc_code():
             ans_3 = str(deg_sel_1)
             input_ = ans_2+','+ans_3
         elif sel == 1:
-            print('現在開発中につき、利用できません。')
-            error_end_2('0x1001')
-        print(ans_2+ans_3+'°','=',ans)
+            tri = int(input('角度へ変換する物を選んでください。sin:0 cos:1 tan:2 '))
+            if tri == 0:
+                tri = li.sintheta
+                ans_2 = 'sin'
+            elif tri == 1:
+                tri = li.costheta
+                ans_2 = 'cos'
+            elif tri == 2:
+                tri = li.tantheta
+                ans_2 = 'tan'
+            else:error_end('0x0001',None)
+            tri_str = str(tri)+' '+'左のリストの中から値を選んで入力してください。'
+            val_sel_1 = str(input(tri_str))
+            val_sel_2 = tri.index(val_sel_1)
+            ans_3 = tri[val_sel_2]
+            if not 0 <= val_sel_2 < len(tri):
+                error_end('0x0001',None)
+            ans = str(li.deg[val_sel_2])
+            input_ = ans_2+','+val_sel_1
+        if sel == 0: 
+            print(ans_2+ans_3+'°','=',ans)
+        elif sel == 1:
+            print(ans_2,',',ans_3,'=',ans+'°')
         output_6(input_,ans)
         end()
     elif cal_mode == '4':
