@@ -158,7 +158,7 @@ def startup():
     #数値変換モード半完成
     #数値変換モード完成
     builder = 'Dr.DOS'
-    year = '2021'
+    year = '2022'
     built = builder+'/'+year
     Created_by_1 = 'Python 3.10.1'
     Created_by_2 = 'Visual Studio Code 1.62.3'
