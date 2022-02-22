@@ -134,10 +134,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.8.0_CUI_Dev_20220221')
+    soft_ver = ('1.4.9.0_CUI_Dev_20220222')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.8.0_CUI_Dev_20220221'+' '+'debug_mode')
+        soft_ver = ('1.4.9.0_CUI_Dev_20220222'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
