@@ -49,14 +49,14 @@ def output_1(input,formula,answer):
 def output_2(input,formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit,'\n']
+        datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n',formula,' , ',answer,'\n','解:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n',formula,answer,'\n','解:',answer,unit,'\n']
+        datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n',formula,' , ',answer,'\n','解:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
@@ -134,10 +134,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.9.0_CUI_Dev_20220222')
+    soft_ver = ('1.4.9.1_CUI_Dev_20220222')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.9.0_CUI_Dev_20220222'+' '+'debug_mode')
+        soft_ver = ('1.4.9.1_CUI_Dev_20220222'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -157,6 +157,7 @@ def startup():
     #税計算モード完成
     #数値変換モード半完成
     #数値変換モード完成
+    #幾何計算モード、テキスト出力機能実装開始
     builder = 'Dr.DOS'
     year = '2022'
     built = builder+'/'+year
@@ -303,10 +304,10 @@ def all_calc_code():
             unit = input('使用する単位を入力して下さい。:')
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
-                cal_mode_3_1 = (input('どちらの計算方法を利用しますか?3辺の長さ:1/y 底辺の長さと高さ:0/n :'))
-                if cal_mode_3_1 == '1' or 'y':
-                    cal_mode_3_1_1 =(input('面積を計算したい三角形の種類を選択してください。正三角形:1/y それ以外:0/n:'))
-                    if cal_mode_3_1_1 == '1' or 'y':
+                cal_mode_3_1 = (input('どちらの計算方法を利用しますか?3辺の長さ:1 底辺の長さと高さ:2 :'))
+                if cal_mode_3_1 == '1':
+                    cal_mode_3_1_1 =str(input('面積を計算したい三角形の種類を選択してください。正三角形:1 それ以外:2 :'))
+                    if cal_mode_3_1_1 == '1':
                         cal_mode_3_1_1_val = float(input('1辺の長さを入力してください。:'))
                         cal_n_1 = float(cal_mode_3_1_1_val)
                         area = cal_n_1 * cal_n_1 /4
@@ -314,10 +315,9 @@ def all_calc_code():
                         area = (str(area)+'√3')
                         input_1 = str(cal_mode_3_1_1_val)
                         formula_1 = '1辺の長さ^2*√3÷4'
-                        answer_1 = str(area),'/',str(area_2)
+                        answer_1 = str(area)+' '+'/'+' '+str(area_2)
                         print('面積:','1辺の長さ*3',area,'/',area_2,unit)
-                        end()
-                    elif cal_mode_3_1_1 =='0' or 'n':
+                    elif cal_mode_3_1_1 =='2':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_2 = float(input('2つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_3 = float(input('3つ目の辺の長さを入力してください。:'))
@@ -325,21 +325,27 @@ def all_calc_code():
                         cal_n_1_2 = cal_mode_3_1_1_val_2
                         cal_n_1_3 = cal_mode_3_1_1_val_3
                         cal_n_2 = float((cal_n_1_1 + cal_n_1_2 + cal_n_1_3)/2)
-                        cal_n_3 = float(math.sqrt(cal_n_2*(cal_n_2 - cal_n_1_1)*(cal_n_2 - cal_n_1_2)*(cal_n_2 - cal_n_1_3)))
-                        area = str(cal_n_3)
-                        print('面積',area)
-                        end()
+                        cal_n_3 = float(cal_n_2*(cal_n_2 - cal_n_1_1)*(cal_n_2 - cal_n_1_2)*(cal_n_2 - cal_n_1_3))
+                        cal_n_4 = float(math.sqrt(cal_n_3))
+                        area = str('√'+str(cal_n_4))
+                        area_2 = str(cal_n_3)
+                        input_1 = str(cal_n_1_1)+','+str(cal_n_1_2)+','+str(cal_n_1_3)
+                        formula_1 = '(1つ目の辺の長さ+2つ目の辺の長さ+3つ目の辺の長さ)/2をaとして、√(a*(a-1つ目の辺の長さ)*(a-2つ目の辺の長さ)*(a-3つ目の辺の長さ))'
+                        answer_1 = str(area)+' '+'/'+' '+str(area_2)
+                        print('面積:',area,'/',area_2,unit)
                     else:
                         error_end('0x0004',None)
-                elif cal_mode_3_1 == '0' or 'n':
+                elif cal_mode_3_1 == '2':
                     cal_mode_3_1_2_val_1 = float(input('底辺の長さを入力してください。:'))
                     cal_mode_3_1_2_val_2 = float(input('高さを入力してください。:'))
                     cal_n_1_1 = cal_mode_3_1_2_val_1
                     cal_n_1_2 = cal_mode_3_1_2_val_2
                     cal_n_2 = float((cal_n_1_1 * cal_n_1_2)/2)
                     area = str(cal_n_2)
-                    print('面積:',area)
-                    end()
+                    input_1 = str(cal_n_1_1)+','+str(cal_n_1_2)
+                    formula_1 = '(底辺*高さ)/2'
+                    answer_1 = str(area)
+                    print('面積:',area,unit)
                 else:
                     error_end('0x0004',None)
             if cal_mode_3 == '2':
@@ -349,8 +355,10 @@ def all_calc_code():
                     cal_n_1 = cal_mode_3_2_1
                     cal_n_2 = cal_n_1 ** 2
                     area = str(cal_n_2)
-                    print('面積:',area)
-                    end()
+                    input_1 = str(cal_n_1)
+                    formula_1 = '1辺の長さ^2'
+                    answer_1 = str(area)
+                    print('面積:',area,unit)
                 elif cal_mode_3_2 == '2':
                     cal_mode_3_2_1 = float(input('高さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('横幅を入力してください。:'))
@@ -358,8 +366,10 @@ def all_calc_code():
                     cal_n_2 = cal_mode_3_2_2 
                     cal_n_3 = cal_n_1 * cal_n_2
                     area = cal_n_3
-                    print('面積:',area)
-                    end()
+                    input_1 = str(cal_n_1)+','+str(cal_n_2)
+                    formula_1 = '高さ*横幅'
+                    answer_1 = str(area)
+                    print('面積:',area,unit)
                 elif cal_mode_3_2 == '3':
                     cal_mode_3_2_1 = float(input('高さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('上底/下底どちらかの長さを入力してください。'))
@@ -524,6 +534,7 @@ def all_calc_code():
             error_end_2('0x1001')
         else:
             error_end_2('0x1002')
+        output_2(input_1,formula_1,answer_1,unit)
     elif cal_mode == '3':
         clear()
         print('数値変換モードで起動します。')
