@@ -134,10 +134,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.9.1_CUI_Dev_20220222')
+    soft_ver = ('1.4.9.2_CUI_Dev_20220226')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.9.1_CUI_Dev_20220222'+' '+'debug_mode')
+        soft_ver = ('1.4.9.2_CUI_Dev_20220226'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -157,7 +157,8 @@ def startup():
     #税計算モード完成
     #数値変換モード半完成
     #数値変換モード完成
-    #幾何計算モード、テキスト出力機能実装開始
+    #幾何計算モード、四角形の面積演算までテキスト出力機能実装完了
+    #ヘルプ表示機能実装
     builder = 'Dr.DOS'
     year = '2022'
     built = builder+'/'+year
@@ -184,9 +185,9 @@ startup()
 # 代入コード1
 def all_calc_code():
     if error_cnt[1] > 0:
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6を入力してください。'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6、ヘルプを見たい場合は7を入力してください。'))
     else:    
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6を入力してください。'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6、ヘルプを見たい場合は7を入力してください。'))
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
@@ -316,7 +317,7 @@ def all_calc_code():
                         input_1 = str(cal_mode_3_1_1_val)
                         formula_1 = '1辺の長さ^2*√3÷4'
                         answer_1 = str(area)+' '+'/'+' '+str(area_2)
-                        print('面積:','1辺の長さ*3',area,'/',area_2,unit)
+                        print('式:',formula_1,'\n','面積:',area,'/',area_2,unit)
                     elif cal_mode_3_1_1 =='2':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_2 = float(input('2つ目の辺の長さを入力してください。:'))
@@ -332,7 +333,7 @@ def all_calc_code():
                         input_1 = str(cal_n_1_1)+','+str(cal_n_1_2)+','+str(cal_n_1_3)
                         formula_1 = '(1つ目の辺の長さ+2つ目の辺の長さ+3つ目の辺の長さ)/2をaとして、√(a*(a-1つ目の辺の長さ)*(a-2つ目の辺の長さ)*(a-3つ目の辺の長さ))'
                         answer_1 = str(area)+' '+'/'+' '+str(area_2)
-                        print('面積:',area,'/',area_2,unit)
+                        print('式:',formula_1,'\n','面積:',area,'/',area_2,unit)
                     else:
                         error_end('0x0004',None)
                 elif cal_mode_3_1 == '2':
@@ -345,7 +346,7 @@ def all_calc_code():
                     input_1 = str(cal_n_1_1)+','+str(cal_n_1_2)
                     formula_1 = '(底辺*高さ)/2'
                     answer_1 = str(area)
-                    print('面積:',area,unit)
+                    print('式:',formula_1,'\n','面積:',area,unit)
                 else:
                     error_end('0x0004',None)
             if cal_mode_3 == '2':
@@ -358,7 +359,7 @@ def all_calc_code():
                     input_1 = str(cal_n_1)
                     formula_1 = '1辺の長さ^2'
                     answer_1 = str(area)
-                    print('面積:',area,unit)
+                    print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '2':
                     cal_mode_3_2_1 = float(input('高さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('横幅を入力してください。:'))
@@ -369,7 +370,7 @@ def all_calc_code():
                     input_1 = str(cal_n_1)+','+str(cal_n_2)
                     formula_1 = '高さ*横幅'
                     answer_1 = str(area)
-                    print('面積:',area,unit)
+                    print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '3':
                     cal_mode_3_2_1 = float(input('高さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('上底/下底どちらかの長さを入力してください。'))
@@ -377,8 +378,10 @@ def all_calc_code():
                     cal_n_2 = cal_mode_3_2_2 
                     cal_n_3 = cal_n_1 * cal_n_2
                     area = cal_n_3
-                    print('面積:',area)
-                    end()
+                    input_1 = str(cal_n_1)+','+str(cal_n_2)
+                    formula_1 = '上底または下底の長さ*高さ'
+                    answer_1 = str(area)
+                    print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '4':
                     cal_mode_3_2_1 = float(input('高さを入力してください。'))
                     cal_mode_3_2_2 = float(input('上底の長さを入力してください。'))
@@ -388,8 +391,10 @@ def all_calc_code():
                     cal_n_3 = cal_mode_3_2_3
                     cal_n_4 = ((cal_n_2 + cal_n_3)*cal_n_1)/2
                     area = cal_n_4
-                    print('面積:',area)
-                    end()
+                    input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)
+                    formula_1 = '(上底+下底)*高さ/2'
+                    answer_1 = str(area)
+                    print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '5':
                     cal_mode_3_2_1 = float(input('縦の対角線の長さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('横の対角線の長さを入力してください。:'))
@@ -397,8 +402,10 @@ def all_calc_code():
                     cal_n_2 = cal_mode_3_2_2
                     cal_n_3 = (cal_n_1 * cal_n_2)/2
                     area = cal_n_3
-                    print('面積:',area)
-                    end()
+                    input_1 = str(cal_n_1)+','+str(cal_n_2)
+                    formula_1 = '(縦の対角線の長さ*横の対角線の長さ)/2'
+                    answer_1 = str(area)
+                    print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '6':
                     cal_mode_3_2_1 = (input('使用したい計算方法を入力してください。1:4つの辺と対角線の長さ 2:2本の対角線の長さとその交わる角度 3:ブレートシュナイダーの公式:'))
                     if cal_mode_3_2_1 == '1':
@@ -664,6 +671,15 @@ def all_calc_code():
         error_end('Happy new year!',None)
     elif cal_mode == '6':
         end()
+    elif cal_mode == '7':
+        with open('README.txt','r',encoding='UTF-8') as f:
+            help = f.read()
+            clear()
+            print(help,'\n','マウスホイールでスクロールできます。')
+            os.system('PAUSE')
+        clear()
+        startup()
+        all_calc_code()
     else:
         error_end('0x0004',None)
 all_calc_code()
