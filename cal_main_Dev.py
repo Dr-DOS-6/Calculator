@@ -258,41 +258,41 @@ def all_calc_code():
             else:
                 n_x_8 = n
                 print(error)
-                rep4 = (input('嘘です。計算をやり直しますか? y/n or 1/0:'))
-                if rep4 == 'y' or '1':
-                    rep4_2 = (input('nに代入した数を残しますか? y/n or 1/0:'))
-                    if rep4_2 == 'y' or '1':
+                rep4 = str(input('嘘です。計算をやり直しますか? y(0)/n(1):'))
+                if rep4 == '0':
+                    rep4_2 = str(input('nに代入した数を残しますか? y(0)/n(1):'))
+                    if rep4_2 == '0':
                         print('nの数字を引き継ぎます。')
                         print('引き継いだ数字:', n_x_8)
                         rep(n)
-                    elif rep4_2 == 'n' or '0':
+                    elif rep4_2 == '1':
                         n = float(input('nに代入する数字を入力してください。:'))
                     else:
                         error_end('0x0003',None)
                     rep(n)
-                elif rep4 == 'n' or '0':
+                elif rep4 == '1':
                     end()
                 else:
                     error_end('0x0001',None)
             answer = str(n_x_8)
             output_1(input_str,formula,answer)
             # 再計算するかの確認
-            rep2 = (input('もう一回計算したいですか? y/n or 1/0:'))
-            if rep2 == 'y' or '1':
+            rep2 = str(input('もう一回計算したいですか? y(0)/n(1):'))
+            if rep2 == '0':
                 # 計算結果の引継ぎの確認
-                rep3 = (input('計算結果を引継ぎますか? y/n or 1/0:'))
-                if rep3 == 'y' or '1':
+                rep3 = str(input('計算結果を引継ぎますか? y(0)/n(1):'))
+                if rep3 == '0':
                     clear()
                     n = n_x_8
                     print('nに結果を引き継ぎます。引き継いだ結果:', n_x_8)
                     rep(n)
-                elif rep3 == 'n' or '0':
+                elif rep3 == '1':
                     # 再代入
                     n = float(input('nに代入する数字を入力してください。:'))
                     rep(n)
                 else:
                     error_end('0x0003',None)
-            elif rep2 == 'n' or '0':
+            elif rep2 == '1':
                 end()
             else:
                 error_end('0x0004',None)
