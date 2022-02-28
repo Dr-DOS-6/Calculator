@@ -6,6 +6,8 @@ import os
 import datetime
 import argparse
 import platform as pf
+
+from pkg_resources import WorkingSet
 import lists as li
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
@@ -42,21 +44,21 @@ def sys_info():
 def output_1(input,formula,answer):
     #代数計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 代数計算モード','\n','入力:',input,'\n',formula,answer,'\n','答え:',answer,'\n']
+        datalist = ['\n','使用モード: 代数計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_2(input,formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n',formula,' , ',answer,'\n','解:',answer,unit,'\n']
+        datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n',formula,' , ',answer,'\n','解:',answer,unit,'\n']
+        datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
         f.writelines(datalist)
         f.close()
     print('An result was output:',os.path.abspath('result.txt'))
@@ -302,7 +304,15 @@ def all_calc_code():
         print('幾何計算モードで起動します。')
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
-            unit = input('使用する単位を入力して下さい。:')
+            unit_str = str(li.unit)+' 左のリストの中から、使用する単位を入力してください。左から0~15です。'
+            unit_int = int(input(unit_str))
+            unit_chk = str(len(li.unit)-1)
+            unit_int_chk = str(unit_int)
+            if not unit_int_chk in unit_chk:
+                error_end('0x0003',None)
+            unit = li.unit[unit_int]
+            if unit_int == 15:
+                unit = ' '
             cal_mode_3 = (input('面積を計算したい図形を入力してください。1:三角形、2:四角形、3:五角形、4:円 :'))
             if cal_mode_3 == '1':
                 cal_mode_3_1 = (input('どちらの計算方法を利用しますか?3辺の長さ:1 底辺の長さと高さ:2 :'))
@@ -315,9 +325,11 @@ def all_calc_code():
                         area_2 = ((cal_n_1 * cal_n_1)*(math.sqrt(3)))/4
                         area = (str(area)+'√3')
                         input_1 = str(cal_mode_3_1_1_val)
-                        formula_1 = '1辺の長さ^2*√3÷4'
+                        formula_0 = '1辺の長さ^2*√3/4'
+                        formula_0_1 = ' / '+str(cal_n_1)+'^2*√3/4'
+                        formula_1 = formula_0+formula_0_1
                         answer_1 = str(area)+' '+'/'+' '+str(area_2)
-                        print('式:',formula_1,'\n','面積:',area,'/',area_2,unit)
+                        print('式:',formula_1,',','\n','面積:',area,'/',area_2,unit)
                     elif cal_mode_3_1_1 =='2':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_2 = float(input('2つ目の辺の長さを入力してください。:'))
@@ -331,7 +343,9 @@ def all_calc_code():
                         area = str('√'+str(cal_n_4))
                         area_2 = str(cal_n_3)
                         input_1 = str(cal_n_1_1)+','+str(cal_n_1_2)+','+str(cal_n_1_3)
-                        formula_1 = '(1つ目の辺の長さ+2つ目の辺の長さ+3つ目の辺の長さ)/2をaとして、√(a*(a-1つ目の辺の長さ)*(a-2つ目の辺の長さ)*(a-3つ目の辺の長さ))'
+                        formula_0 = '(1つ目の辺の長さ+2つ目の辺の長さ+3つ目の辺の長さ)/2をaとして、√(a*(a-1つ目の辺の長さ)*(a-2つ目の辺の長さ)*(a-3つ目の辺の長さ))'
+                        formula_0_1 = ' / ('+str(cal_n_1_1)+'+'+str(cal_n_1_2)+'+'+str(cal_n_1_3)+')/2をaとして、√(a*(a-'+str(cal_n_1_1)+')*(a-'+str(cal_n_1_2)+')*(a-'+str(cal_n_1_3)+'))'
+                        formula_1 = formula_0+formula_0_1
                         answer_1 = str(area)+' '+'/'+' '+str(area_2)
                         print('式:',formula_1,'\n','面積:',area,'/',area_2,unit)
                     else:
@@ -344,7 +358,9 @@ def all_calc_code():
                     cal_n_2 = float((cal_n_1_1 * cal_n_1_2)/2)
                     area = str(cal_n_2)
                     input_1 = str(cal_n_1_1)+','+str(cal_n_1_2)
-                    formula_1 = '(底辺*高さ)/2'
+                    formula_0 = '(底辺*高さ)/2'
+                    formula_0_1 = ' / ('+str(cal_n_1_1)+'*'+str(cal_n_1_2)+')/2'
+                    formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                     print('式:',formula_1,'\n','面積:',area,unit)
                 else:
@@ -357,7 +373,9 @@ def all_calc_code():
                     cal_n_2 = cal_n_1 ** 2
                     area = str(cal_n_2)
                     input_1 = str(cal_n_1)
-                    formula_1 = '1辺の長さ^2'
+                    formula_0 = '1辺の長さ^2'
+                    formula_0_1 = ' / '+str(cal_n_1)+'^2'
+                    formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                     print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '2':
@@ -368,7 +386,9 @@ def all_calc_code():
                     cal_n_3 = cal_n_1 * cal_n_2
                     area = cal_n_3
                     input_1 = str(cal_n_1)+','+str(cal_n_2)
-                    formula_1 = '高さ*横幅'
+                    formula_0 = '高さ*横幅'
+                    formula_0_1 = ' / '+str(cal_n_1)+'*'+str(cal_n_2)
+                    formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                     print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '3':
@@ -379,7 +399,9 @@ def all_calc_code():
                     cal_n_3 = cal_n_1 * cal_n_2
                     area = cal_n_3
                     input_1 = str(cal_n_1)+','+str(cal_n_2)
-                    formula_1 = '上底または下底の長さ*高さ'
+                    formula_0 = '上底または下底の長さ*高さ'
+                    formula_0_1 = ' / '+str(cal_n_2)+'*'+str(cal_n_1)
+                    formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                     print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '4':
@@ -392,7 +414,9 @@ def all_calc_code():
                     cal_n_4 = ((cal_n_2 + cal_n_3)*cal_n_1)/2
                     area = cal_n_4
                     input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)
-                    formula_1 = '(上底+下底)*高さ/2'
+                    formula_0 = '(上底+下底)*高さ/2'
+                    formula_0_1 = ' / ('+str(cal_n_2)+'+'+str(cal_n_3)+')*'+str(cal_n_1)+'/2'
+                    formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                     print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '5':
@@ -403,7 +427,9 @@ def all_calc_code():
                     cal_n_3 = (cal_n_1 * cal_n_2)/2
                     area = cal_n_3
                     input_1 = str(cal_n_1)+','+str(cal_n_2)
-                    formula_1 = '(縦の対角線の長さ*横の対角線の長さ)/2'
+                    formula_0 = '(縦の対角線の長さ*横の対角線の長さ)/2'
+                    formula_0_1 = ' / ('+str(cal_n_1)+'*'+str(cal_n_2)+')/2'
+                    formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                     print('式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '6':
