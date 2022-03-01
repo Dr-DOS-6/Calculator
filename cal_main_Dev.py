@@ -436,41 +436,45 @@ def all_calc_code():
                 elif cal_mode_3_2 == '6':
                     cal_mode_3_2_1 = (input('使用したい計算方法を入力してください。1:4つの辺と対角線の長さ 2:2本の対角線の長さとその交わる角度 3:ブレートシュナイダーの公式:'))
                     if cal_mode_3_2_1 == '1':
+                        cal_n_5 = (input('対角線の向きを入力してください。左上から右下:0 右上から左下:1 :'))
+                        if cal_n_5 == '0':
+                            print('辺の長さは、上の辺+右の辺 > 対角線 かつ、下の辺+左の辺 > 対角線 となるように入力してください。')
+                        elif cal_n_5 == '1':
+                            print('辺の長さは、上の辺+左の辺 > 対角線 かつ、右の辺+下の辺 > 対角線 となるように入力してください。')
                         print('辺の長さは、上→右→下→左の順に入力してください。')
                         cal_n_1 = float(input('上の辺の長さを入力してください。:'))
                         cal_n_2 = float(input('右の辺の長さを入力してください。:'))
                         cal_n_3 = float(input('下の辺の長さを入力してください。:'))
                         cal_n_4 = float(input('左の辺の長さを入力してください。:'))
-                        cal_n_5 = (input('対角線の向きを入力してください。左上から右下:0 右上から左下:1 :'))
-                        #formula_0をstrに変更する(現在はタプル)
+                        cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
+                        if (cal_n_5 == '0' and ( cal_n_1+cal_n_2 < cal_n_5_1 or cal_n_3+cal_n_4 < cal_n_5_1)) or (cal_n_5 == '1' and (cal_n_4+cal_n_1 < cal_n_5_1 or cal_n_2+cal_n_3 < cal_n_5_1)):
+                            print('入力された値では計算できません。')
+                            error_end('Input_value_is_invalid',None)
                         if cal_n_5 == '0':
-                            cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
                             cal_n_6 = float((cal_n_1 + cal_n_2 + cal_n_5_1)/float(2))
                             area_1 = float(math.sqrt(cal_n_6*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_2)*(cal_n_6 - cal_n_5_1)))
                             cal_n_7 = float((cal_n_3 + cal_n_4 + cal_n_5_1)/float(2))
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
                             area = area_all
-                            input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+'対角線の向き:左上から右下'+',',str(cal_n_5_1)
-                            formula_0 = '(上の辺の長さ+右の辺の長さ+左上から右下の対角線の長さ)/2をaとして、√(a*(a-上の辺の長さ)*(a-右の辺の長さ)*(a-左上から右下の対角線の長さ))をxとする。''\n''(下の辺の長さ+左の辺の長さ+左上から右下の対角線の長さ)/2をbとして、√(b*(b-下の辺の長さ)*(b-左の辺の長さ)*(b-左上から右下の対角線の長さ))をyとする。''\n''xとyを足すと面積となる。'
+                            input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+'対角線の向き:左上から右下'+','+str(cal_n_5_1)
+                            formula_0 = str("(上の辺の長さ+右の辺の長さ+左上から右下の対角線の長さ)/2をaとして、√(a*(a-上の辺の長さ)*(a-右の辺の長さ)*(a-左上から右下の対角線の長さ))をxとする。(下の辺の長さ+左の辺の長さ+左上から右下の対角線の長さ)/2をbとして、√(b*(b-下の辺の長さ)*(b-左の辺の長さ)*(b-左上から右下の対角線の長さ))をyとする。xとyを足すと面積となる。")
                             formula_0_1 = '('+str(cal_n_1)+'+'+str(cal_n_2)+'+'+str(cal_n_5_1)+')/2をaとして、√(a*(a-'+str(cal_n_1)+')*(a-'+str(cal_n_2)+')*(a-'+str(cal_n_5_1)+'))をxとする。''\n''('+str(cal_n_3)+'+'+str(cal_n_4)+'+'+str(cal_n_5_1)+')/2をbとして、√(b*(b-'+str(cal_n_3)+')*(b-'+str(cal_n_4)+')*(b-'+str(cal_n_5_1)+'))をyとする。''\n''xとyを足すと面積となる。'
                             answer_1 = str(area)
-                        #formula_0をstrに変更する(現在はタプル)
                         elif cal_n_5 == '1':
-                            cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
                             cal_n_6 = float((cal_n_4 + cal_n_1 + cal_n_5_1)/float(2))
                             area_1 = float(math.sqrt(cal_n_6*(cal_n_6 - cal_n_4)*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_5_1)))
                             cal_n_7 = float((cal_n_2 + cal_n_3 + cal_n_5_1)/float(2))
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
                             area = area_all
-                            input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+'対角線の向き:右上から左下'+',',str(cal_n_5_1)
-                            formula_0 = '(左の辺の長さ+上の辺の長さ+右上から左下の対角線の長さ)/2をaとして、√(a*(a-左の辺の長さ)*(a-上の辺の長さ)*(a-右上から左下の対角線の長さ))をxとする。''\n''(右の辺の長さ+下の辺の長さ+右上から左下の対角線の長さ)/2をbとして、√(b*(b-右の辺の長さ)*(b-下の辺の長さ)*(b-右上から左下の対角線の長さ))をyとする。''\n''xとyを足すと面積となる。'
+                            input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+'対角線の向き:右上から左下'+','+str(cal_n_5_1)
+                            formula_0 = str("(左の辺の長さ+上の辺の長さ+右上から左下の対角線の長さ)/2をaとして、√(a*(a-左の辺の長さ)*(a-上の辺の長さ)*(a-右上から左下の対角線の長さ))をxとする。(右の辺の長さ+下の辺の長さ+右上から左下の対角線の長さ)/2をbとして、√(b*(b-右の辺の長さ)*(b-下の辺の長さ)*(b-右上から左下の対角線の長さ))をyとする。xとyを足すと面積となる。")
                             formula_0_1 = '('+str(cal_n_4)+'+'+str(cal_n_1)+'+'+str(cal_n_5_1)+')/2をaとして、√(a*(a-'+str(cal_n_4)+')*(a-'+str(cal_n_1)+')*(a-'+str(cal_n_5_1)+'))をxとする。''\n''('+str(cal_n_2)+'+'+str(cal_n_3)+'+'+str(cal_n_5_1)+')/2をbとして、√(b*(b-'+str(cal_n_2)+')*(b-'+str(cal_n_3)+')*(b-'+str(cal_n_5_1)+'))をyとする。''\n''xとyを足すと面積となる。'
                             answer_1 = str(area)
                         else:
                             error_end('0x0004',None)
-                        formula_1 = formula_0+'\n'+formula_0_1
+                        formula_1 = str(formula_0+'\n'+formula_0_1)
                         print('式:',formula_1,'\n','面積:',area,unit)
                     elif cal_mode_3_2_1 == '2':
                         cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
