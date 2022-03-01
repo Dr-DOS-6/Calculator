@@ -220,3 +220,13 @@ Python_version  : 3.9.10
 Generated_Date  : 2022/02/21 17:28:24
 Software_version: 1.4.8.0_CUI_Dev_20220221 debug_mode
 Mode            : debug_mode
+
+System          : Windows
+Release         : 10
+System_version  : 10.0.22557
+Machine         : AMD64
+Processor       : Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+Python_version  : 3.10.1
+Generated_Date  : 2022/03/02 08:12:20
+Software_version: 1.4.9.2_CUI_Dev_20220226 debug_mode
+Mode            : debug_mode

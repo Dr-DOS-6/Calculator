@@ -482,17 +482,25 @@ def all_calc_code():
                         cal_n_3 = input('θの大きさを選んでください。15°:0 30°:1 45°:2 60°:3 75°:4 90°:5 :')
                         cal_n_4 = (cal_n_1*cal_n_2)
                         if cal_n_3 == '0':
+                            #作りかけ(2022/03/01)
                             area = float(0.5*cal_n_4*(((math.sqrt(6))-(math.sqrt(2)))/4))
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*((√6-√2)/4)')
+                            area_str_2 = '0.5*('+str(cal_n_1)+'*'+str(cal_n_2)
                         elif cal_n_3 == '1':
                             area = float(0.5*cal_n_4*0.5)
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*0.5')
                         elif cal_n_3 == '2':
                             area = float(0.5*cal_n_4*(math.sqrt(2)/2))
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*(√2/2)')
                         elif cal_n_3 == '3':
                             area = float(0.5*cal_n_4*(math.sqrt(3)/2))
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*(√3/2')
                         elif cal_n_3 == '4':
                             area = float(0.5*cal_n_4*(((math.sqrt(2))+(math.sqrt(6)))/4))
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*((√2+√6)/4))')
                         elif cal_n_3 == '5':
                             area = float(0.5*cal_n_4)
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)')
                         else:
                             error_end('0x0004',None)
                         print('面積:',area)
