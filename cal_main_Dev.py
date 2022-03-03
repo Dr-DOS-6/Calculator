@@ -136,10 +136,10 @@ error = 'A serious error has occurred. Restarting the program.'
 def startup():
     print('Calculator')
     global soft_ver
-    soft_ver = ('1.4.9.2_CUI_Dev_20220226')
+    soft_ver = ('1.4.9.3_CUI_Dev_20220304')
     str(soft_ver)
     if argv == 'debug':
-        soft_ver = ('1.4.9.2_CUI_Dev_20220226'+' '+'debug_mode')
+        soft_ver = ('1.4.9.3_CUI_Dev_20220304'+' '+'debug_mode')
     #Hallo 2022, Happy new year!!
     ver = 'Version'+' '+soft_ver
     #体積計算モード、表面積計算モードをモード2に統合
@@ -161,6 +161,7 @@ def startup():
     #数値変換モード完成
     #幾何計算モード、四角形の面積演算までテキスト出力機能実装完了
     #ヘルプ表示機能実装
+    #幾何計算モード小改善
     builder = 'Dr.DOS'
     year = '2022'
     built = builder+'/'+year
@@ -457,6 +458,9 @@ def all_calc_code():
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
                             area = area_all
+                            area_str_1 = ' / √'+str(float((cal_n_6*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_2)*(cal_n_6 - cal_n_5_1))))
+                            area_str_2 = '+√'+str(float((cal_n_7*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_4)*(cal_n_7 - cal_n_5_1))))
+                            area += area_str_1 + area_str_2
                             input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+'対角線の向き:左上から右下'+','+str(cal_n_5_1)
                             formula_0 = str("(上の辺の長さ+右の辺の長さ+左上から右下の対角線の長さ)/2をaとして、√(a*(a-上の辺の長さ)*(a-右の辺の長さ)*(a-左上から右下の対角線の長さ))をxとする。(下の辺の長さ+左の辺の長さ+左上から右下の対角線の長さ)/2をbとして、√(b*(b-下の辺の長さ)*(b-左の辺の長さ)*(b-左上から右下の対角線の長さ))をyとする。xとyを足すと面積となる。")
                             formula_0_1 = '('+str(cal_n_1)+'+'+str(cal_n_2)+'+'+str(cal_n_5_1)+')/2をaとして、√(a*(a-'+str(cal_n_1)+')*(a-'+str(cal_n_2)+')*(a-'+str(cal_n_5_1)+'))をxとする。''\n''('+str(cal_n_3)+'+'+str(cal_n_4)+'+'+str(cal_n_5_1)+')/2をbとして、√(b*(b-'+str(cal_n_3)+')*(b-'+str(cal_n_4)+')*(b-'+str(cal_n_5_1)+'))をyとする。''\n''xとyを足すと面積となる。'
@@ -468,6 +472,9 @@ def all_calc_code():
                             area_2 = float(math.sqrt(cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1)))
                             area_all = str(area_1 + area_2)
                             area = area_all
+                            area_str_1 = ' / √'+str(float((cal_n_6*(cal_n_6 - cal_n_4)*(cal_n_6 - cal_n_1)*(cal_n_6 - cal_n_5_1))))
+                            area_str_2 = '+√'+str(float((cal_n_7*(cal_n_7 - cal_n_2)*(cal_n_7 - cal_n_3)*(cal_n_7 - cal_n_5_1))))
+                            area += area_str_1 + area_str_2
                             input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+'対角線の向き:右上から左下'+','+str(cal_n_5_1)
                             formula_0 = str("(左の辺の長さ+上の辺の長さ+右上から左下の対角線の長さ)/2をaとして、√(a*(a-左の辺の長さ)*(a-上の辺の長さ)*(a-右上から左下の対角線の長さ))をxとする。(右の辺の長さ+下の辺の長さ+右上から左下の対角線の長さ)/2をbとして、√(b*(b-右の辺の長さ)*(b-下の辺の長さ)*(b-右上から左下の対角線の長さ))をyとする。xとyを足すと面積となる。")
                             formula_0_1 = '('+str(cal_n_4)+'+'+str(cal_n_1)+'+'+str(cal_n_5_1)+')/2をaとして、√(a*(a-'+str(cal_n_4)+')*(a-'+str(cal_n_1)+')*(a-'+str(cal_n_5_1)+'))をxとする。''\n''('+str(cal_n_2)+'+'+str(cal_n_3)+'+'+str(cal_n_5_1)+')/2をbとして、√(b*(b-'+str(cal_n_2)+')*(b-'+str(cal_n_3)+')*(b-'+str(cal_n_5_1)+'))をyとする。''\n''xとyを足すと面積となる。'
