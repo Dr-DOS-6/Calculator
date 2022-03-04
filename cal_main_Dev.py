@@ -541,8 +541,8 @@ def all_calc_code():
                         s = ((cal_n_1+cal_n_2+cal_n_3+cal_n_4)/2)
                         area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
                         area = area_all
-                        print('面積:',area)
-                        end()
+                        input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+str(cal_n_5)+','+str(cal_n_6)+','+str(cal_n_7)
+                        print('式:',formula_1,'\n','面積:',area,unit)
                     else:
                         error_end('0x0004',None)
             elif cal_mode_3 == '3':
@@ -552,6 +552,11 @@ def all_calc_code():
                     cal_n_2 = float(input('中心までの距離を入力してください。:'))
                     area_pre = ((cal_n_1*cal_n_2)/2)
                     area = area_pre*5
+                    input_1 = str(cal_n_1)+','+str(cal_n_2)
+                    formula_0 = '((一辺の長さ*中心までの距離)/2)*5'
+                    formula_0_1 = '(('+str(cal_n_1)+'*'+str(cal_n_2)+')/2)*5'
+                    formula_1 = formula_0+formula_0_1
+                    answer_1 = str(area)
                 elif cal_mode_3_2 == '2':
                     print('五角形を5つの三角形に分け、上から時計周りに入力してください。「底辺」は、五角形にした時に一番外側に来る辺のことを言います。')
                     cal_n_1 = float(input('1つ目の三角形の底辺の長さを入力してください。'))
@@ -571,10 +576,14 @@ def all_calc_code():
                     area_5 = ((cal_n_9*cal_n_10)/2)
                     area_all = area_1+area_2+area_3+area_4+area_5
                     area = area_all
+                    input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+str(cal_n_5)+','+str(cal_n_6)+','+str(cal_n_7)+','+str(cal_n_8)+','+str(cal_n_9)+','+str(cal_n_10)
+                    formula_0 = '(1(2,3,4,5)つ目の三角形の底辺*1(2,3,4,5)つ目の三角形の高さ)/2'
+                    formula_0_1 = '('+str(cal_n_1)+'('+str(cal_n_3)+','+str(cal_n_5)+','+str(cal_n_7)+','+str(cal_n_9)+')'+'*'+str(cal_n_2)+'('+str(cal_n_4)+','+str(cal_n_6)+','+str(cal_n_8)+','+str(cal_n_10)+')'+')/2'
+                    formula_1 = formula_0+formula_0_1
+                    answer_1 = str(area)
                 else:
                     error_end('0x0004',None)
-                print('面積:',area)
-                end()
+                print('式:',formula_1,'\n','面積:',area,unit)
             elif cal_mode_3 == '4':
                 cal_mode_3_2 = input('面積の求め方を指定してください。半径と円周率:1 半径と円周:2')
                 if cal_mode_3_2 == '1':
