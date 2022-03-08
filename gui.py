@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 import func as fn
-import readchar
 main_win = tk.Tk()
 main_win.title('Calculator Ver.Dev')
 main_win.geometry('330x560')
@@ -26,7 +25,7 @@ buttonent =  tk.Button(main_frm, text="Enter", height=9, width=10)
 buttonfn =   tk.Button(main_frm, text="Fn", height=4, width=10)
 buttonrst =  tk.Button(main_frm,text="Reset",height=4,width=10)
 buttonbksp = tk.Button(main_frm,text="Bksp/Del",height=4,width=10)
-console =    tk.Label(main_frm,text=readchar.readchar(),height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10))
+console =    tk.Label(main_frm,text='コンソールをここに表示',height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10))
 console.grid(column=0,row=0,columnspan=4,rowspan=2)
 buttonfn.grid(column=0,row=2)
 buttonsl.grid(column=1,row=2)

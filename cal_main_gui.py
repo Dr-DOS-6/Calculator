@@ -7,8 +7,57 @@ import datetime
 import argparse
 import platform as pf
 import lists as li
-import gui as g
-g.main
+import threading
+import tkinter as tk
+from tkinter import ttk
+import func as fn
+def keypad():
+    main_win = tk.Tk()
+    main_win.title('Calculator Ver.Dev')
+    main_win.geometry('330x560')
+    main_frm = ttk.Frame(main_win)
+    main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
+    button0 =    tk.Button(main_frm, text="0", height=4, width=10,command=fn.btn0)
+    button1 =    tk.Button(main_frm, text="1", height=4, width=10)
+    button2 =    tk.Button(main_frm, text="2/↓", height=4, width=10)
+    button3 =    tk.Button(main_frm, text="3", height=4, width=10)
+    button4 =    tk.Button(main_frm, text="4/←", height=4, width=10)
+    button5 =    tk.Button(main_frm, text="5", height=4, width=10)
+    button6 =    tk.Button(main_frm, text="6/→", height=4, width=10)
+    button7 =    tk.Button(main_frm, text="7", height=4, width=10)
+    button8 =    tk.Button(main_frm, text="8/↑", height=4, width=10)
+    button9 =    tk.Button(main_frm, text="9", height=4, width=10)
+    buttonpe =   tk.Button(main_frm, text=".", height=4, width=10)
+    buttonpl =   tk.Button(main_frm, text="+", height=4, width=10)
+    buttonmin =  tk.Button(main_frm, text="-", height=4, width=10)
+    buttonast =  tk.Button(main_frm, text="*", height=4, width=10)
+    buttonsl =   tk.Button(main_frm, text="/", height=4, width=10)
+    buttonent =  tk.Button(main_frm, text="Enter", height=9, width=10)
+    buttonfn =   tk.Button(main_frm, text="Fn", height=4, width=10)
+    buttonrst =  tk.Button(main_frm,text="Reset",height=4,width=10)
+    buttonbksp = tk.Button(main_frm,text="Bksp/Del",height=4,width=10)
+    console =    tk.Label(main_frm,text='コンソールをここに表示',height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10))
+    console.grid(column=0,row=0,columnspan=4,rowspan=2)
+    buttonfn.grid(column=0,row=2)
+    buttonsl.grid(column=1,row=2)
+    buttonast.grid(column=2,row=2)
+    buttonrst.grid(column=3,row=2)
+    buttonmin.grid(column=3,row=3)
+    button7.grid(column=0,row=3)
+    button8.grid(column=1,row=3)
+    button9.grid(column=2,row=3)
+    buttonpl.grid(column=3,row=4)
+    button4.grid(column=0,row=4)
+    button5.grid(column=1,row=4)
+    button6.grid(column=2,row=4)
+    buttonent.grid(column=3,row=5,rowspan=2)
+    button1.grid(column=0,row=5)
+    button2.grid(column=1,row=5)
+    button3.grid(column=2,row=5)
+    buttonpe.grid(column=2,row=6)
+    button0.grid(column=1,row=6)
+    buttonbksp.grid(column=0,row=6)
+    main_win.mainloop()
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
@@ -747,4 +796,8 @@ def all_calc_code():
         all_calc_code()
     else:
         error_end('0x0004',None)
-all_calc_code()
+if __name__ == "__main__":
+    thread_1 = threading.Thread(target=keypad)
+    thread_2 = threading.Thread(target=all_calc_code)
+thread_1.start()
+thread_2.start()
