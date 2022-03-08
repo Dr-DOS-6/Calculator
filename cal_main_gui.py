@@ -6,10 +6,9 @@ import os
 import datetime
 import argparse
 import platform as pf
-import gui as g
-
-from pkg_resources import WorkingSet
 import lists as li
+import gui as g
+g.main
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
