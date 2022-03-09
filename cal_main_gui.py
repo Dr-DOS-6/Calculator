@@ -7,17 +7,26 @@ import datetime
 import argparse
 import platform as pf
 import lists as li
-import threading
+import multiprocessing as ml
+from multiprocessing import Process,freeze_support
 import tkinter as tk
 from tkinter import ttk
-import func as fn
+from pynput.keyboard import Controller as co
+from pynput.keyboard import Key
+from pynput import keyboard as k2
+k = co()
+def btn0():
+    k.press('0')
+def reset():
+    keypad_p.close()
+    all_calc_code()
 def keypad():
     main_win = tk.Tk()
     main_win.title('Calculator Ver.Dev')
     main_win.geometry('330x560')
     main_frm = ttk.Frame(main_win)
     main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
-    button0 =    tk.Button(main_frm, text="0", height=4, width=10,command=fn.btn0)
+    button0 =    tk.Button(main_frm, text="0", height=4, width=10,command=btn0)
     button1 =    tk.Button(main_frm, text="1", height=4, width=10)
     button2 =    tk.Button(main_frm, text="2/↓", height=4, width=10)
     button3 =    tk.Button(main_frm, text="3", height=4, width=10)
@@ -34,7 +43,7 @@ def keypad():
     buttonsl =   tk.Button(main_frm, text="/", height=4, width=10)
     buttonent =  tk.Button(main_frm, text="Enter", height=9, width=10)
     buttonfn =   tk.Button(main_frm, text="Fn", height=4, width=10)
-    buttonrst =  tk.Button(main_frm,text="Reset",height=4,width=10)
+    buttonrst =  tk.Button(main_frm,text="Reset",height=4,width=10,command=reset)
     buttonbksp = tk.Button(main_frm,text="Bksp/Del",height=4,width=10)
     console =    tk.Label(main_frm,text='コンソールをここに表示',height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10))
     console.grid(column=0,row=0,columnspan=4,rowspan=2)
@@ -58,6 +67,10 @@ def keypad():
     button0.grid(column=1,row=6)
     buttonbksp.grid(column=0,row=6)
     main_win.mainloop()
+if __name__ == "__main__":
+    freeze_support()
+    keypad_p = Process(target=keypad)
+    keypad_p.start()
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
@@ -237,9 +250,11 @@ startup()
 # 代入コード1
 def all_calc_code():
     if error_cnt[1] > 0:
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6、ヘルプを見たい場合は7を入力してください。'))
-    else:    
-        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6、ヘルプを見たい場合は7を入力してください。'))
+        print('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6、ヘルプを見たい場合は7を入力してください。')
+        cal_mode = str(sys.stdin.read().strip('\r','\n'))
+    else: 
+        print('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6、ヘルプを見たい場合は7を入力してください。')   
+        cal_mode = str(sys.stdin.read().strip('\n'))
     if cal_mode == '1':
         clear()
         print('代数計算モードで起動します。')
@@ -797,7 +812,6 @@ def all_calc_code():
     else:
         error_end('0x0004',None)
 if __name__ == "__main__":
-    thread_1 = threading.Thread(target=keypad)
-    thread_2 = threading.Thread(target=all_calc_code)
-thread_1.start()
-thread_2.start()
+    freeze_support()
+    alcalco_p = Process(target=all_calc_code)
+    alcalco_p.start()
