@@ -240,3 +240,23 @@ Python_version  : 3.10.1
 Generated_Date  : 2022/03/09 17:36:25
 Software_version: 1.4.9.3_CUI_Dev_20220304
 Mode            : Normal_mode
+
+System          : Windows
+Release         : 10
+System_version  : 10.0.22567
+Machine         : AMD64
+Processor       : Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+Python_version  : 3.10.1
+Generated_Date  : 2022/03/11 13:20:19
+Software_version: 1.4.9.3_CUI_Dev_20220304
+Mode            : Normal_mode
+
+System          : Windows
+Release         : 10
+System_version  : 10.0.22567
+Machine         : AMD64
+Processor       : Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+Python_version  : 3.10.1
+Generated_Date  : 2022/03/11 13:26:48
+Software_version: 1.4.9.3_CUI_Dev_20220304
+Mode            : Normal_mode
