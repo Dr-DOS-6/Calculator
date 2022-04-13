@@ -5,73 +5,63 @@ import datetime
 import argparse
 import platform as pf
 import lists as li
-from multiprocessing import Process,freeze_support
 import tkinter as tk
 from tkinter import ttk
-from pynput.keyboard import Controller as co
-k = co()
-def keypad():
-    def btnprsd():
-        f = open('temp.txt',encoding='utf-8')
-        text_data = f.read()
-        textBox.insert('1.0',text_data)
-    def btnent():
-        btnprsd()
-    main_win = tk.Tk()
-    main_win.title('Calculator Ver.Dev')
-    main_win.geometry('330x560')
-    main_frm = ttk.Frame(main_win)
-    main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
-    button0 =    tk.Button(main_frm, text="0", height=4, width=10,command=btn0)
-    button1 =    tk.Button(main_frm, text="1", height=4, width=10)
-    button2 =    tk.Button(main_frm, text="2/↓", height=4, width=10)
-    button3 =    tk.Button(main_frm, text="3", height=4, width=10)
-    button4 =    tk.Button(main_frm, text="4/←", height=4, width=10)
-    button5 =    tk.Button(main_frm, text="5", height=4, width=10)
-    button6 =    tk.Button(main_frm, text="6/→", height=4, width=10)
-    button7 =    tk.Button(main_frm, text="7", height=4, width=10)
-    button8 =    tk.Button(main_frm, text="8/↑", height=4, width=10)
-    button9 =    tk.Button(main_frm, text="9", height=4, width=10)
-    buttonpe =   tk.Button(main_frm, text=".", height=4, width=10)
-    buttonpl =   tk.Button(main_frm, text="+", height=4, width=10)
-    buttonmin =  tk.Button(main_frm, text="-", height=4, width=10)
-    buttonast =  tk.Button(main_frm, text="*", height=4, width=10)
-    buttonsl =   tk.Button(main_frm, text="/", height=4, width=10)
-    buttonent =  tk.Button(main_frm, text="Enter", height=9, width=10,command=btnent)
-    buttonfn =   tk.Button(main_frm, text="Fn", height=4, width=10)
-    buttonrst =  tk.Button(main_frm,text="Reset",height=4,width=10,command=reset)
-    buttonbksp = tk.Button(main_frm,text="Bksp/Del",height=4,width=10)
-    textBox =    tk.Text(main_frm,height=9,width=38,borderwidth=3,relief="sunken",font=('Consolas',10))
-    textBox.grid(column=0,row=0,columnspan=4,rowspan=2)
-    buttonfn.grid(column=0,row=2)
-    buttonsl.grid(column=1,row=2)
-    buttonast.grid(column=2,row=2)
-    buttonrst.grid(column=3,row=2)
-    buttonmin.grid(column=3,row=3)
-    button7.grid(column=0,row=3)
-    button8.grid(column=1,row=3)
-    button9.grid(column=2,row=3)
-    buttonpl.grid(column=3,row=4)
-    button4.grid(column=0,row=4)
-    button5.grid(column=1,row=4)
-    button6.grid(column=2,row=4)
-    buttonent.grid(column=3,row=5,rowspan=2)
-    button1.grid(column=0,row=5)
-    button2.grid(column=1,row=5)
-    button3.grid(column=2,row=5)
-    buttonpe.grid(column=2,row=6)
-    button0.grid(column=1,row=6)
-    buttonbksp.grid(column=0,row=6)
-    main_win.mainloop()
-if __name__ == "__main__":
-    freeze_support()
-    keypad_p = Process(target=keypad)
-    keypad_p.start()
-def btn0():
-    k.press('a')
-def reset():
-    keypad_p.close()
-    all_calc_code()
+class output():
+    def __init__(self):
+        output = str('Program started.')
+o = output()
+class keypad():
+    def __init__(self):
+        self.main_win = tk.Tk()
+        self.main_win.title('Calculator Ver.Dev')
+        self.main_win.geometry('330x560')
+        self.main_frm = ttk.Frame(self.main_win)
+        self.main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
+        self.button0 =    tk.Button(self.main_frm, text="0", height=4, width=10)
+        self.button1 =    tk.Button(self.main_frm, text="1", height=4, width=10)
+        self.button2 =    tk.Button(self.main_frm, text="2/↓", height=4, width=10)
+        self.button3 =    tk.Button(self.main_frm, text="3", height=4, width=10)
+        self.button4 =    tk.Button(self.main_frm, text="4/←", height=4, width=10)
+        self.button5 =    tk.Button(self.main_frm, text="5", height=4, width=10)
+        self.button6 =    tk.Button(self.main_frm, text="6/→", height=4, width=10)
+        self.button7 =    tk.Button(self.main_frm, text="7", height=4, width=10)
+        self.button8 =    tk.Button(self.main_frm, text="8/↑", height=4, width=10)
+        self.button9 =    tk.Button(self.main_frm, text="9", height=4, width=10)
+        self.buttonpe =   tk.Button(self.main_frm, text=".", height=4, width=10)
+        self.buttonpl =   tk.Button(self.main_frm, text="+", height=4, width=10)
+        self.buttonmin =  tk.Button(self.main_frm, text="-", height=4, width=10)
+        self.buttonast =  tk.Button(self.main_frm, text="*", height=4, width=10)
+        self.buttonsl =   tk.Button(self.main_frm, text="/", height=4, width=10)
+        self.buttonent =  tk.Button(self.main_frm, text="Enter", height=9, width=10)
+        self.buttonfn =   tk.Button(self.main_frm, text="Fn", height=4, width=10)
+        self.buttonrst =  tk.Button(self.main_frm,text="Reset",height=4,width=10)
+        self.buttonbksp = tk.Button(self.main_frm,text="Bksp/Del",height=4,width=10)
+        self.text = tk.StringVar(self.main_win)
+        self.text.set(output)
+        textBox =   tk.Label(self.main_frm,height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10),textvariable=self.text)
+        textBox.grid(column=0,row=0,columnspan=4,rowspan=2)
+        self.buttonfn.grid(column=0,row=2)
+        self.buttonsl.grid(column=1,row=2)
+        self.buttonast.grid(column=2,row=2)
+        self.buttonrst.grid(column=3,row=2)
+        self.buttonmin.grid(column=3,row=3)
+        self.button7.grid(column=0,row=3)
+        self.button8.grid(column=1,row=3)
+        self.button9.grid(column=2,row=3)
+        self.buttonpl.grid(column=3,row=4)
+        self.button4.grid(column=0,row=4)
+        self.button5.grid(column=1,row=4)
+        self.button6.grid(column=2,row=4)
+        self.buttonent.grid(column=3,row=5,rowspan=2)
+        self.button1.grid(column=0,row=5)
+        self.button2.grid(column=1,row=5)
+        self.button3.grid(column=2,row=5)
+        self.buttonpe.grid(column=2,row=6)
+        self.button0.grid(column=1,row=6)
+        self.buttonbksp.grid(column=0,row=6)
+        self.main_win.mainloop()
+Keypad = keypad()
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
@@ -90,41 +80,41 @@ verin = pf.version()
 macin = pf.machine()
 proin = pf.processor()
 def sys_info():
-    print ('System information for this computer:',file=open("./temp.txt","w"))
-    print ('system          :', pf.system(),file=open("./temp.txt","w"))
-    print ('release         :', pf.release(),file=open("./temp.txt","w"))
-    print ('system_version  :', pf.version(),file=open("./temp.txt","w"))
-    print ('machine         :', pf.machine(),file=open("./temp.txt","w"))
-    print ('processor       :', pf.processor(),file=open("./temp.txt","w"))
-    print ('python_version  :',ver,file=open("./temp.txt","w"))
-    print ('Software_version:',soft_ver,file=open("./temp.txt","w"))
-    print ('Mode            : ',argv,file=open("./temp.txt","w"))
+    o.output += ('System information for this computer:')
+    o.output += ('system          :', pf.system())
+    o.output += ('release         :', pf.release())
+    o.output += ('system_version  :', pf.version())
+    o.output += ('machine         :', pf.machine())
+    o.output += ('processor       :', pf.processor())
+    o.output += ('python_version  :',ver)
+    o.output += ('Software_version:',soft_ver)
+    o.output += ('Mode            : ',argv)
     with open('error.log', mode='a', encoding='UTF-8') as f:
         datalist = ['\n','System          : ',pf.system(),'\n','Release         : ',pf.release(),'\n','System_version  : ',pf.version(),'\n','Machine         : ',pf.machine(),'\n','Processor       : ',pf.processor(),'\n','Python_version  : ',ver,'\n','Generated_Date  : ',date_1,'\n','Software_version: ',soft_ver,'\n','Mode            : ',argv,'_mode'+'\n']
         f.writelines(datalist)
         f.close()
-        print('An error log was output:',os.path.abspath('error.log'),file=open("./temp.txt","w"))
+        o.output += ( 'An error log was output:',os.path.abspath('error.log'))
 def output_1(input,formula,answer):
     #代数計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         datalist = ['\n','使用モード: 代数計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,'\n']
         f.writelines(datalist)
         f.close()
-    print('An result was output:',os.path.abspath('result.txt'),file=open("./temp.txt","w"))
+    o.output += ( 'An result was output:',os.path.abspath('result.txt'))
 def output_2(input,formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
         f.writelines(datalist)
         f.close()
-    print('An result was output:',os.path.abspath('result.txt'),file=open("./temp.txt","w"))
+    o.output += ( 'An result was output:',os.path.abspath('result.txt'))
 def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
         f.writelines(datalist)
         f.close()
-    print('An result was output:',os.path.abspath('result.txt'),file=open("./temp.txt","w"))
+    o.output += ( 'An result was output:',os.path.abspath('result.txt'))
 def output_4(input,formula,answer,unit,sel):
     #税計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
@@ -134,21 +124,21 @@ def output_4(input,formula,answer,unit,sel):
             datalist = ['\n','使用モード: 税計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,unit,'\n']
         f.writelines(datalist)
         f.close()
-    print('An result was output:',os.path.abspath('result.txt'),file=open("./temp.txt","w"))
+    o.output += ( 'An result was output:',os.path.abspath('result.txt'))
 def output_5(input,answer):
     #直接計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         datalist = ['\n','使用モード: 直接計算モード','\n','入力:',input,'\n','答え:',answer,'\n']
         f.writelines(datalist)
         f.close()
-    print('An result was output:',os.path.abspath('result.txt'),file=open("./temp.txt","w"))
+    o.output += ( 'An result was output:',os.path.abspath('result.txt'))
 def output_6(input,answer):
     #数値変換モード用
     with open('result.txt',mode='a',encoding='UTF-8') as f:
         datalist = ['\n','使用モード: 数値変換モード','\n','入力:',input,'\n','結果:',answer,'\n']
         f.writelines(datalist)
         f.close()
-    print('An result was output:',os.path.abspath('result.txt'),file=open("./temp.txt","w"))
+    o.output += ( 'An result was output:',os.path.abspath('result.txt'))
 def clear():
     if pf_s == 'Windows':
         os.system('cls')
@@ -157,16 +147,16 @@ def clear():
     else:
         error_end_3()
 def end():
-    print('Finish the calculation.',file=open("./temp.txt","w"))
+    o.output += ( 'Finish the calculation.')
     sys.exit()
 #エラー時再起動コード
 def error_end(error_code,error):
-    print('A serious error has occurred. Restarting the program.',file=open("./temp.txt","w"))
-    print('Error code:',error_code,file=open("./temp.txt","w"))
+    o.output += ( 'A serious error has occurred. Restarting the program.')
+    o.output += ( 'Error code:',error_code)
     error_cnt[0] += 1
     if error_cnt[0] > 5:
-        print('Multiple serious errors have occurred. Kill the program.',file=open("./temp.txt","w"))
-        print('Error code: 0x000F',file=open("./temp.txt","w"))
+        output += ( 'Multiple serious errors have occurred. Kill the program.')
+        output += ( 'Error code: 0x000F')
         sys_info()
         os.system('PAUSE')
         sys.exit()
@@ -177,12 +167,12 @@ def error_end(error_code,error):
     startup()
     all_calc_code()
 def error_end_2(error_code):
-    print('This feature is currently not implemented and cannot be activated. Restarting the program.',file=open("./temp.txt","w"))
-    print('Error code:',error_code,file=open("./temp.txt","w"))
+    o.output += ( 'This feature is currently not implemented and cannot be activated. Restarting the program.')
+    o.output += ( 'Error code:',error_code)
     error_cnt[0] += 1
     if error_cnt[0] > 5:
-        print('Multiple serious errors have occurred. Kill the program.',file=open("./temp.txt","w"))
-        print('Error code: 0x000F',file=open("./temp.txt","w"))
+        o.output += ( 'Multiple serious errors have occurred. Kill the program.')
+        o.output += ( 'Error code: 0x000F')
         sys_info()
         os.system('PAUSE')
         sys.exit()
@@ -191,13 +181,13 @@ def error_end_2(error_code):
     startup()
     all_calc_code()
 def error_end_3():
-    print('This program will not run on this computer.',file=open("./temp.txt","w"))
-    print('Error code: 0x000E',file=open("./temp.txt","w"))
+    o.output += ( 'This program will not run on this computer.')
+    o.output += ( 'Error code: 0x000E')
     sys_info()
     sys.exit()
 error = 'A serious error has occurred. Restarting the program.'
 def startup():
-    print('Calculator',file=open("./temp.txt","w"))
+    o.output += ( 'Calculator')
     global soft_ver
     soft_ver = ('1.4.9.3_CUI_Dev_20220304')
     str(soft_ver)
@@ -231,40 +221,38 @@ def startup():
     Created_by_1 = 'Python 3.10.1'
     Created_by_2 = 'Visual Studio Code 1.62.3'
     Created_by = ('Created by'+' '+Created_by_1+' '+'and'+' '+Created_by_2)
-    print(ver,file=open("./temp.txt","w"))
-    print(built,file=open("./temp.txt","w"))
-    print(Created_by,file=open("./temp.txt","w"))
+    o.output += ( ver)
+    o.output += ( built)
+    o.output += ( Created_by)
     if pf_s == 'Windows' or 'Linux' or 'Darwin':
         if argv == 'debug':
             sysinfo_tst = input('Enter the name of the OS you want to test. :')
             if not sysinfo_tst == 'Windows' or 'Linux' or 'Darwin':
-                print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.",file=open("./temp.txt","w"))
+                o.output += ( "I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
                 error_end_3()
         return
     else:
-        print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.",file=open("./temp.txt","w"))
+        o.output += ( "I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
         error_end_3()
     #if not pf_s == 'Linux':
-    #    print("I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
+    #    o.output += ( "I'm sorry. This calculator is available for Windows, Linux, Chrome OS, and MacOS. Please make sure that the OS you are using is supported. There is a possibility that it will not work properly.")
 startup()
 #error_end_3()
 # 代入コード1
 def all_calc_code():
     if error_cnt[1] > 0:
-        print('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6、ヘルプを見たい場合は7を入力してください。',file=open("./temp.txt","w"))
-        cal_mode = str(sys.stdin.read().strip('\r','\n'))
-    else: 
-        print('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6、ヘルプを見たい場合は7を入力してください。',file=open("./temp.txt","w"))   
-        cal_mode = str(sys.stdin.read().strip('\n'))
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4です。現在、直接計算モードは利用できません。終了する場合は6、ヘルプを見たい場合は7を入力してください。'))
+    else:    
+        cal_mode = (input('使用するモードを選択してください。代数計算モードは1、幾何計算モードは2、数値変換モードは3、税計算モードは4、直接計算モードは5です。終了する場合は6、ヘルプを見たい場合は7を入力してください。'))
     if cal_mode == '1':
         clear()
-        print('代数計算モードで起動します。',file=open("./temp.txt","w"))
+        o.output += ( '代数計算モードで起動します。')
         n = float(input('nに代入する数字を入力してください。'))
         def rep(n):
             error = 'A serious error has occurred. Restarting the program.'
             x = float(input('xに代入する数字を入力してください。'))
-            print('nに代入された数字= ', n,file=open("./temp.txt","w"))
-            print('xに代入された数字= ', x,file=open("./temp.txt","w"))
+            o.output += ( 'nに代入された数字= ', n)
+            o.output += ( 'xに代入された数字= ', x)
             input_pre_1 = str(n)
             input_pre_2 = str(x)
             input_ = str(' '+'n ='+' '+input_pre_1+' '+'x ='+' '+input_pre_2)
@@ -274,64 +262,64 @@ def all_calc_code():
             # 計算
             if cal_mode_2 == '1':
                 n_x_0 = n + x
-                print('n + x =', n_x_0,file=open("./temp.txt","w"))
+                o.output += ( 'n + x =', n_x_0)
                 n_x_8 = n_x_0
                 formula = 'n + x = '
             elif cal_mode_2 == '2':
                 n_x_1 = n * x
-                print('n * x =', n_x_1,file=open("./temp.txt","w"))
+                o.output += ( 'n * x =', n_x_1)
                 n_x_8 = n_x_1
                 formula = 'n * x = '
             elif cal_mode_2 == '3':
                 n_x_2 = n - x
-                print('n - x =', n_x_2,file=open("./temp.txt","w"))
+                o.output += ( 'n - x =', n_x_2)
                 n_x_8 = n_x_2
                 formula = 'n - x = '
             elif cal_mode_2 == '4':
                 if x == 0:
                     error_end('0x0001',None)
                 n_x_3 = n / x
-                print('n ÷ x =', n_x_3,file=open("./temp.txt","w"))
+                o.output += ( 'n ÷ x =', n_x_3)
                 n_x_8 = n_x_3
                 formula = 'n ÷ x = '
             elif cal_mode_2 == '5':
                 n_x_4 = n // x
-                print('(余りがある場合、商のみ) n ÷ x =',n_x_4,file=open("./temp.txt","w"))
+                o.output += ( '(余りがある場合、商のみ) n ÷ x =',n_x_4)
                 n_x_8 = n_x_4
                 formula = '(余りがある場合、商のみ) n ÷ x = '
             elif cal_mode_2 == '6':
                 n_x_5 = n % x
-                print('(余りがある場合、余りのみ) n ÷ x =',n_x_5,file=open("./temp.txt","w"))
+                o.output += ( '(余りがある場合、余りのみ) n ÷ x =',n_x_5)
                 n_x_8 = n_x_5
                 formula = '(余りがある場合、余りのみ) n ÷ x = '
             elif cal_mode_2 == '7':
                 n_x_6 = n ** x
-                print('n^x =',n_x_6,file=open("./temp.txt","w"))
+                o.output += ( 'n^x =',n_x_6)
                 n_x_8 = n_x_6
                 formula = 'n ^ x = '
             elif cal_mode_2 == '8':
                 cal_mode_2_1 = (input('平方根を求めたい値はどちらですか?n/x or 1/2:'))
                 if cal_mode_2_1 == '1' or 'n':
                     n_x_7 = math.sqrt(n)
-                    print('√n =',n_x_7,'√',n,file=open("./temp.txt","w"))
+                    o.output += ( '√n =',n_x_7,'√',n)
                     n_x_8 = n_x_7
                     formula = '√n = '
                 elif cal_mode_2_1 == '2' or 'x':
                     n_x_7 = math.sqrt(x)
-                    print('√x =',n_x_7,'√',x,file=open("./temp.txt","w"))
+                    o.output += ( '√x =',n_x_7,'√',x)
                     n_x_8 = n_x_7
                     formula = '√x = '
                 else:
                     error_end('0x0002',None)
             else:
                 n_x_8 = n
-                print(error,file=open("./temp.txt","w"))
+                o.output += ( error)
                 rep4 = str(input('嘘です。計算をやり直しますか? y(0)/n(1):'))
                 if rep4 == '0':
                     rep4_2 = str(input('nに代入した数を残しますか? y(0)/n(1):'))
                     if rep4_2 == '0':
-                        print('nの数字を引き継ぎます。',file=open("./temp.txt","w"))
-                        print('引き継いだ数字:', n_x_8,file=open("./temp.txt","w"))
+                        o.output += ( 'nの数字を引き継ぎます。')
+                        o.output += ( '引き継いだ数字:', n_x_8)
                         rep(n)
                     elif rep4_2 == '1':
                         n = float(input('nに代入する数字を入力してください。:'))
@@ -352,7 +340,7 @@ def all_calc_code():
                 if rep3 == '0':
                     clear()
                     n = n_x_8
-                    print('nに結果を引き継ぎます。引き継いだ結果:', n_x_8,file=open("./temp.txt","w"))
+                    o.output += ( 'nに結果を引き継ぎます。引き継いだ結果:', n_x_8)
                     rep(n)
                 elif rep3 == '1':
                     # 再代入
@@ -367,7 +355,7 @@ def all_calc_code():
         rep(n)
     elif cal_mode == '2':
         clear()
-        print('幾何計算モードで起動します。',file=open("./temp.txt","w"))
+        o.output += ( '幾何計算モードで起動します。')
         cal_mode_int = (input('使用したいモードを選択してください。1:面積計算モード 2:体積計算モード 3:表面積計算モード :'))
         if cal_mode_int == '1':
             unit_str = str(li.unit)+' 左のリストの中から、使用する単位を入力してください。左から0~15です。'
@@ -396,7 +384,7 @@ def all_calc_code():
                         formula_0_1 = ' / '+str(cal_n_1)+'^2*√3/4'
                         formula_1 = formula_0+formula_0_1
                         answer_1 = str(area)+' '+'/'+' '+str(area_2)
-                        print('式:',formula_1,',','\n','面積:',area,'/',area_2,unit,file=open("./temp.txt","w"))
+                        o.output += ( '式:',formula_1,',','\n','面積:',area,'/',area_2,unit)
                     elif cal_mode_3_1_1 =='2':
                         cal_mode_3_1_1_val_1 = float(input('1つ目の辺の長さを入力してください。:'))
                         cal_mode_3_1_1_val_2 = float(input('2つ目の辺の長さを入力してください。:'))
@@ -414,7 +402,7 @@ def all_calc_code():
                         formula_0_1 = ' / ('+str(cal_n_1_1)+'+'+str(cal_n_1_2)+'+'+str(cal_n_1_3)+')/2をaとして、√(a*(a-'+str(cal_n_1_1)+')*(a-'+str(cal_n_1_2)+')*(a-'+str(cal_n_1_3)+'))'
                         formula_1 = formula_0+formula_0_1
                         answer_1 = str(area)+' '+'/'+' '+str(area_2)
-                        print('式:',formula_1,'\n','面積:',area,'/',area_2,unit,file=open("./temp.txt","w"))
+                        o.output += ( '式:',formula_1,'\n','面積:',area,'/',area_2,unit)
                     else:
                         error_end('0x0004',None)
                 elif cal_mode_3_1 == '2':
@@ -429,7 +417,7 @@ def all_calc_code():
                     formula_0_1 = ' / ('+str(cal_n_1_1)+'*'+str(cal_n_1_2)+')/2'
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
-                    print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                    o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                 else:
                     error_end('0x0004',None)
             if cal_mode_3 == '2':
@@ -444,7 +432,7 @@ def all_calc_code():
                     formula_0_1 = ' / '+str(cal_n_1)+'^2'
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
-                    print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                    o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '2':
                     cal_mode_3_2_1 = float(input('高さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('横幅を入力してください。:'))
@@ -457,7 +445,7 @@ def all_calc_code():
                     formula_0_1 = ' / '+str(cal_n_1)+'*'+str(cal_n_2)
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
-                    print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                    o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '3':
                     cal_mode_3_2_1 = float(input('高さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('上底/下底どちらかの長さを入力してください。'))
@@ -470,7 +458,7 @@ def all_calc_code():
                     formula_0_1 = ' / '+str(cal_n_2)+'*'+str(cal_n_1)
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
-                    print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                    o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '4':
                     cal_mode_3_2_1 = float(input('高さを入力してください。'))
                     cal_mode_3_2_2 = float(input('上底の長さを入力してください。'))
@@ -485,7 +473,7 @@ def all_calc_code():
                     formula_0_1 = ' / ('+str(cal_n_2)+'+'+str(cal_n_3)+')*'+str(cal_n_1)+'/2'
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
-                    print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                    o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '5':
                     cal_mode_3_2_1 = float(input('縦の対角線の長さを入力してください。:'))
                     cal_mode_3_2_2 = float(input('横の対角線の長さを入力してください。:'))
@@ -498,23 +486,23 @@ def all_calc_code():
                     formula_0_1 = ' / ('+str(cal_n_1)+'*'+str(cal_n_2)+')/2'
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
-                    print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                    o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                 elif cal_mode_3_2 == '6':
                     cal_mode_3_2_1 = (input('使用したい計算方法を入力してください。1:4つの辺と対角線の長さ 2:2本の対角線の長さとその交わる角度 3:ブレートシュナイダーの公式:'))
                     if cal_mode_3_2_1 == '1':
                         cal_n_5 = (input('対角線の向きを入力してください。左上から右下:0 右上から左下:1 :'))
                         if cal_n_5 == '0':
-                            print('辺の長さは、上の辺+右の辺 > 対角線 かつ、下の辺+左の辺 > 対角線 となるように入力してください。',file=open("./temp.txt","w"))
+                            o.output += ( '辺の長さは、上の辺+右の辺 > 対角線 かつ、下の辺+左の辺 > 対角線 となるように入力してください。')
                         elif cal_n_5 == '1':
-                            print('辺の長さは、上の辺+左の辺 > 対角線 かつ、右の辺+下の辺 > 対角線 となるように入力してください。',file=open("./temp.txt","w"))
-                        print('辺の長さは、上→右→下→左の順に入力してください。',file=open("./temp.txt","w"))
+                            o.output += ( '辺の長さは、上の辺+左の辺 > 対角線 かつ、右の辺+下の辺 > 対角線 となるように入力してください。')
+                        o.output += ( '辺の長さは、上→右→下→左の順に入力してください。')
                         cal_n_1 = float(input('上の辺の長さを入力してください。:'))
                         cal_n_2 = float(input('右の辺の長さを入力してください。:'))
                         cal_n_3 = float(input('下の辺の長さを入力してください。:'))
                         cal_n_4 = float(input('左の辺の長さを入力してください。:'))
                         cal_n_5_1 = float(input('対角線の長さを入力してください。:'))
                         if (cal_n_5 == '0' and ( cal_n_1+cal_n_2 < cal_n_5_1 or cal_n_3+cal_n_4 < cal_n_5_1)) or (cal_n_5 == '1' and (cal_n_4+cal_n_1 < cal_n_5_1 or cal_n_2+cal_n_3 < cal_n_5_1)):
-                            print('入力された値では計算できません。',file=open("./temp.txt","w"))
+                            o.output += ( '入力された値では計算できません。')
                             error_end('Input_value_is_invalid',None)
                         if cal_n_5 == '0':
                             cal_n_6 = float((cal_n_1 + cal_n_2 + cal_n_5_1)/float(2))
@@ -547,7 +535,7 @@ def all_calc_code():
                         else:
                             error_end('0x0004',None)
                         formula_1 = str(formula_0+'\n'+formula_0_1)
-                        print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                        o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                     elif cal_mode_3_2_1 == '2':
                         cal_n_1 = float(input('1つ目の対角線の長さを入力してください。:'))
                         cal_n_2 = float(input('2つ目の対角線の長さを入力してください。:'))
@@ -575,7 +563,7 @@ def all_calc_code():
                             area_str = str('0.5*(1つ目の対角線*2つ目の対角線)')
                         else:
                             error_end('0x0004',None)
-                        print('面積:',area,file=open("./temp.txt","w"))
+                        o.output += ( '面積:',area)
                         end()
                     elif cal_mode_3_2_1 == '3':
                         cal_n_1 = float(input('1つ目の辺の長さを入力してください。:'))
@@ -607,7 +595,7 @@ def all_calc_code():
                         area_all = (math.sqrt((s-cal_n_1)*(s-cal_n_2)*(s-cal_n_3)*(s-cal_n_4)-cal_n_1*cal_n_2*cal_n_3*cal_n_4*((1+cal_n_7)/2)))
                         area = area_all
                         input_1 = str(cal_n_1)+','+str(cal_n_2)+','+str(cal_n_3)+','+str(cal_n_4)+','+str(cal_n_5)+','+str(cal_n_6)+','+str(cal_n_7)
-                        print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                        o.output += ( '式:',formula_1,'\n','面積:',area,unit)
                     else:
                         error_end('0x0004',None)
             elif cal_mode_3 == '3':
@@ -623,7 +611,7 @@ def all_calc_code():
                     formula_1 = formula_0+formula_0_1
                     answer_1 = str(area)
                 elif cal_mode_3_2 == '2':
-                    print('五角形を5つの三角形に分け、上から時計周りに入力してください。「底辺」は、五角形にした時に一番外側に来る辺のことを言います。',file=open("./temp.txt","w"))
+                    o.output += ( '五角形を5つの三角形に分け、上から時計周りに入力してください。「底辺」は、五角形にした時に一番外側に来る辺のことを言います。')
                     cal_n_1 = float(input('1つ目の三角形の底辺の長さを入力してください。'))
                     cal_n_2 = float(input('1つ目の三角形の頂点までの距離を入力してください。'))
                     cal_n_3 = float(input('2つ目の三角形の底辺の長さを入力してください。'))
@@ -648,20 +636,20 @@ def all_calc_code():
                     answer_1 = str(area)
                 else:
                     error_end('0x0004',None)
-                print('式:',formula_1,'\n','面積:',area,unit,file=open("./temp.txt","w"))
+                o.output += ( '式:',formula_1,'\n','面積:',area,unit)
             elif cal_mode_3 == '4':
                 cal_mode_3_2 = input('面積の求め方を指定してください。半径と円周率:1 半径と円周:2')
                 if cal_mode_3_2 == '1':
                     cal_n_1 = float(input('半径の長さを入力してください。'))
                     area = math.pi*(cal_n_1*cal_n_1)
-                    print('面積:',area,file=open("./temp.txt","w"))
+                    o.output += ( '面積:',area)
                     end()
                 elif cal_mode_3_2 == '2':
                     cal_n_1 = float(input('半径の長さを入力してください。'))
                     cal_n_2 = float(input('円周の長さを入力してください。'))
                     area_pre = cal_n_2/math.pi/2
                     area = area_pre*area_pre*math.pi
-                    print('面積:',area,file=open("./temp.txt","w"))
+                    o.output += ( '面積:',area)
                     end()
                 else:
                     error_end('0x0004',None)
@@ -674,7 +662,7 @@ def all_calc_code():
         output_2(input_1,formula_1,answer_1,unit)
     elif cal_mode == '3':
         clear()
-        print('数値変換モードで起動します。',file=open("./temp.txt","w"))
+        o.output += ( '数値変換モードで起動します。')
         sel = int(input('使用するモードを選択してください。 角度→三角比変換モード:0 三角比→角度変換モード:1 '))
         if sel == 0:
             tri = int(input('角度から変換する先を選択してください。sin:0 cos:1 tan:2 '))
@@ -716,14 +704,14 @@ def all_calc_code():
             ans = str(li.deg[val_sel_1])
             input_ = ans_2+','+ans_3
         if sel == 0: 
-            print(ans_2+ans_3+'°','=',ans,file=open("./temp.txt","w"))
+            o.output += ( ans_2+ans_3+'°','=',ans)
         elif sel == 1:
-            print(ans_3,'=',ans_2+ans+'°',file=open("./temp.txt","w"))
+            o.output += ( ans_3,'=',ans_2+ans+'°')
         output_6(input_,ans)
         end()
     elif cal_mode == '4':
         clear()
-        print('税計算モードで起動します。',file=open("./temp.txt","w"))
+        o.output += ( '税計算モードで起動します。')
         cal = float(input('どの値を求めますか? 1:税込み金額、2:税抜き金額、3:税率、4:税額 :'))
         if cal == 1:
             tax_free_price = float(input('税抜き価格:'))
@@ -734,7 +722,7 @@ def all_calc_code():
             input_ = tax_free_price_str+','+tax_percent_str 
             tax_include_price = str((tax_free_price+(tax_free_price*(tax_percent*0.01))))
             formula = '税抜き価格+(税抜き価格*税率(%))'
-            print(unit+tax_include_price,file=open("./temp.txt","w"))
+            o.output += ( unit+tax_include_price)
             output_4(input_,formula,tax_include_price,unit,0)
         elif cal == 2:
             tax_include_price = float(input('税込み価格:'))
@@ -745,7 +733,7 @@ def all_calc_code():
             input_ = tax_include_price_str+','+tax_percent_str
             tax_free_price = str(int(tax_include_price-(tax_include_price/(((tax_percent*0.01)+1)*100)*tax_percent)))
             formula = '税込み価格-(税込み価格÷(((税率+1)*100)*税率))'
-            print(unit+tax_free_price,file=open("./temp.txt","w"))
+            o.output += ( unit+tax_free_price)
             output_4(input_,formula,tax_free_price,unit,0)
         elif cal == 3:
             tax_include_price = float(input('税込み価格:'))
@@ -755,7 +743,7 @@ def all_calc_code():
             input_ = tax_include_price_str+','+tax_free_price_str 
             tax_percent = str(int(((tax_include_price/tax_free_price)-1)*100))
             formula = '((税込み価格÷税抜き価格)-1)*100'
-            print(tax_percent+'%',file=open("./temp.txt","w"))
+            o.output += ( tax_percent+'%')
             output_4(input_,formula,tax_percent,'%',1)
         elif cal == 4:
             tax_include_price = float(input('税込みの価格:'))
@@ -766,20 +754,20 @@ def all_calc_code():
             input_ = tax_include_price_str+','+tax_free_price_str 
             tax_price = str(int(tax_include_price-tax_free_price))
             formula = '税込み価格-税抜き価格'
-            print(unit+tax_price,file=open("./temp.txt","w"))
+            o.output += ( unit+tax_price)
             output_4(input_,formula,tax_price,unit,0)
         else:
             error_end('0x0004',None)
         end()
     elif cal_mode == '5' and error_cnt[1] == 1:
-        print('直接計算モードは現在利用できません。計算機を再起動してください。',file=open("./temp.txt","w"))
+        o.output += ( '直接計算モードは現在利用できません。計算機を再起動してください。')
         error_end_2('0x1001')
     elif cal_mode == '5':
         clear()
         cal = None
         cal_int = None
         cal_error = 0
-        print('直接計算モードで起動します。',file=open("./temp.txt","w"))
+        o.output += ( '直接計算モードで起動します。')
         cal = (input('計算を行いたい式を入力してください。'))
         cal_str = str(cal)
         for i in range (0,25):
@@ -794,7 +782,7 @@ def all_calc_code():
         if cal_error > 0:
             error_end('input_is_not_calculation_formula','error')
         cal_int = str(eval(cal))
-        print('結果:',cal_int,file=open("./temp.txt","w"))
+        o.output += ( '結果:',cal_int)
         output_5(cal_str,cal_int)
         end()
     elif cal_mode == '2022':
@@ -805,14 +793,11 @@ def all_calc_code():
         with open('README.txt','r',encoding='UTF-8') as f:
             help = f.read()
             clear()
-            print(help,'\n','マウスホイールでスクロールできます。',file=open("./temp.txt","w"))
+            o.output += ( help,'\n','マウスホイールでスクロールできます。')
             os.system('PAUSE')
         clear()
         startup()
         all_calc_code()
     else:
         error_end('0x0004',None)
-if __name__ == "__main__":
-    freeze_support()
-    alcalco_p = Process(target=all_calc_code)
-    alcalco_p.start()
+all_calc_code()
