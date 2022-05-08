@@ -8,12 +8,12 @@ import lists as li
 import tkinter as tk
 from tkinter import ttk
 class output():
-    def __init__(self):
-        output = str('Program started.')
+    output = str('Program started.')
 o = output()
+print(o.output)
 class keypad():
     def __init__(self):
-        self.main_win = tk.Tk()
+        self.main_win = tk.Tk
         self.main_win.title('Calculator Ver.Dev')
         self.main_win.geometry('330x560')
         self.main_frm = ttk.Frame(self.main_win)
