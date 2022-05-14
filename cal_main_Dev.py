@@ -26,11 +26,13 @@ relin = pf.release()
 verin = pf.version()
 macin = pf.machine()
 proin = pf.processor()
+def outputpath():
+    os.path.abspath('result.txt')
 def sys_info():
     print ('System information for this computer:')
-    print(f'system          : {pf.system()}\nrelease         :{ pf.release()}\nsystem_version  :{pf.version()}\nmachine         :{ pf.machine()}\nprocessor       :{ pf.processor()}\npython_version  :{ver}\nSoftware_version:{soft_ver}\nMode            : {argv}')
+    print(f'system          : {sysin}\nrelease         :{relin}\nsystem_version  :{verin}\nmachine         :{macin}\nprocessor       :{proin}\npython_version  :{ver}\nSoftware_version:{soft_ver}\nMode            : {argv}')
     with open('./log/error.log', mode='a', encoding='UTF-8') as f:
-        datalist = [f'\nSystem          : {pf.system()}\nRelease         : {pf.release()}\nSystem_version  : {pf.version()}\nMachine         : {pf.machine()}\nProcessor       : {pf.processor()}\nPython_version  : {ver}\nGenerated_Date  : {date_1}\nSoftware_version: {soft_ver}\nMode            : {argv}_mode\n']
+        datalist = [f'\nSystem          : {sysin}\nRelease         : {relin}\nSystem_version  : {verin}\nMachine         : {macin}\nProcessor       : {proin}\nPython_version  : {ver}\nGenerated_Date  : {date_1}\nSoftware_version: {soft_ver}\nMode            : {argv}_mode\n']
         f.writelines(datalist)
         print('An error log was output:',os.path.abspath('./log/error.log'))
 def output_1(input,formula,answer):
@@ -48,7 +50,7 @@ def output_2(input,formula,answer,unit):
 def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
+        datalist = [f'\n使用モード: 幾何計算モード/体積\n入力:{input}\n式:{formula}\n解(単位無し):{answer}\n解:{answer} {unit}\n']
         f.writelines(datalist)
     print('An result was output:',os.path.abspath('result.txt'))
 def output_4(input,formula,answer,unit,sel):
