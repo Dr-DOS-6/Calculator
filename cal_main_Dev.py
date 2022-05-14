@@ -6,9 +6,9 @@ import os
 import datetime
 import argparse
 import platform as pf
-
-from pkg_resources import WorkingSet
 import lists as li
+if os.path.exists('./log') == False:
+    os.mkdir('./log')
 parser = argparse.ArgumentParser()
 parser.add_argument('debug',nargs="?")
 args = parser.parse_args( )
@@ -28,39 +28,28 @@ macin = pf.machine()
 proin = pf.processor()
 def sys_info():
     print ('System information for this computer:')
-    print ('system          :', pf.system())
-    print ('release         :', pf.release())
-    print ('system_version  :', pf.version())
-    print ('machine         :', pf.machine())
-    print ('processor       :', pf.processor())
-    print ('python_version  :',ver)
-    print ('Software_version:',soft_ver)
-    print ('Mode            : ',argv)
-    with open('error.log', mode='a', encoding='UTF-8') as f:
-        datalist = ['\n','System          : ',pf.system(),'\n','Release         : ',pf.release(),'\n','System_version  : ',pf.version(),'\n','Machine         : ',pf.machine(),'\n','Processor       : ',pf.processor(),'\n','Python_version  : ',ver,'\n','Generated_Date  : ',date_1,'\n','Software_version: ',soft_ver,'\n','Mode            : ',argv,'_mode'+'\n']
+    print(f'system          : {pf.system()}\nrelease         :{ pf.release()}\nsystem_version  :{pf.version()}\nmachine         :{ pf.machine()}\nprocessor       :{ pf.processor()}\npython_version  :{ver}\nSoftware_version:{soft_ver}\nMode            : {argv}')
+    with open('./log/error.log', mode='a', encoding='UTF-8') as f:
+        datalist = [f'\nSystem          : {pf.system()}\nRelease         : {pf.release()}\nSystem_version  : {pf.version()}\nMachine         : {pf.machine()}\nProcessor       : {pf.processor()}\nPython_version  : {ver}\nGenerated_Date  : {date_1}\nSoftware_version: {soft_ver}\nMode            : {argv}_mode\n']
         f.writelines(datalist)
-        f.close()
-        print('An error log was output:',os.path.abspath('error.log'))
+        print('An error log was output:',os.path.abspath('./log/error.log'))
 def output_1(input,formula,answer):
     #代数計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 代数計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,'\n']
+        datalist = [f'\n使用モード: 代数計算モード\n入力:{input}\n式:{formula}\n答え:{answer}\n']
         f.writelines(datalist)
-        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_2(input,formula,answer,unit):
     #幾何計算モード{面積/表面積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
-        datalist = ['\n','使用モード: 幾何計算モード/面積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
+        datalist = [f'\n使用モード: 幾何計算モード/面積\n入力:{input}\n式:{formula}\n解(単位無し):{answer}\n解:{answer} {unit}\n']
         f.writelines(datalist)
-        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_3(input,formula,answer,unit):
     #幾何計算モード{体積}用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         datalist = ['\n','使用モード: 幾何計算モード/体積','\n','入力:',input,'\n','式:',formula,'\n','解(単位無し):',answer,'\n','解:',answer,' ',unit,'\n']
         f.writelines(datalist)
-        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_4(input,formula,answer,unit,sel):
     #税計算モード用
@@ -70,21 +59,18 @@ def output_4(input,formula,answer,unit,sel):
         elif sel == 1:
             datalist = ['\n','使用モード: 税計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,unit,'\n']
         f.writelines(datalist)
-        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_5(input,answer):
     #直接計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         datalist = ['\n','使用モード: 直接計算モード','\n','入力:',input,'\n','答え:',answer,'\n']
         f.writelines(datalist)
-        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def output_6(input,answer):
     #数値変換モード用
     with open('result.txt',mode='a',encoding='UTF-8') as f:
         datalist = ['\n','使用モード: 数値変換モード','\n','入力:',input,'\n','結果:',answer,'\n']
         f.writelines(datalist)
-        f.close()
     print('An result was output:',os.path.abspath('result.txt'))
 def clear():
     if pf_s == 'Windows':
@@ -492,19 +478,23 @@ def all_calc_code():
                             #作りかけ(2022/03/01)
                             area = float(0.5*cal_n_4*(((math.sqrt(6))-(math.sqrt(2)))/4))
                             area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*((√6-√2)/4)')
-                            area_str_2 = '0.5*('+str(cal_n_1)+'*'+str(cal_n_2)
+                            area_str_2 = f'0.5*({cal_n_1}*{cal_n_2})*((√6-√2)/4)'
                         elif cal_n_3 == '1':
                             area = float(0.5*cal_n_4*0.5)
                             area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*0.5')
+                            area_str_2 = f'0.5*({cal_n_1}*{cal_n_2})*0.5'
                         elif cal_n_3 == '2':
                             area = float(0.5*cal_n_4*(math.sqrt(2)/2))
                             area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*(√2/2)')
+                            area_str_2 = f'0.5*({cal_n_1}*{cal_n_2})*(√2/2)'
                         elif cal_n_3 == '3':
                             area = float(0.5*cal_n_4*(math.sqrt(3)/2))
-                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*(√3/2')
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*(√3/2)')
+                            area_str_2 = f'0.5*({cal_n_1}*{cal_n_2})*(√3/2)'
                         elif cal_n_3 == '4':
                             area = float(0.5*cal_n_4*(((math.sqrt(2))+(math.sqrt(6)))/4))
-                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*((√2+√6)/4))')
+                            area_str = str('0.5*(1つ目の対角線*2つ目の対角線)*((√2+√6)/4)')
+                            area_str_2 = f'0.5*({cal_n_1}*{cal_n_2})*((√2+√6)/4)'
                         elif cal_n_3 == '5':
                             area = float(0.5*cal_n_4)
                             area_str = str('0.5*(1つ目の対角線*2つ目の対角線)')
