@@ -8,7 +8,7 @@ class Keypad:
         self.main_win.geometry('330x560')
         self.main_frm = ttk.Frame(self.main_win)
         self.textoutput = tk.StringVar()
-        self.textoutput.set('test')
+        self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022')
         self.temp = str()
         self.main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
         self.btn0 =    tk.Button(self.main_frm, text="0", height=4, width=10,command=lambda: self.btnAdd('0'))
@@ -28,8 +28,9 @@ class Keypad:
         self.btnSl =   tk.Button(self.main_frm, text="/", height=4, width=10,command=lambda: self.btnAdd('/'))
         self.btnEtr =  tk.Button(self.main_frm, text="Enter", height=9, width=10,command=lambda: self.btnEnter())
         self.btnFn =   tk.Button(self.main_frm, text="Fn", height=4, width=10, command=lambda: self.Fn())
-        self.btnBksp = tk.Button(self.main_frm,text="Bksp/Del",height=4,width=10)
-        self.console =    tk.Label(self.main_frm,height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
+        self.btnBksp = tk.Button(self.main_frm,text="Bksp",height=4,width=10, command=lambda: self.btnBackspace())
+        self.btnClr =  tk.Button(self.main_frm,text="Clear",height=4,width=10,command=lambda: self.btnClear())
+        self.console = tk.Label(self.main_frm,height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
         self.console.grid(column=0,row=0,columnspan=4,rowspan=2)
         self.btnFn.grid(column=0,row=2)
         self.btnSl.grid(column=1,row=2)
@@ -48,6 +49,7 @@ class Keypad:
         self.btn3.grid(column=2,row=5)
         self.btnPe.grid(column=2,row=6)
         self.btn0.grid(column=1,row=6)
+        self.btnClr.grid(column=0,row=6)
         self.btnBksp.grid(column=3,row=2)
         self.main = self.main_win.mainloop()
     def Fn(self):
@@ -69,6 +71,15 @@ class Keypad:
         self.temp += _input
         self.textReplacer(self.temp)
     def btnEnter(self):
-        self.temp = str(eval(self.temp))
+        try :
+            self.temp = str(eval(self.temp))
+        except SyntaxError:
+            pass
+        self.textReplacer(self.temp)
+    def btnClear(self):
+        self.temp = str()
+        self.textReplacer(self.temp)
+    def btnBackspace(self):
+        self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
 app = Keypad()
