@@ -57,7 +57,7 @@ def output_4(input,formula,answer,unit,sel):
     #税計算モード用
     with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
         if sel == 0:
-            datalist = ['\n','使用モード: 税計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',unit,answer,'\n']
+            datalist = [f'\n使用モード: 税計算モード\n入力:{input}\n式:{formula}\n答え:{unit},{answer}\n']
         elif sel == 1:
             datalist = ['\n','使用モード: 税計算モード','\n','入力:',input,'\n','式:',formula,'\n','答え:',answer,unit,'\n']
         f.writelines(datalist)
