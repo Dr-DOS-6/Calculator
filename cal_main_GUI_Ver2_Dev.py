@@ -14,6 +14,7 @@ class Keypad:
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022')
         self.count1 = 0
         self.temp = str()
+        self.replaced = 0
         self.main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
         self.btn0 =    tk.Button(self.main_frm, text="0", height=4, width=10,command=lambda: self.btnAdd('0'))
         self.btn1 =    tk.Button(self.main_frm, text="1", height=4, width=10,command=lambda: self.btnAdd('1'))
