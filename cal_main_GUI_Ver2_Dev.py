@@ -1,8 +1,8 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import StringVar, ttk
 import os
 import textwrap as tw
-import threading as th
+import multiprocessing as ml
 state = 0
 class Keypad:
     def __init__(self):
@@ -12,18 +12,18 @@ class Keypad:
         self.main_frm = ttk.Frame(self.main_win)
         self.textoutput = tk.StringVar()
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022')
-        self.textoutput.set('使用モードを選択してください。')
+        self.count1 = 0
         self.temp = str()
         self.main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
         self.btn0 =    tk.Button(self.main_frm, text="0", height=4, width=10,command=lambda: self.btnAdd('0'))
         self.btn1 =    tk.Button(self.main_frm, text="1", height=4, width=10,command=lambda: self.btnAdd('1'))
-        self.btn2 =    tk.Button(self.main_frm, text="2/↓", height=4, width=10,command=lambda: self.btnAdd('2'))
+        self.btn2 =    tk.Button(self.main_frm, text="2", height=4, width=10,command=lambda: self.btnAdd('2'))
         self.btn3 =    tk.Button(self.main_frm, text="3", height=4, width=10,command=lambda: self.btnAdd('3'))
-        self.btn4 =    tk.Button(self.main_frm, text="4/←", height=4, width=10,command=lambda: self.btnAdd('4'))
+        self.btn4 =    tk.Button(self.main_frm, text="4", height=4, width=10,command=lambda: self.btnAdd('4'))
         self.btn5 =    tk.Button(self.main_frm, text="5", height=4, width=10,command=lambda: self.btnAdd('5'))
-        self.btn6 =    tk.Button(self.main_frm, text="6/→", height=4, width=10,command=lambda: self.btnAdd('6'))
+        self.btn6 =    tk.Button(self.main_frm, text="6", height=4, width=10,command=lambda: self.btnAdd('6'))
         self.btn7 =    tk.Button(self.main_frm, text="7", height=4, width=10,command=lambda: self.btnAdd('7'))
-        self.btn8 =    tk.Button(self.main_frm, text="8/↑", height=4, width=10,command=lambda: self.btnAdd('8'))
+        self.btn8 =    tk.Button(self.main_frm, text="8", height=4, width=10,command=lambda: self.btnAdd('8'))
         self.btn9 =    tk.Button(self.main_frm, text="9", height=4, width=10,command=lambda: self.btnAdd('9'))
         self.btnPe =   tk.Button(self.main_frm, text=".", height=4, width=10,command=lambda: self.btnAdd('.'))
         self.btnPl =   tk.Button(self.main_frm, text="+", height=4, width=10,command=lambda: self.btnAdd('+'))
@@ -59,29 +59,45 @@ class Keypad:
     def Fn(self):
         if self.btnFn.config('relief')[-1] == 'sunken':
             self.btnFn.config(relief="raised")
-            self.btn2.config(text= '2')
-            self.btn4.config(text= '4')
-            self.btn6.config(text= '6')
-            self.btn8.config(text= '8')
+            #self.btn2.config(text= '2')
+            #self.btn4.config(text= '4')
+            #self.btn6.config(text= '6')
+            #self.btn8.config(text= '8')
             self.btnClr.config(text= 'Clear')
         else:
             self.btnFn.config(relief="sunken")
-            self.btn2.config(text='↓')
-            self.btn4.config(text= '←')
-            self.btn6.config(text= '→')
-            self.btn8.config(text= '↑')
+            #self.btn2.config(text='↓')
+            #self.btn4.config(text= '←')
+            #self.btn6.config(text= '→')
+            #self.btn8.config(text= '↑')
             self.btnClr.config(text= 'Export')
     def textReplacer(self,_input):
         _input = tw.fill(_input,40)
         self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
-        self.temp += _input
-        self.textReplacer(self.temp)
+        if self.count1 == 0:
+            self.textoutput.set('使用モードを選択してください。')
+            self.count1 += 1
+        elif self.replaced == 1:
+            self.temp = str()
+            self.textReplacer(self.temp)
+            self.replaced = 0
+        else:
+            self.temp += _input
+            self.textReplacer(self.temp)
     def btnEnter(self):
-        try :
-            self.temp = str(eval(self.temp))
-        except SyntaxError:
-            pass
+        if self.count1 == 0:
+            self.textoutput.set('使用モードを選択してください。')
+            self.count1 += 1
+        elif self.replaced == 1:
+            self.temp = str()
+            self.textReplacer(self.temp)
+            self.replaced = 0
+        else:
+            try :
+                self.temp = str(eval(self.temp))
+            except SyntaxError:
+                pass
         self.textReplacer(self.temp)
     def btnClear(self):
         if self.btnClr.cget('text') == 'Export':
@@ -90,20 +106,26 @@ class Keypad:
             self.path = os.path.abspath('result.txt')
             self.temp = f'An result was output at:\n{self.path}'
             self.textReplacer(self.temp)
+            self.replaced = 1
         else:
             self.temp = str()
             self.textReplacer(self.temp)
     def btnBackspace(self):
         self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
-def starting():
-    while state == 0:
-        print('Program Starting...')
-if __name__ == "__main__":
-    thread_1 = th.Thread(target=Keypad)
-    thread_2 = th.Thread(target=starting)
-
-    thread_1.start()
-    thread_2.start()
+def sub_window():
+    sub_win = tk.Tk()
+    sub_win.title('Calculator Ver.Dev')
+    sub_win.geometry('150x50')
+    textoutput2 = tk.StringVar()
+    sub_win_msg = tk.Label(sub_win,font=('Meiryo',10),textvariable=textoutput2)
+    sub_win_msg.grid(column=0,row=0)
+    main = sub_win.mainloop()
+if __name__ == '__main__':
+    mwin = ml.Process(target=Keypad)
+    swin = ml.Process(target=sub_window,daemon=True)
+    mwin.start()
+    swin.start()
+if state == 1:
+    swin.kill()
 state = 1
-app = Keypad()
