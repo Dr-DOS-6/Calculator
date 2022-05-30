@@ -5,7 +5,7 @@ import textwrap as tw
 import multiprocessing as ml
 import time
 from mgmtlist import mlist as mli
-mli[0,0] = 0
+mli[0] = 0
 class Keypad:
     def __init__(self):
         self.main_win = tk.Tk()
@@ -13,9 +13,9 @@ class Keypad:
         self.main_win.geometry('330x560')
         self.main_frm = ttk.Frame(self.main_win)
         self.textoutput = tk.StringVar()
-        mli[0,1] = 0
+        mli[1] = 0
         self.temp = str()
-        mli[0,2] = 0
+        mli[2] = 0
         self.main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
         self.btn0 =    tk.Button(self.main_frm, text="0", height=4, width=10,command=lambda: self.btnAdd('0'))
         self.btn1 =    tk.Button(self.main_frm, text="1", height=4, width=10,command=lambda: self.btnAdd('1'))
@@ -79,26 +79,26 @@ class Keypad:
         _input = tw.fill(_input,40)
         self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
-        if mli[0,1] == 0:
+        if mli[1] == 0:
             self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
             self.console.config(anchor=tk.NW)
-            mli[0,1] += 1
-        elif mli[0,2] == 1:
+            mli[1] += 1
+        elif mli[2] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
-            mli[0,2] = 0
+            mli[2] = 0
         else:
             self.temp += _input
             self.textReplacer(self.temp)
     def btnEnter(self):
-        if mli[0,1] == 0:
+        if mli[1] == 0:
             self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
             self.console.config(anchor=tk.NW)
-            mli[0,1] += 1
-        elif mli[0,2] == 1:
+            mli[1] += 1
+        elif mli[2] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
-            mli[0,2] = 0
+            mli[2] = 0
         else:
             try :
                 self.temp = str(eval(self.temp))
@@ -112,7 +112,7 @@ class Keypad:
             self.path = os.path.abspath('result.txt')
             self.temp = f'An result was output at:\n{self.path}'
             self.textReplacer(self.temp)
-            mli[0,2] = 1
+            mli[2] = 1
         else:
             self.temp = str()
             self.textReplacer(self.temp)
@@ -132,6 +132,6 @@ if __name__ == '__main__':
     swin = ml.Process(target=sub_window,daemon=True)
     mwin.start()
     swin.start()
-if mli[0,0] == 1:
+if mli[0] == 1:
     swin.kill()
-mli[0,0] = 1
+mli[0] = 1
