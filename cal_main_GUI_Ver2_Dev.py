@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-import platform as pf
+import os
+import textwrap as tw
+import threading as th
+state = 0
 class Keypad:
     def __init__(self):
         self.main_win = tk.Tk()
@@ -9,6 +12,7 @@ class Keypad:
         self.main_frm = ttk.Frame(self.main_win)
         self.textoutput = tk.StringVar()
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022')
+        self.textoutput.set('使用モードを選択してください。')
         self.temp = str()
         self.main_frm.grid(column=0, row=0, sticky=tk.NSEW, padx=5, pady=10)
         self.btn0 =    tk.Button(self.main_frm, text="0", height=4, width=10,command=lambda: self.btnAdd('0'))
@@ -29,7 +33,7 @@ class Keypad:
         self.btnEtr =  tk.Button(self.main_frm, text="Enter", height=9, width=10,command=lambda: self.btnEnter())
         self.btnFn =   tk.Button(self.main_frm, text="Fn", height=4, width=10, command=lambda: self.Fn())
         self.btnBksp = tk.Button(self.main_frm,text="Bksp",height=4,width=10, command=lambda: self.btnBackspace())
-        self.btnClr =  tk.Button(self.main_frm,text="Clear",height=4,width=10,command=lambda: self.btnClear())
+        self.btnClr =  tk.Button(self.main_frm,text="Clear/\nExport",height=4,width=10,command=lambda: self.btnClear())
         self.console = tk.Label(self.main_frm,height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
         self.console.grid(column=0,row=0,columnspan=4,rowspan=2)
         self.btnFn.grid(column=0,row=2)
@@ -59,14 +63,17 @@ class Keypad:
             self.btn4.config(text= '4')
             self.btn6.config(text= '6')
             self.btn8.config(text= '8')
+            self.btnClr.config(text= 'Clear')
         else:
             self.btnFn.config(relief="sunken")
             self.btn2.config(text='↓')
             self.btn4.config(text= '←')
             self.btn6.config(text= '→')
             self.btn8.config(text= '↑')
-    def textReplacer(self,test):
-        self.textoutput.set(f'{test}')
+            self.btnClr.config(text= 'Export')
+    def textReplacer(self,_input):
+        _input = tw.fill(_input,40)
+        self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
         self.temp += _input
         self.textReplacer(self.temp)
@@ -77,9 +84,26 @@ class Keypad:
             pass
         self.textReplacer(self.temp)
     def btnClear(self):
-        self.temp = str()
-        self.textReplacer(self.temp)
+        if self.btnClr.cget('text') == 'Export':
+            with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
+                f.write(self.temp)
+            self.path = os.path.abspath('result.txt')
+            self.temp = f'An result was output at:\n{self.path}'
+            self.textReplacer(self.temp)
+        else:
+            self.temp = str()
+            self.textReplacer(self.temp)
     def btnBackspace(self):
         self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
+def starting():
+    while state == 0:
+        print('Program Starting...')
+if __name__ == "__main__":
+    thread_1 = th.Thread(target=Keypad)
+    thread_2 = th.Thread(target=starting)
+
+    thread_1.start()
+    thread_2.start()
+state = 1
 app = Keypad()
