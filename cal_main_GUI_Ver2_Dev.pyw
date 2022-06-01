@@ -3,14 +3,19 @@ from tkinter import StringVar, ttk
 import os
 import textwrap as tw
 import multiprocessing as ml
-import time
 from mgmtlist import mlist as mli
 mli[0] = 0
 class Keypad:
     def __init__(self):
         self.main_win = tk.Tk()
+        self.main_win.resizable(0,0)
         self.main_win.title('Calculator Ver.Dev')
-        self.main_win.geometry('330x560')
+        self.scrwid = self.main_win.winfo_screenwidth()
+        self.scrhei = self.main_win.winfo_screenheight()
+        self.winwid = 330
+        self.winhei = 560
+        self.winsize = f'330x560+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
+        self.main_win.geometry(self.winsize)
         self.main_frm = ttk.Frame(self.main_win)
         self.textoutput = tk.StringVar()
         mli[1] = 0
@@ -32,16 +37,17 @@ class Keypad:
         self.btnMin =  tk.Button(self.main_frm, text="-", height=4, width=10,command=lambda: self.btnAdd('-'))
         self.btnAst =  tk.Button(self.main_frm, text="*", height=4, width=10,command=lambda: self.btnAdd('*'))
         self.btnSl =   tk.Button(self.main_frm, text="/", height=4, width=10,command=lambda: self.btnAdd('/'))
-        self.btnEtr =  tk.Button(self.main_frm, text="Enter", height=9, width=10,command=lambda: self.btnEnter())
+        self.btnEtr =  tk.Button(self.main_frm, text="Enter", height=4, width=10,command=lambda: self.btnEnter())
         self.btnFn =   tk.Button(self.main_frm, text="Fn", height=4, width=10, command=lambda: self.Fn())
         self.btnBksp = tk.Button(self.main_frm,text="Bksp",height=4,width=10, command=lambda: self.btnBackspace())
         self.btnClr =  tk.Button(self.main_frm,text="Clear/\nExport",height=4,width=10,command=lambda: self.btnClear())
+        self.btnExt = tk.Button(self.main_frm,text='Exit',height=4,width=10,command=lambda: self.btnExit())
         self.console = tk.Label(self.main_frm,height=9,width=38,borderwidth=3,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
         self.console.grid(column=0,row=0,columnspan=4,rowspan=2)
         self.btnFn.grid(column=0,row=2)
         self.btnSl.grid(column=1,row=2)
         self.btnAst.grid(column=2,row=2)
-        self.btnMin.grid(column=3,row=3)
+        self.btnMin.grid(column=3,row=5)
         self.btn7.grid(column=0,row=3)
         self.btn8.grid(column=1,row=3)
         self.btn9.grid(column=2,row=3)
@@ -49,7 +55,7 @@ class Keypad:
         self.btn4.grid(column=0,row=4)
         self.btn5.grid(column=1,row=4)
         self.btn6.grid(column=2,row=4)
-        self.btnEtr.grid(column=3,row=5,rowspan=2)
+        self.btnEtr.grid(column=3,row=3)
         self.btn1.grid(column=0,row=5)
         self.btn2.grid(column=1,row=5)
         self.btn3.grid(column=2,row=5)
@@ -57,6 +63,7 @@ class Keypad:
         self.btn0.grid(column=1,row=6)
         self.btnClr.grid(column=0,row=6)
         self.btnBksp.grid(column=3,row=2)
+        self.btnExt.grid(column=3,row=6)
         self.console.config(anchor=tk.N)
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\n何かキーを押して下さい...\nPress any key to continue...')
         self.main = self.main_win.mainloop()
@@ -79,11 +86,12 @@ class Keypad:
         _input = tw.fill(_input,40)
         self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
-        if mli[1] == 0:
-            self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
-            self.console.config(anchor=tk.NW)
-            mli[1] += 1
-        elif mli[2] == 1:
+        self.console.config(anchor=tk.NW)
+        #if mli[1] == 0:
+        #    self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
+        #    self.console.config(anchor=tk.NW)
+        #    mli[1] += 1
+        if mli[2] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
             mli[2] = 0
@@ -91,11 +99,12 @@ class Keypad:
             self.temp += _input
             self.textReplacer(self.temp)
     def btnEnter(self):
-        if mli[1] == 0:
-            self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
-            self.console.config(anchor=tk.NW)
-            mli[1] += 1
-        elif mli[2] == 1:
+        self.console.config(anchor=tk.NW)
+        #if mli[1] == 0:
+        #    self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
+        #    self.console.config(anchor=tk.NW)
+        #    mli[1] += 1
+        if mli[2] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
             mli[2] = 0
@@ -104,8 +113,11 @@ class Keypad:
                 self.temp = str(eval(self.temp))
             except SyntaxError:
                 pass
+                self.temp += '入力された式は使用できません。もう一度式を入力してください。'
+                self.textReplacer(self.temp)
         self.textReplacer(self.temp)
     def btnClear(self):
+        self.console.config(anchor=tk.NW)
         if self.btnClr.cget('text') == 'Export':
             with open('result.txt', mode = 'a', encoding = 'UTF-8') as f:
                 f.write(self.temp)
@@ -117,8 +129,30 @@ class Keypad:
             self.temp = str()
             self.textReplacer(self.temp)
     def btnBackspace(self):
+        self.console.config(anchor=tk.NW)
         self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
+    def btnExit(self):
+        self.exit_win = tk.Toplevel()
+        self.exit_win.resizable(0,0)
+        self.scrwid = self.exit_win.winfo_screenwidth()
+        self.scrhei = self.exit_win.winfo_screenheight()
+        self.winwid = 150
+        self.winhei = 100
+        self.winsize = f'150x100+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
+        #print(self.winsize)
+        self.exit_win.geometry(self.winsize)
+        self.exit_win.title("終了確認")
+        self.exit_win.grab_set()
+        self.exit_win.focus_set()
+        self.exit_win.transient(self.main_win)
+        self.exit_label =tk.Label(self.exit_win,text="終了しますか？")
+        self.confirm_btn = tk.Button(self.exit_win,text="はい",command=lambda: self.exit_win.quit())
+        self.deny_btn = tk.Button(self.exit_win,text="いいえ",command=lambda: self.exit_win.destroy())
+        self.exit_label.pack()
+        self.confirm_btn.pack()
+        self.deny_btn.pack()
+exit_win = None
 def sub_window():
     sub_win = tk.Tk()
     sub_win.title('Calculator Ver.Dev')
