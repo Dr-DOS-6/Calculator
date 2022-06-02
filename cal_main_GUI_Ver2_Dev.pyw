@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import StringVar, ttk
+from tkinter import END, StringVar, ttk
 import os
 import textwrap as tw
 import multiprocessing as ml
@@ -65,7 +65,7 @@ class Keypad:
         self.btnBksp.grid(column=3,row=2)
         self.btnExt.grid(column=3,row=6)
         self.console.config(anchor=tk.N)
-        self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\n何かキーを押して下さい...\nPress any key to continue...')
+        self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS© 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main = self.main_win.mainloop()
     def Fn(self):
         if self.btnFn.config('relief')[-1] == 'sunken':
@@ -95,27 +95,49 @@ class Keypad:
             self.temp = str()
             self.textReplacer(self.temp)
             mli[2] = 0
+        if  mli[3] == 1 and _input == '1':
+            self.temp = '電卓モードが選択されました。'
+            self.textReplacer(self.temp)
+            self.main_win.title('Calculator Ver.Dev 電卓モード')
+            mli[3] = 0
+            mli[4] = 1
         else:
             self.temp += _input
             self.textReplacer(self.temp)
     def btnEnter(self):
         self.console.config(anchor=tk.NW)
-        #if mli[1] == 0:
-        #    self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
-        #    self.console.config(anchor=tk.NW)
-        #    mli[1] += 1
-        if mli[2] == 1:
+        if mli[1] == 0:
+            self.temp ='使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2 '
+            self.textReplacer(self.temp)
+            self.console.config(anchor=tk.NW)
+            mli[1] = 1
+            mli[3] = 1
+        elif mli[2] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
             mli[2] = 0
+        #elif mli[4] == 1:
+        #    try:
+        #        return None
+        #    except SyntaxError:
+        #        pass
+        #        mli[5] = 1
+        #if mli[5] == 1:
+        #    self.temp = str()
+        #    self.textReplacer(self.temp)
         else:
             try :
-                self.temp = str(eval(self.temp))
+                #check = '0123456789/+-*'
+                #check2 = self.temp.strip(check)
+                #if not self.temp.count(check2) == 0:
+                #    END
+                #else:
+                    self.temp = str(eval(self.temp))
+                    self.textReplacer(self.temp)
             except SyntaxError:
                 pass
                 self.temp += '入力された式は使用できません。もう一度式を入力してください。'
                 self.textReplacer(self.temp)
-        self.textReplacer(self.temp)
     def btnClear(self):
         self.console.config(anchor=tk.NW)
         if self.btnClr.cget('text') == 'Export':
