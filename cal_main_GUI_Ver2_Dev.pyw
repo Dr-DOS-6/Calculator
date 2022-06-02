@@ -4,6 +4,7 @@ import os
 import textwrap as tw
 import multiprocessing as ml
 from mgmtlist import mlist as mli
+from mgmtlist import allow as al
 mli[0] = 0
 class Keypad:
     def __init__(self):
@@ -86,22 +87,30 @@ class Keypad:
         _input = tw.fill(_input,40)
         self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
-        self.console.config(anchor=tk.NW)
         #if mli[1] == 0:
         #    self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
         #    self.console.config(anchor=tk.NW)
         #    mli[1] += 1
         if mli[2] == 1:
+            self.console.config(anchor=tk.NW)
             self.temp = str()
             self.textReplacer(self.temp)
             mli[2] = 0
         if  mli[3] == 1 and _input == '1':
+            self.console.config(anchor=tk.NW)
             self.temp = '電卓モードが選択されました。'
             self.textReplacer(self.temp)
             self.main_win.title('Calculator Ver.Dev 電卓モード')
             mli[3] = 0
             mli[4] = 1
+        elif mli[1] == 0:
+            END
+        elif mli[4] == 1:
+            self.temp = str()
+            self.textReplacer(self.temp)
+            mli[4] = 0
         else:
+            self.console.config(anchor=tk.NW)
             self.temp += _input
             self.textReplacer(self.temp)
     def btnEnter(self):
@@ -127,14 +136,24 @@ class Keypad:
         #    self.textReplacer(self.temp)
         else:
             try :
+                for i in range(0,13):
+                    check = self.temp.strip(al[i])
+                    if not len(check) == 0:
+                        mli[6] = 1 
+                    else:
+                        continue
                 #check = '0123456789/+-*'
                 #check2 = self.temp.strip(check)
                 #if not self.temp.count(check2) == 0:
                 #    END
                 #else:
+                if not mli[6] == 1:
                     self.temp = str(eval(self.temp))
                     self.textReplacer(self.temp)
             except SyntaxError:
+                if mli[1] == 0 or mli[6] == 1:
+                    pass
+                    END
                 pass
                 self.temp += '入力された式は使用できません。もう一度式を入力してください。'
                 self.textReplacer(self.temp)
