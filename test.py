@@ -72,8 +72,8 @@ class Keypad:
         self.main = self.main_win.mainloop()
     def Keyboard_input(self,keyin):
         try:
-            self.keyin = int(keyin.keysym)
-            self.keyin = str(keyin.keysym)
+            self.keyin = int(self.keyin)
+            self.keyin = str(self.keyin)
         except ValueError:
             self.keyin = str(self.keyin)
             if str(keyin.keysym) == 'BackSpace' or 'Return':
@@ -141,8 +141,8 @@ class Keypad:
             self.main_win.title('Calculator Ver.Dev 電卓モード')
             mli[3] = 0
             mli[4] = 1
-        #elif mli[1] == 0:
-        #    END
+        elif mli[1] == 0:
+            END
         elif mli[4] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
