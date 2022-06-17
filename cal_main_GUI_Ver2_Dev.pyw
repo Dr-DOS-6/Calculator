@@ -127,6 +127,12 @@ class Keypad:
         #    self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
         #    self.console.config(anchor=tk.NW)
         #    mli[1] += 1
+        if mli[1] == 0:
+            self.temp ='使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2 '
+            self.textReplacer(self.temp)
+            self.console.config(anchor=tk.NW)
+            mli[1] = 1
+            mli[3] = 1
         if mli[2] == 1:
             self.console.config(anchor=tk.NW)
             mli[1] += 1
@@ -174,27 +180,24 @@ class Keypad:
         #    self.textReplacer(self.temp)
         else:
             try :
-                for i in range(0,13):
-                    check = self.temp.strip(al[i])
-                    if not len(check) == 0:
-                        mli[6] = 1 
-                    else:
-                        continue
-                #check = '0123456789/+-*'
-                #check2 = self.temp.strip(check)
-                #if not self.temp.count(check2) == 0:
-                #    END
-                #else:
-                if not mli[6] == 1:
-                    self.temp = str(eval(self.temp))
-                    self.textReplacer(self.temp)
+                
+                self.temp = str(eval(self.temp))
+                self.textReplacer(self.temp)
             except SyntaxError:
                 if mli[1] == 0 or mli[6] == 1:
                     pass
                     END
+                elif self.temp == '電卓モードが選択されました。':
+                    pass
+                    END
+                elif '入力された式は使用できません。もう一度式を入力してください。' in self.temp:
+                    self.btnClear()
+                else:
+                    pass
+                    self.temp += '入力された式は使用できません。もう一度式を入力してください。'
+                    self.textReplacer(self.temp)
+            except ZeroDivisionError:
                 pass
-                self.temp += '入力された式は使用できません。もう一度式を入力してください。'
-                self.textReplacer(self.temp)
     def btnClear(self):
         self.console.config(anchor=tk.NW)
         if self.btnClr.cget('text') == 'Export':
