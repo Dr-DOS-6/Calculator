@@ -108,15 +108,9 @@ class Keypad:
             return 'ignore'
     def kbd_input(self,keyin1):
         try:
-            self.keyin2i = self.keyin2 = int(keyin1.keysym)
+            self.keyin2i = int(keyin1.keysym)
             self.keyin2 = str(self.keyin2)
-            if self.keyin2 == "Return":
-                self.btnEnter()
-                self.temp == str()
-            elif self.keyin2 == "BackSpace":
-                self.btnBackspace()
-            else:
-                self.btnAdd(str(self.keyin2i))
+            self.btnAdd(str(self.keyin2i))
         except:
             replacer = self.inputreplacer(keyin1.keysym)
             self.keyin2 = replacer
@@ -158,7 +152,7 @@ class Keypad:
         #    self.console.config(anchor=tk.NW)
         #    mli[1] += 1
         '''if mli[1] == 0:
-            self.temp ='使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2 '
+            self.temp ='使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2
             self.textReplacer(self.temp)
             self.console.config(anchor=tk.NW)
             mli[1] = 1
@@ -172,7 +166,7 @@ class Keypad:
             mli[2] = 0
         if  mli[3] == 1 and _input == '1':
             self.console.config(anchor=tk.NW)
-            self.temp = '電卓モードが選択されました。'
+            self.temp = '電卓モードが選択されました。何かキーを押してください。'
             self.textReplacer(self.temp)
             self.main_win.title('Calculator Ver.Dev 電卓モード')
             mli[3] = 0
@@ -190,7 +184,7 @@ class Keypad:
     def btnEnter(self):
         self.console.config(anchor=tk.NW)
         if mli[1] == 0:
-            self.temp ='使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2 '
+            self.temp ='使用するモードを選んでください。\n電卓モード:1'# 関数電卓モード:2 '
             self.textReplacer(self.temp)
             self.console.config(anchor=tk.NW)
             mli[1] = 1
@@ -199,6 +193,8 @@ class Keypad:
             self.temp = str()
             self.textReplacer(self.temp)
             mli[2] = 0
+        elif mli[4] == 1:
+            self.btnAdd(1)
         #elif mli[4] == 1:
         #    try:
         #        return None
