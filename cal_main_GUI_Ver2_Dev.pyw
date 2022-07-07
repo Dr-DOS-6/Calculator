@@ -5,6 +5,7 @@ import textwrap as tw
 import multiprocessing as ml
 from mgmtlist import mlist as mli
 from mgmtlist import allow as al
+import re
 mli[0] = 0
 class Keypad:
     def __init__(self):
@@ -18,7 +19,7 @@ class Keypad:
         self.winsize = f'330x560+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
         self.main_win.geometry(self.winsize)
         self.main_frm = ttk.Frame(self.main_win)
-        self.main_win.bind("<KeyPress>",self.Keyboard_input)
+        self.main_win.bind("<KeyPress>",self.kbd_input)
         mli[7] = 0
         self.textoutput = tk.StringVar()
         mli[1] = 0
@@ -68,42 +69,71 @@ class Keypad:
         self.btnBksp.grid(column=3,row=2)
         self.btnExt.grid(column=3,row=6)
         self.console.config(anchor=tk.N)
-        self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\n何かキーを押して下さい...\nPress any key to continue...')
+        self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main = self.main_win.mainloop()
-    def Keyboard_input(self,keyin):
+    def inputreplacer(self,key_input: str) ->str:
+        str(key_input)
+        #print(key_input)
+        if key_input == 'period':
+            return '.'
+        elif key_input == 'less':
+            return '<'
+        elif key_input == 'greater':
+            return '>'
+        elif key_input == 'slash':
+            return '/'
+        elif key_input == 'exclam':
+            return '!'
+        elif key_input == 'percent':
+            return '%'
+        elif key_input == 'asciicircum':
+            return '^'
+        elif key_input == 'asterrisk':
+            return '*'
+        elif key_input == 'parenleft':
+            return '('
+        elif key_input == 'parenright':
+            return ')'
+        elif key_input == 'minus':
+            return '-'
+        elif key_input == 'plus':
+            return '+'
+        elif key_input == 'equal':
+            return '='
+        elif key_input == 'Return':
+            return 'Return'
+        elif key_input == 'BackSpace':
+            return 'BackSpace'
+        elif key_input == 'Shift_R'or'Shift_L'or'Control_R'or'Control_L'or'Tab'or'NumLock':
+            return 'ignore'
+    def kbd_input(self,keyin1):
         try:
-            self.keyin = int(keyin.keysym)
-            self.keyin = str(keyin.keysym)
-        except ValueError:
-            self.keyin = str(self.keyin)
-            if str(keyin.keysym) == 'BackSpace' or 'Return':
-                pass
-            self.keyin = self.keyin.strip(self.keyin)
-            pass
-        if mli[7] == 0:
-            self.temp = str()
-            mli[7] = 1
-        if str(keyin.keysym) == "Return":
-            if mli[1] == 0:
-                self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
-                self.console.config(anchor=tk.NW)
-                mli[1] += 1
-            elif mli[2] == 1:
-                self.temp = str()
-                self.textReplacer(self.temp)
-                mli[2] = 0
+            self.keyin2i = self.keyin2 = int(keyin1.keysym)
+            self.keyin2 = str(self.keyin2)
+            if self.keyin2 == "Return":
+                self.btnEnter()
+                self.temp == str()
+            elif self.keyin2 == "BackSpace":
+                self.btnBackspace()
             else:
-                try :
-                    self.temp = str(eval(self.temp))
-                except SyntaxError:
-                    pass
-        elif str(keyin.keysym) == "BackSpace":
-            self.keyin = self.keyin.strip('BackSpace')
-            self.temp = self.temp[:-1]
-            self.textReplacer(self.temp)
-        self.temp += self.keyin
-        #self.temp - ''
-        self.textReplacer(self.temp)
+                self.btnAdd(str(self.keyin2i))
+        except:
+            replacer = self.inputreplacer(keyin1.keysym)
+            self.keyin2 = replacer
+            #print(self.keyin2)
+            if self.keyin2 == 'ignore':
+                self.keyin2 = str()
+            elif self.keyin2 == "Return":
+                self.btnEnter()
+                self.keyin2 == str()
+            elif self.keyin2 == "BackSpace":
+                self.btnBackspace()
+            else:
+                self.temp += self.keyin2
+                self.textReplacer(self.temp)
+        '''if mli[7] == 0:
+            self.temp = str()
+            mli[7] == 0'''
     def Fn(self):
         if self.btnFn.config('relief')[-1] == 'sunken':
             self.btnFn.config(relief="raised")
@@ -120,19 +150,19 @@ class Keypad:
             #self.btn8.config(text= '↑')
             self.btnClr.config(text= 'Export')
     def textReplacer(self,_input):
-        _input = tw.fill(_input,40)
+        self._input = re.sub('Num_Lock|Tab|Control_R|Control_L|Shift_R|Shift_L|ignore','',tw.fill(_input,40))
         self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
         #if mli[1] == 0:
         #    self.textoutput.set('言語を選択してください。\nPlease select a Language.\n日本語:1\nEnglish:2')
         #    self.console.config(anchor=tk.NW)
         #    mli[1] += 1
-        if mli[1] == 0:
+        '''if mli[1] == 0:
             self.temp ='使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2 '
             self.textReplacer(self.temp)
             self.console.config(anchor=tk.NW)
             mli[1] = 1
-            mli[3] = 1
+            mli[3] = 1'''
         if mli[2] == 1:
             self.console.config(anchor=tk.NW)
             mli[1] += 1

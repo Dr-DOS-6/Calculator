@@ -1,1 +1,1 @@
-An error log was output: C:\Users\user\Documents\Calculator\Calculator_20220530\Calculator\error.log
+Error code: 0x0004
