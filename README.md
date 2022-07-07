@@ -7,3 +7,6 @@
 ÷: /
 ^: **
 √: //
+ダウンロード:
+Easy-to-Use_GUI_Calculator.zipをダウンロードし、解凍してください。
+main.pywを起動し、数秒で使用可能です。
