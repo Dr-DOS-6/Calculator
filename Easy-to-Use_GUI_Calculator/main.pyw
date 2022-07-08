@@ -5,6 +5,7 @@ import textwrap as tw
 import multiprocessing as ml
 from mgmtlist import mlist as mli
 from mgmtlist import allow as al
+import math
 import re
 mli[0] = 0
 class Keypad:
@@ -83,11 +84,11 @@ class Keypad:
         elif key_input == 'slash':
             return '/'
         elif key_input == 'exclam':
-            return '!'
+            return 'math.factorial('
         elif key_input == 'percent':
             return '%'
         elif key_input == 'asciicircum':
-            return '^'
+            return '**'
         elif key_input == 'asterisk':
             return '*'
         elif key_input == 'parenleft':

@@ -7,6 +7,8 @@
 ÷: /
 ^: **
 √: //
+!(階乗):math.factorial(入力値)
+mathをインポート済みなので、そのままmathモジュールの関数が使用可能です。
 ダウンロード:
 Easy-to-Use_GUI_Calculator.zipをダウンロードし、解凍してください。
 main.pywを起動し、数秒で使用可能です。
