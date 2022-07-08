@@ -88,7 +88,7 @@ class Keypad:
             return '%'
         elif key_input == 'asciicircum':
             return '^'
-        elif key_input == 'asterrisk':
+        elif key_input == 'asterisk':
             return '*'
         elif key_input == 'parenleft':
             return '('
