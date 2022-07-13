@@ -165,14 +165,16 @@ class func:
         mli[4] = 0
         sub_win = tk.Toplevel()
         sub_win.title('EUGC Ver.Dev')
-        winwid = 180
-        winhei = 630
+        winwid = 200
+        winhei = 640
         btnwid = winwid/4
-        btnhei = winhei/5
+        btnhei = winhei/8
         winlocwid = int((scrwid-mainwinwid)/2)-winwid
         winlochei = int((scrhei-winhei)/2)
         winsize = f'{winwid}x{winhei}+{winlocwid}+{winlochei}'
         sub_win.geometry(winsize)
+        testbtn1 = tk.Button(sub_win,text="0",font=('Meiryo',20),command=lambda: None)
+        testbtn1.place(x=0,y=0,width=btnwid,height=btnhei)
         sub_win.mainloop()
 class main_win(func):
     def __init__(self):
@@ -186,7 +188,7 @@ class main_win(func):
         self.scrwid = scrwid = self.main_win.winfo_screenwidth()
         self.scrhei = scrhei = self.main_win.winfo_screenheight()
         self.winwid = 360
-        self.winhei = 630
+        self.winhei = 640
         self.consolehei = int(self.winwid/2)
         self.btnwid = self.winwid/4
         self.btnhei = (self.winhei-self.consolehei)/5
