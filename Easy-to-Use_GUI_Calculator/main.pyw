@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import END, StringVar, ttk
+from tkinter import messagebox, END
 import os
 import textwrap as tw
 import multiprocessing as ml
@@ -122,7 +122,6 @@ class func:
             self.btnAdd(1)
         else:
             try :
-                
                 self.temp = str(eval(self.temp))
                 self.textReplacer(self.temp)
             except SyntaxError:
@@ -160,24 +159,15 @@ class func:
         self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
     def btnExit(self):
-        self.exit_win = tk.Toplevel()
-        self.exit_win.resizable(0,0)
-        self.scrwid = self.exit_win.winfo_screenwidth()
-        self.scrhei = self.exit_win.winfo_screenheight()
-        self.winwid = 150
-        self.winhei = 100
-        self.winsize = f'150x100+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
-        self.exit_win.geometry(self.winsize)
-        self.exit_win.title("終了確認")
-        self.exit_win.grab_set()
-        self.exit_win.focus_set()
-        self.exit_win.transient(self.main_win)
-        self.exit_label =tk.Label(self.exit_win,text="終了しますか？")
-        self.confirm_btn = tk.Button(self.exit_win,text="はい",command=lambda: self.exit_win.quit())
-        self.deny_btn = tk.Button(self.exit_win,text="いいえ",command=lambda: self.exit_win.destroy())
-        self.exit_label.pack()
-        self.confirm_btn.pack()
-        self.deny_btn.pack()
+        if mli[0] == 0:
+            pass
+        else:
+            Messagebox = tk.messagebox.askquestion('EUGC Ver.Dev 終了確認','終了してもよろしいですか？', icon='warning')
+            if Messagebox == 'yes': #If関数
+                self.main_win.destroy()
+            else:
+                pass
+
 mli[0] = 0
 class main_win(func):
     def __init__(self):
@@ -251,14 +241,16 @@ class main_win(func):
         self.console.config(anchor=tk.N)
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main_win.mainloop()
+        mli[0] = 1
 class sub_win:
     def sub_win(self):
-        self.sub_win = tk.Tk()
-        self.sub_win.title('EUGC Ver.Dev')
+        self._sub_win = tk.Tk()
+        self._sub_win.title('EUGC Ver.Dev')
         self.winwid = 180
         self.winhei = 630
         self.btnwid = self.winwid/4
         self.btnhei = self.winhei/5
         self.winsize = f'{self.winwid}x{self.winhei}+{int((scrwid-self.winwid-mainwinwid)/2)}+{int((scrhei-self.winhei)/2)}'
+        self._sub_win.mainloop()
 if __name__ == '__main__':
     main = main_win()
