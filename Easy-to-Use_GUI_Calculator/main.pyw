@@ -96,9 +96,9 @@ class func:
             mli[3] = 0
             mli[4] = 1
             mli[8] = 2
+        if mli[4] == 1 and mli[8] == 2:
+            sub_win() 
         elif mli[4] == 1:
-            if mli[8] == 2:
-                pass
             self.temp = str()
             self.textReplacer(self.temp)
             mli[4] = 0            
@@ -128,10 +128,7 @@ class func:
                 if mli[1] == 0 or mli[6] == 1:
                     pass
                     END
-                elif self.temp == '電卓モードが選択されました。':
-                    pass
-                    END
-                elif '入力された式は使用できません。もう一度式を入力してください。' in self.temp:
+                elif '入力された式は使用できません。もう一度式を入力してください。' or '電卓モードが選択されました。' or '関数電卓モードが選択されました。' in self.temp:
                     self.btnClear()
                 else:
                     pass
@@ -159,16 +156,24 @@ class func:
         self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
     def btnExit(self):
-        if mli[0] == 0:
-            pass
+        Messagebox = tk.messagebox.askquestion('EUGC Ver.Dev 終了確認','終了してもよろしいですか？', icon='warning')
+        if Messagebox == 'yes':
+            self.main_win.destroy()
         else:
-            Messagebox = tk.messagebox.askquestion('EUGC Ver.Dev 終了確認','終了してもよろしいですか？', icon='warning')
-            if Messagebox == 'yes': #If関数
-                self.main_win.destroy()
-            else:
-                pass
-
-mli[0] = 0
+            pass
+    def _sub_win(self):
+        mli[4] = 0
+        sub_win = tk.Toplevel()
+        sub_win.title('EUGC Ver.Dev')
+        winwid = 180
+        winhei = 630
+        btnwid = winwid/4
+        btnhei = winhei/5
+        winlocwid = int((scrwid-mainwinwid)/2)-winwid
+        winlochei = int((scrhei-winhei)/2)
+        winsize = f'{winwid}x{winhei}+{winlocwid}+{winlochei}'
+        sub_win.geometry(winsize)
+        sub_win.mainloop()
 class main_win(func):
     def __init__(self):
         global mainwinwid
@@ -180,9 +185,6 @@ class main_win(func):
         self.main_win.title('Calculator Ver.Dev')
         self.scrwid = scrwid = self.main_win.winfo_screenwidth()
         self.scrhei = scrhei = self.main_win.winfo_screenheight()
-        self.main_win.update_idletasks()
-        mainwinwid = self.main_win.winfo_width()
-        mainwinhei = self.main_win.winfo_height()
         self.winwid = 360
         self.winhei = 630
         self.consolehei = int(self.winwid/2)
@@ -190,6 +192,9 @@ class main_win(func):
         self.btnhei = (self.winhei-self.consolehei)/5
         self.winsize = f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
         self.main_win.geometry(self.winsize)
+        self.main_win.update_idletasks()
+        mainwinwid = self.main_win.winfo_width()
+        mainwinhei = self.main_win.winfo_height()
         self.main_win.bind("<KeyPress>",self.kbd_input)
         mli[7] = 0
         self.textoutput = tk.StringVar()
@@ -241,16 +246,19 @@ class main_win(func):
         self.console.config(anchor=tk.N)
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main_win.mainloop()
-        mli[0] = 1
 class sub_win:
-    def sub_win(self):
-        self._sub_win = tk.Tk()
-        self._sub_win.title('EUGC Ver.Dev')
+    def __init__(self):
+        mli[4] = 0
+        self.sub_win = tk.Toplevel()
+        self.sub_win.title('EUGC Ver.Dev')
         self.winwid = 180
         self.winhei = 630
         self.btnwid = self.winwid/4
         self.btnhei = self.winhei/5
-        self.winsize = f'{self.winwid}x{self.winhei}+{int((scrwid-self.winwid-mainwinwid)/2)}+{int((scrhei-self.winhei)/2)}'
-        self._sub_win.mainloop()
+        self.winlocwid = int((scrwid-mainwinwid)/2)-self.winwid
+        self.winlochei = int((scrhei-self.winhei)/2)
+        self.winsize = f'{self.winwid}x{self.winhei}+{self.winlocwid}+{self.winlochei}'
+        self.sub_win.geometry(self.winsize)
+        self.sub_win.mainloop()
 if __name__ == '__main__':
     main = main_win()
