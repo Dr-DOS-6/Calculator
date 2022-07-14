@@ -66,7 +66,7 @@ class func:
         if self.btnFn.config('relief')[-1] == 'sunken':
             self.btnFn.config(relief="raised")
             self.btnClr.config(text= 'Clear')
-            self.btnExt.config(text= '終了')
+            self.btnExt.config(text= '終了',font=('Meiryo',20))
         else:
             self.btnFn.config(relief="sunken")
             self.btnClr.config(text= 'Export')
@@ -103,7 +103,8 @@ class func:
             mli[8] = 2
             END
         if mli[4] == 1 and mli[8] == 2:
-            sub_win()
+            self.subwin = ml.Process(target=sub_win,daemon=True)
+            self.subwin.start()
             mli[4] = 0
             mli[8] = 0 
         elif mli[4] == 1:
@@ -167,11 +168,12 @@ class func:
             if self.title == 'EUGC Ver.Dev 電卓モード':
                 self.title = 'EUGC Ver.Dev 関数電卓モード'
                 self.main_win.title(self.title)
-                self.sub_win()
+                self.subwin = ml.Process(target=sub_win,daemon=True)
+                self.subwin.start()
             elif self.title == 'EUGC Ver.Dev 関数電卓モード':
                 self.title = 'EUGC Ver.Dev 電卓モード'
                 self.main_win.title(self.title)
-                self.sub_win.quit()
+                self.subwin.terminate()
         else:
             Messagebox = tk.messagebox.askquestion('EUGC Ver.Dev 終了確認','終了してもよろしいですか？', icon='warning')
             if Messagebox == 'yes':
@@ -184,28 +186,28 @@ class sub_win(func):
         self.sub_win = tk.Tk()
         self.sub_win.resizable(0,0)
         self.sub_win.title('EUGC Ver.Dev')
+        self.scrwid = self.sub_win.winfo_screenwidth()
+        self.scrhei = self.sub_win.winfo_screenheight()
         self.winwid = 200
         self.winhei = 640
         self.btnwid = int(self.winwid/4)
         self.btnhei = int(self.winhei/8)
-        self.winlocwid = int((scrwid-mainwinwid)/2)-self.winwid
-        self.winlochei = int((scrhei-self.winhei)/2)
+        self.winlocwid = int((self.scrwid-360)/2)-self.winwid
+        self.winlochei = int((self.scrhei-self.winhei)/2)
         self.winsize = f'{self.winwid}x{self.winhei}+{self.winlocwid}+{self.winlochei}'
         self.sub_win.geometry(self.winsize)
         self.testbtn1 = tk.Button(self.sub_win,text="0",font=('Meiryo',20),command=lambda: None)
+        self.testbtn2 = tk.Button(self.sub_win,text="1",font=('Meiryo',20),command=lambda: None)
         self.testbtn1.place(x=0,y=0,width=self.btnwid,height=self.btnhei)
+        self.testbtn2.place(x=50,y=0,width=self.btnwid,height=self.btnhei)
         self.sub_win.mainloop()
 class main_win(func):
     def __init__(self):
-        global mainwinwid
-        global mainwinhei
-        global scrwid
-        global scrhei
         self.main_win = tk.Tk()
         self.main_win.resizable(0,0)
         self.main_win.title('EUGC Ver.Dev')
-        self.scrwid = scrwid = self.main_win.winfo_screenwidth()
-        self.scrhei = scrhei = self.main_win.winfo_screenheight()
+        self.scrwid = self.main_win.winfo_screenwidth()
+        self.scrhei = self.main_win.winfo_screenheight()
         self.winwid = 360
         self.winhei = 640
         self.consolehei = int(self.winwid/2)
@@ -241,7 +243,7 @@ class main_win(func):
         self.btnFn =   tk.Button(self.main_win, text="切替",font=('Meiryo',20),command=lambda: self.Fn())
         self.btnBksp = tk.Button(self.main_win,text="←",font=('Meiryo',20), command=lambda: self.btnBackspace())
         self.btnClr =  tk.Button(self.main_win,text="消去/\n出力",font=('Meiryo',15),command=lambda: self.btnClear())
-        self.btnExt =  tk.Button(self.main_win,text='終了',font=('Meiryo',20),command=lambda: self.btnExit())
+        self.btnExt =  tk.Button(self.main_win,text='終了/\nモード切替',font=('Meiryo',12),command=lambda: self.btnExit())
         self.console = tk.Label(self.main_win,relief="sunken",font=('Meiryo',10),height=self.consolehei,anchor=tk.NW,textvariable=self.textoutput)
         self.console.place(x=0,y=0,width=self.winwid,height=self.consolehei)
         self.btnFn.place(x=0,y=self.consolehei,width=self.btnwid,height=self.btnhei)
@@ -268,4 +270,5 @@ class main_win(func):
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main_win.mainloop()
 if __name__ == '__main__':
-    main = main_win()
+    mainwin = ml.Process(target=main_win)
+    mainwin.start()
