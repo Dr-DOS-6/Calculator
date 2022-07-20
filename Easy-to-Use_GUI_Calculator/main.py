@@ -3,11 +3,10 @@ from tkinter import messagebox, END
 import os
 import textwrap as tw
 import multiprocessing as ml
-from mgmtlist import mlist as mli
-from mgmtlist import allow as al
 import math
 import re
 #Thanks for Staycia930
+mli = [0,0,0,0,0,0,0,0,0,0]
 class func:
     def screenresetter(self,mode):
         self.fontset = ('Meiryo',20)
