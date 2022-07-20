@@ -1,6 +1,5 @@
 # Readme for EUGC(Easy-to-Use_GUI_Calculator)
-このGUI電卓「EUGC」は、Python 3.9以上、TkinterがインストールされたWindows、Chrome OSに対応しています。
-#2022/07/20現在、MacOSには対応していません。
+このGUI電卓「EUGC」は、Python 3.8.9以上、TkinterがインストールされたWindows、MacOS、Chrome OSに対応しています。
 当計算機中にて使用される計算記号の対応表を以下に記述します。
 +: +
 -: -
