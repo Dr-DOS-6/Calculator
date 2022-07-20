@@ -62,8 +62,9 @@ class func:
             self.btnFn =   tk.Button(self.main_win, text="切替",font=('Meiryo',20),command=lambda: self.Fn())
             self.btnBksp = tk.Button(self.main_win,text="←",font=('Meiryo',20), command=lambda: self.btnBackspace())
             self.btnClr =  tk.Button(self.main_win,text=text1,font=('Meiryo',text1font),command=lambda: self.btnClear())
-            self.btnExt =  tk.Button(self.main_win,text=text2,font=('Meiryo',text2font),command=lambda: self.btnExit())
+            self.btnExt =  tk.Button(self.main_win,text=text2,font=('Meiryo',text2font),command=lambda: self.btnExit())            
             self.console = tk.Label(self.main_win,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
+            self.btnFcrl = tk.Button(self.main_win,text="階乗",font=('Meiryo',20),command=lambda: self.btnFactorial())
             self.console.place(x=self.btnwid*2,y=0,width=self.winwid,height=self.consolehei)
             self.btnFn.place(x=self.btnwid*2,y=self.consolehei,width=self.btnwid,height=self.btnhei)
             self.btnSl.place(x=self.btnwid*3,y=self.consolehei,width=self.btnwid,height=self.btnhei)
@@ -85,6 +86,7 @@ class func:
             self.btn0.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnPe.place(x=self.btnwid*4,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnExt.place(x=self.btnwid*5,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnFcrl.place(x=0,y=0,width=self.btnwid,height=self.btnhei)
         elif mode == 2:
             self.main_win.geometry(f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}')
             self.console.destroy()
@@ -205,6 +207,8 @@ class func:
             return 'BackSpace'
         elif key_input == 'Shift_R'or'Shift_L'or'Control_R'or'Control_L'or'Tab'or'NumLock':
             return 'ignore'
+        elif key_input == '+'or'-'or'*'or'<'or'>'or'/'or'.'or'('or')':
+            return str(key_input)
     def Fn(self):
         if self.btnFn.config('relief')[-1] == 'sunken':
             self.btnFn.config(relief="raised")
@@ -221,7 +225,10 @@ class func:
         try: 
             _intinput = int(_input)
         except ValueError:
-            _input = self.inputreplacer(self,_input)
+            if _input == '+'or'-'or'*'or'<'or'>'or'/'or'.'or'('or')':
+                pass
+            else:
+                _input = self.inputreplacer(_input)
         if mli[2] == 1:
             self.console.config(anchor=tk.NW)
             mli[1] += 1
@@ -258,6 +265,9 @@ class func:
             self.console.config(anchor=tk.NW)
             self.temp += _input
             self.textReplacer(self.temp)
+    def btnFactorial(self):
+        self.temp += "math.factorial("
+        self.textReplacer(self.temp)
     def btnEnter(self):
         self.console.config(anchor=tk.NW)
         if mli[1] == 0:
