@@ -65,31 +65,45 @@ class func:
             self.console = tk.Label(self.main_win,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
             self.btnFcrl = tk.Button(self.main_win,text="階乗",font=self.fontset,command=lambda: self.btnFactorial())
             self.btnSqrt = tk.Button(self.main_win,text="平方根",font=('Meiryo',15),command=lambda: self.btnSquareroot())
+            self.btnCil = tk.Button(self.main_win,text="繰り上げ",font=('Meiryo',15),command=lambda: self.btnCeil())
+            self.btnFlr = tk.Button(self.main_win,text="繰り下げ",font=('Meiryo',15),command=lambda: self.btnFloor())
+            self.btnCma = tk.Button(self.main_win,text=",",font=self.fontset,command=lambda: self.btnAdd(','))
+            self.btnPct = tk.Button(self.main_win,text='割り算\nの余り',font=('Meiryo',12),command=lambda: self.btnAdd('%'))
             self.btnBrckL = tk.Button(self.main_win,text="(",font=self.fontset,command=lambda: self.btnAdd('('))
             self.btnBrckR = tk.Button(self.main_win,text=")",font=self.fontset,command=lambda: self.btnAdd(')'))
-            self.console.place(x=self.btnwid*2,y=0,width=self.winwid,height=self.consolehei)
-            self.btnFn.place(x=self.btnwid*2,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btnSl.place(x=self.btnwid*3,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btnAst.place(x=self.btnwid*4,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btnBksp.place(x=self.btnwid*5,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btn7.place(x=self.btnwid*2,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btn8.place(x=self.btnwid*3,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btn9.place(x=self.btnwid*4,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btnEtr.place(x=self.btnwid*5,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btn4.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btn5.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btn6.place(x=self.btnwid*4,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btnPl.place(x=self.btnwid*5,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btn1.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btn2.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btn3.place(x=self.btnwid*4,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btnMin.place(x=self.btnwid*5,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btnClr.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btn0.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btnPe.place(x=self.btnwid*4,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btnExt.place(x=self.btnwid*5,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnGcd = tk.Button(self.main_win,text="最大\n公約数",font=('Meiryo',12),command=lambda: self.btnGcdfunc())
+            self.btnExp = tk.Button(self.main_win,text='eのx乗',font=('Meiryo',15),command=lambda: self.btnExpfunc())
+            self.btnLog = tk.Button(self.main_win,text='xを底とする\nyの対数',font=('Meiryo',12),command=lambda: self.btnLogfunc())
+            self.console.place(x=self.btnwid*2,y=0,width=self.btnwid*4,height=self.btnhei*2)
+            self.btnFn.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnSl.place(x=self.btnwid*3,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnAst.place(x=self.btnwid*4,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnBksp.place(x=self.btnwid*5,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn7.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btn8.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btn9.place(x=self.btnwid*4,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btnEtr.place(x=self.btnwid*5,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btn4.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn5.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn6.place(x=self.btnwid*4,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnPl.place(x=self.btnwid*5,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn1.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btn2.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btn3.place(x=self.btnwid*4,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnMin.place(x=self.btnwid*5,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnClr.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btn0.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnPe.place(x=self.btnwid*4,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnExt.place(x=self.btnwid*5,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnFcrl.place(x=0,y=0,width=self.btnwid,height=self.btnhei)
             self.btnSqrt.place(x=self.btnwid,y=0,width=self.btnwid,height=self.btnhei)
+            self.btnPct.place(x=self.btnwid,y=self.btnhei*5,width=self.btnwid,height=self.btnhei)
+            self.btnCma.place(x=0,y=self.btnhei*5,width=self.btnwid,height=self.btnhei)
+            self.btnCil.place(x=0,y=self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btnFlr.place(x=self.btnwid,y=self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btnGcd.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnExp.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnLog.place(x=0,y=self.btnhei*3,width=self.btnwid,height=self.btnhei)
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
@@ -100,6 +114,13 @@ class func:
                 self.btnSqrt.destroy()
                 self.btnBrckL.destroy()
                 self.btnBrckR.destroy()
+                self.btnCma.destroy()
+                self.btnPct.destroy()
+                self.btnFlr.destroy()
+                self.btnCil.destroy()
+                self.btnGcd.destroy()
+                self.btnExp.destroy()
+                self.btnLog.destroy()
             self.console.destroy()
             self.btn0.destroy()
             self.btn1.destroy()
@@ -142,27 +163,27 @@ class func:
             self.btnClr =  tk.Button(self.main_win,text="消去",font=('Meiryo',15),command=lambda: self.btnClear())
             self.btnExt =  tk.Button(self.main_win,text='終了',font=('Meiryo',15),command=lambda: self.btnExit())
             self.console = tk.Label(self.main_win,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
-            self.console.place(x=0,y=0,width=self.winwid,height=self.consolehei)
-            self.btnFn.place(x=0,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btnSl.place(x=self.btnwid,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btnAst.place(x=self.btnwid*2,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btnBksp.place(x=self.btnwid*3,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-            self.btn7.place(x=0,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btn8.place(x=self.btnwid,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btn9.place(x=self.btnwid*2,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btnEtr.place(x=self.btnwid*3,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-            self.btn4.place(x=0,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btn5.place(x=self.btnwid,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btn6.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btnPl.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-            self.btn1.place(x=0,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btn2.place(x=self.btnwid,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btn3.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btnMin.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btnClr.place(x=0,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btn0.place(x=self.btnwid,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btnPe.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btnExt.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
+            self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnAst.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnBksp.place(x=self.btnwid*3,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn7.place(x=0,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btn8.place(x=self.btnwid,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btn9.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btnEtr.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+            self.btn4.place(x=0,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn5.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn6.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btnPl.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+            self.btn1.place(x=0,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btn2.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btn3.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnMin.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnClr.place(x=0,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btn0.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
     def kbd_input(self,keyin1):
         try:
             self.keyin2i = int(keyin1.keysym)
@@ -180,12 +201,15 @@ class func:
                 self.btnBackspace()
             else:
                 self.temp += self.keyin2
+                #print(self.temp)
                 self.textReplacer(self.temp)
     def inputreplacer(self,key_input: str) ->str:
         str(key_input)
         #print(key_input)
         if key_input == 'period':
             return '.'
+        elif key_input == 'comma':
+            return ','
         elif key_input == 'less':
             return '<'
         elif key_input == 'greater':
@@ -218,8 +242,28 @@ class func:
             return 'BackSpace'
         elif key_input == 'Shift_R'or'Shift_L'or'Control_R'or'Control_L'or'Tab'or'NumLock':
             return 'ignore'
-        elif key_input == '+'or'-'or'*'or'<'or'>'or'/'or'.'or'('or')':
-            return str(key_input)
+        elif key_input == '+':
+            return '+'
+        elif key_input == '-':
+            return '-'
+        elif key_input == '*':
+            return '*'
+        elif key_input == '<':
+            return '<'
+        elif key_input == '>':
+            return '>'
+        elif key_input == '/':
+            return '/'
+        elif key_input == '.':
+            return '.'
+        elif key_input == ',':
+            return ','
+        elif key_input == '(':
+            return '('
+        elif key_input == ')':
+            return ')'
+        else:
+            return 'ignore'
     def Fn(self):
         if self.btnFn.config('relief')[-1] == 'sunken':
             self.btnFn.config(relief="raised")
@@ -241,7 +285,8 @@ class func:
         try: 
             _intinput = int(_input)
         except ValueError:
-            if _input == '+'or'-'or'*'or'<'or'>'or'/'or'.'or'('or')':
+            #print(_input)
+            if _input == '+'or'-'or'*'or'<'or'>'or'/'or'.'or','or'('or')':
                 pass
             else:
                 _input = self.inputreplacer(_input)
@@ -279,6 +324,21 @@ class func:
             self.console.config(anchor=tk.NW)
             self.temp += _input
             self.textReplacer(self.temp)
+    def btnLogfunc(self):
+        self.temp += "math.log("
+        self.textReplacer(self.temp)
+    def btnExpfunc(self):
+        self.temp += "math.exp("
+        self.textReplacer(self.temp)
+    def btnGcdfunc(self):
+        self.temp += "math.gcd("
+        self.textReplacer(self.temp)
+    def btnCeil(self):
+        self.temp += "math.ceil("
+        self.textReplacer(self.temp)
+    def btnFloor(self):
+        self.temp += "math.floor("
+        self.textReplacer(self.temp)
     def btnSquareroot(self):
         self.temp += "math.sqrt("
         self.textReplacer(self.temp)
@@ -331,21 +391,27 @@ class func:
             self.textReplacer(self.temp)
     def btnBackspace(self):
         self.console.config(anchor=tk.NW)
-        try:
-            self.decide = self.temp[-15:]
-        except IndexError or 'math.sqrt(' in self.decide:
-            pass
-            try:
-                self.decide = self.temp[-10:]
-            except IndexError:
-                pass
-        if self.decide == 'math.sqrt(':
-            self.temp = self.temp[:-10]
-        elif self.decide == 'math.factorial(':
-            self.temp = self.temp[:-15]
-        else:   
-            self.temp = self.temp[:-1]
-        print(self.temp)
+        if self.temp[-15:] == 'math.factorial(':
+            #print(self.temp[-15:]+'\nこれは階乗です')
+            self.temp = self.temp[:len(self.temp)-15]
+        elif self.temp[-11:] == 'math.floor(':
+            #print(self.temp[-11:]+'\nこれは繰り下げです')
+            self.temp = self.temp[:len(self.temp)-11]
+        elif self.temp[-10:] == 'math.sqrt(':
+            #print(self.temp[-10:]+'\nこれは平方根です')
+            self.temp = self.temp[:len(self.temp)-10]
+        elif self.temp[-10:] == 'math.ceil(':
+            #print(self.temp[-10:]+'\nこれは平方根です')
+            self.temp = self.temp[:len(self.temp)-10]
+        elif self.temp[-9:] == 'math.gcd(':
+            self.temp = self.temp[:len(self.temp)-9]
+        elif self.temp[-9:] == 'math.exp(':
+            self.temp = self.temp[:len(self.temp)-9]
+        elif self.temp[-9:] == 'math.log(':
+            self.temp = self.temp[:len(self.temp)-9]
+        else:
+            self.temp = self.temp[:len(self.temp)-1]
+        #print(self.temp)
         self.textReplacer(self.temp)
     def btnExit(self):
         if self.btnExt.cget('text') == 'モード変更':
@@ -371,10 +437,9 @@ class main_win(func):
         self.scrwid = self.main_win.winfo_screenwidth()
         self.scrhei = self.main_win.winfo_screenheight()
         self.winwid = 360
-        self.winhei = 640
-        self.consolehei = int(self.winwid/2)
+        self.winhei = 630
         self.btnwid = int(self.winwid/4)
-        self.btnhei = int((self.winhei-self.consolehei)/5)
+        self.btnhei = int(self.winhei/7)
         self.winsize = f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
         self.main_win.geometry(self.winsize)
         self.main_win.bind("<KeyPress>",self.kbd_input)
@@ -404,27 +469,27 @@ class main_win(func):
         self.btnClr =  tk.Button(self.main_win,text="消去/\n出力",font=('Meiryo',15),command=lambda: self.btnClear())
         self.btnExt =  tk.Button(self.main_win,text='終了/\nモード切替',font=('Meiryo',12),command=lambda: self.btnExit())
         self.console = tk.Label(self.main_win,relief="sunken",font=('Meiryo',10),anchor=tk.NW,textvariable=self.textoutput)
-        self.console.place(x=0,y=0,width=self.winwid,height=self.consolehei)
-        self.btnFn.place(x=0,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-        self.btnSl.place(x=self.btnwid,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-        self.btnAst.place(x=self.btnwid*2,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-        self.btnBksp.place(x=self.btnwid*3,y=self.consolehei,width=self.btnwid,height=self.btnhei)
-        self.btn7.place(x=0,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-        self.btn8.place(x=self.btnwid,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-        self.btn9.place(x=self.btnwid*2,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-        self.btnEtr.place(x=self.btnwid*3,y=self.consolehei+self.btnhei,width=self.btnwid,height=self.btnhei)
-        self.btn4.place(x=0,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-        self.btn5.place(x=self.btnwid,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-        self.btn6.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-        self.btnPl.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*2,width=self.btnwid,height=self.btnhei)
-        self.btn1.place(x=0,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-        self.btn2.place(x=self.btnwid,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-        self.btn3.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-        self.btnMin.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*3,width=self.btnwid,height=self.btnhei)
-        self.btnClr.place(x=0,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-        self.btn0.place(x=self.btnwid,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-        self.btnPe.place(x=self.btnwid*2,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-        self.btnExt.place(x=self.btnwid*3,y=self.consolehei+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+        self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
+        self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btnAst.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btnBksp.place(x=self.btnwid*3,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btn7.place(x=0,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+        self.btn8.place(x=self.btnwid,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+        self.btn9.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+        self.btnEtr.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei,width=self.btnwid,height=self.btnhei)
+        self.btn4.place(x=0,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btn5.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btn6.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btnPl.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*2,width=self.btnwid,height=self.btnhei)
+        self.btn1.place(x=0,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+        self.btn2.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+        self.btn3.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+        self.btnMin.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*3,width=self.btnwid,height=self.btnhei)
+        self.btnClr.place(x=0,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+        self.btn0.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+        self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+        self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.console.config(anchor=tk.N)
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main_win.mainloop()
