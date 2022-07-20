@@ -93,7 +93,6 @@ class func:
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
-            self.btnAdd(1)
         elif mode == 2:
             self.main_win.geometry(f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}')
             if self.mode2 == 1:
@@ -234,6 +233,11 @@ class func:
         self._input = re.sub('Num_Lock|Tab|Control_R|Control_L|Shift_R|Shift_L|ignore','',tw.fill(_input,40))
         self.textoutput.set(f'{_input}')
     def btnAdd(self,_input):
+        #print(mli[2])
+        #print(mli[3])
+        #print(mli[4])
+        #print(_input)
+        #print('-----ここで切り取り-----')
         try: 
             _intinput = int(_input)
         except ValueError:
@@ -255,10 +259,9 @@ class func:
             self.title = 'EUGC Ver.Dev 電卓モード'
             self.main_win.title(self.title)
             mli[3] = 0
-            mli[4] = 1
+            #mli[4] = 1
             mli[8] = 1
-            END
-        if mli[3] == 1 and _input == '2':
+        elif mli[3] == 1 and _input == '2':
             self.console.config(anchor=tk.NW)
             self.temp = str()
             self.textReplacer(self.temp)
@@ -266,9 +269,8 @@ class func:
             self.main_win.title(self.title)
             self.screenresetter(1)
             mli[3] = 0
-            mli[4] = 1
+            #mli[4] = 1
             mli[8] = 2
-            END
         elif mli[4] == 1:
             self.temp = str()
             self.textReplacer(self.temp)
@@ -331,17 +333,19 @@ class func:
         self.console.config(anchor=tk.NW)
         try:
             self.decide = self.temp[-15:]
-        except IndexError:
+        except IndexError or 'math.sqrt(' in self.decide:
+            pass
             try:
                 self.decide = self.temp[-10:]
             except IndexError:
                 pass
         if self.decide == 'math.sqrt(':
-            self.temp = self.temp.rstrip('math.sqrt(')
+            self.temp = self.temp[:-10]
         elif self.decide == 'math.factorial(':
-            self.temp = self.temp.rstrip('math.factorial(')
+            self.temp = self.temp[:-15]
         else:   
             self.temp = self.temp[:-1]
+        print(self.temp)
         self.textReplacer(self.temp)
     def btnExit(self):
         if self.btnExt.cget('text') == 'モード変更':
