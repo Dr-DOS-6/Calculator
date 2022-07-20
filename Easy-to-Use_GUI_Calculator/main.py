@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox, END
 import os
 import textwrap as tw
-import multiprocessing as ml
 import math
 import re
 #Thanks for Staycia930
@@ -94,6 +93,7 @@ class func:
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
+            self.btnAdd(1)
         elif mode == 2:
             self.main_win.geometry(f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}')
             if self.mode2 == 1:
@@ -278,7 +278,7 @@ class func:
             self.temp += _input
             self.textReplacer(self.temp)
     def btnSquareroot(self):
-        self.temp += "math.factorial("
+        self.temp += "math.sqrt("
         self.textReplacer(self.temp)
     def btnFactorial(self):
         self.temp += "math.factorial("
@@ -329,7 +329,19 @@ class func:
             self.textReplacer(self.temp)
     def btnBackspace(self):
         self.console.config(anchor=tk.NW)
-        self.temp = self.temp[:-1]
+        try:
+            self.decide = self.temp[-15:]
+        except IndexError:
+            try:
+                self.decide = self.temp[-10:]
+            except IndexError:
+                pass
+        if self.decide == 'math.sqrt(':
+            self.temp = self.temp.rstrip('math.sqrt(')
+        elif self.decide == 'math.factorial(':
+            self.temp = self.temp.rstrip('math.factorial(')
+        else:   
+            self.temp = self.temp[:-1]
         self.textReplacer(self.temp)
     def btnExit(self):
         if self.btnExt.cget('text') == 'モード変更':
@@ -413,5 +425,4 @@ class main_win(func):
         self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.main_win.mainloop()
 if __name__ == '__main__':
-    mainwin = ml.Process(target=main_win)
-    mainwin.start()
+    main_win()
