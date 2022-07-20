@@ -74,6 +74,9 @@ class func:
             self.btnGcd = tk.Button(self.main_win,text="最大\n公約数",font=('Meiryo',12),command=lambda: self.btnGcdfunc())
             self.btnExp = tk.Button(self.main_win,text='eのx乗',font=('Meiryo',15),command=lambda: self.btnExpfunc())
             self.btnLog = tk.Button(self.main_win,text='xを底とする\nyの対数',font=('Meiryo',12),command=lambda: self.btnLogfunc())
+            self.btnSinx = tk.Button(self.main_win,text='sinx',font=self.fontset,command=lambda: self.btnSinxfunc())
+            self.btnCosx = tk.Button(self.main_win,text='cosx',font=self.fontset,command=lambda: self.btnCosxfunc())
+            self.btnTanx = tk.Button(self.main_win,text='tanx',font=self.fontset,command=lambda: self.btnTanxfunc())
             self.console.place(x=self.btnwid*2,y=0,width=self.btnwid*4,height=self.btnhei*2)
             self.btnFn.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnSl.place(x=self.btnwid*3,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
@@ -104,6 +107,9 @@ class func:
             self.btnGcd.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnExp.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnLog.place(x=0,y=self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnSinx.place(x=self.btnwid,y=self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnCosx.place(x=0,y=self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnTanx.place(x=self.btnwid,y=self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
@@ -121,6 +127,9 @@ class func:
                 self.btnGcd.destroy()
                 self.btnExp.destroy()
                 self.btnLog.destroy()
+                self.btnSinx.destroy()
+                self.btnCosx.destroy()
+                self.btnTanx.destroy()
             self.console.destroy()
             self.btn0.destroy()
             self.btn1.destroy()
@@ -324,6 +333,15 @@ class func:
             self.console.config(anchor=tk.NW)
             self.temp += _input
             self.textReplacer(self.temp)
+    def btnSinxfunc(self):
+        self.temp += 'math.sin((math.pi/180)*'
+        self.textReplacer(self.temp)
+    def btnCosxfunc(self):
+        self.temp += 'math.cos((math.pi/180)*'
+        self.textReplacer(self.temp)
+    def btnTanxfunc(self): 
+        self.temp += 'math.tan((math.pi/180)*'
+        self.textReplacer(self.temp)
     def btnLogfunc(self):
         self.temp += "math.log("
         self.textReplacer(self.temp)
@@ -391,7 +409,13 @@ class func:
             self.textReplacer(self.temp)
     def btnBackspace(self):
         self.console.config(anchor=tk.NW)
-        if self.temp[-15:] == 'math.factorial(':
+        if self.temp[-23:] == 'math.sin((math.pi/180)*':
+            self.temp = self.temp[:len(self.temp)-23]
+        elif self.temp[-23:] == 'math.cos((math.pi/180)*':
+            self.temp = self.temp[:len(self.temp)-23]
+        elif self.temp[-23:] == 'math.tan((math.pi/180)*':
+            self.temp = self.temp[:len(self.temp)-23]
+        elif self.temp[-15:] == 'math.factorial(':
             #print(self.temp[-15:]+'\nこれは階乗です')
             self.temp = self.temp[:len(self.temp)-15]
         elif self.temp[-11:] == 'math.floor(':
