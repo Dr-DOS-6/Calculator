@@ -213,6 +213,8 @@ class func:
                 self.keyin2 == str()
             elif self.keyin2 == "BackSpace":
                 self.btnBackspace()
+            elif self.keyin2 == "Escape":
+                self.btnExit()
             else:
                 self.temp += self.keyin2
                 #print(self.temp)
@@ -254,6 +256,8 @@ class func:
             return 'Return'
         elif key_input == 'BackSpace':
             return 'BackSpace'
+        elif key_input == "Escape":
+            return "Escape"
         elif key_input == 'Shift_R'or'Shift_L'or'Control_R'or'Control_L'or'Tab'or'NumLock':
             return 'ignore'
         elif key_input == '+':
