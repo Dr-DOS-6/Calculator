@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import messagebox, END,ttk
 import os
@@ -10,7 +11,7 @@ class func:
     def screenresetter(self,mode):
         self.style = ttk.Style()
         self.style.configure("stdButton.TButton",font=('Meiryo',20))
-        self.style.configure("stdButton2.TButton",font=('Meiryo',15))
+        self.style.configure("stdButton2.TButton",font=('Meiryo',12))
         self.style.configure("stdButton3.TButton",font=('Meiryo',12))
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
@@ -78,10 +79,10 @@ class func:
             self.btnBrckR = ttk.Button(self.main_win,text=")",style="stdButton.TButton",command=lambda: self.btnAdd(')'))
             self.btnGcd = ttk.Button(self.main_win,text="最大\n公約数",style="stdButton3.TButton",command=lambda: self.btnGcdfunc())
             self.btnExp = ttk.Button(self.main_win,text='eのx乗',style="stdButton2.TButton",command=lambda: self.btnExpfunc())
-            self.btnLog = ttk.Button(self.main_win,text='xを底とする\nyの対数',style="stdButton3.TButton",command=lambda: self.btnLogfunc())
-            self.btnSinx = ttk.Button(self.main_win,text='sinx',style="stdButton.TButton",command=lambda: self.btnSinxfunc())
-            self.btnCosx = ttk.Button(self.main_win,text='cosx',style="stdButton.TButton",command=lambda: self.btnCosxfunc())
-            self.btnTanx = ttk.Button(self.main_win,text='tanx',style="stdButton.TButton",command=lambda: self.btnTanxfunc())
+            self.btnLog = ttk.Button(self.main_win,text='yを底とする\nxの対数\n(log(x,y))',style="stdButton4.TButton",command=lambda: self.btnLogfunc())
+            self.btnSint = ttk.Button(self.main_win,text='sin',style="stdButton.TButton",command=lambda: self.btnSintfunc())
+            self.btnCost = ttk.Button(self.main_win,text='cos',style="stdButton.TButton",command=lambda: self.btnCostfunc())
+            self.btnTant = ttk.Button(self.main_win,text='tan',style="stdButton.TButton",command=lambda: self.btnTantfunc())
             self.console.place(x=self.btnwid*2,y=0,width=self.btnwid*4,height=self.btnhei*2)
             self.btnFn.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnSl.place(x=self.btnwid*3,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
@@ -112,9 +113,9 @@ class func:
             self.btnGcd.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnExp.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnLog.place(x=0,y=self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btnSinx.place(x=self.btnwid,y=self.btnhei*3,width=self.btnwid,height=self.btnhei)
-            self.btnCosx.place(x=0,y=self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            self.btnTanx.place(x=self.btnwid,y=self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnSint.place(x=self.btnwid,y=self.btnhei*3,width=self.btnwid,height=self.btnhei)
+            self.btnCost.place(x=0,y=self.btnhei*4,width=self.btnwid,height=self.btnhei)
+            self.btnTant.place(x=self.btnwid,y=self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
@@ -132,9 +133,9 @@ class func:
                 self.btnGcd.destroy()
                 self.btnExp.destroy()
                 self.btnLog.destroy()
-                self.btnSinx.destroy()
-                self.btnCosx.destroy()
-                self.btnTanx.destroy()
+                self.btnSint.destroy()
+                self.btnCost.destroy()
+                self.btnTant.destroy()
             self.console.destroy()
             self.btn0.destroy()
             self.btn1.destroy()
@@ -283,12 +284,18 @@ class func:
         else:
             return 'ignore'
     def Fn(self):
-        if self.btnExt.cget('text') == 'モード変更':
-            self.btnClr.config(text= 'Clear')
+        if self.btnExt.cget('text') == 'モード\n変更':
+            self.btnClr.config(text= '消去')
             self.btnExt.config(text= '終了',style="stdButton.TButton")
+            self.btnSint.config(text='sin')
+            self.btnCost.config(text='cos')
+            self.btnTant.config(text='tan')
         else:
-            self.btnClr.config(text= 'Export')
-            self.btnExt.config(text= 'モード変更',style="stdButton2.TButton")
+            self.btnClr.config(text= '出力')
+            self.btnExt.config(text= 'モード\n変更',style="stdButton2.TButton")
+            self.btnSint.config(text='arc\nsin')
+            self.btnCost.config(text='arc\ncos')
+            self.btnTant.config(text='arc\ntan')
     def textReplacer(self,_input):
         self._input = re.sub('Num_Lock|Tab|Control_R|Control_L|Shift_R|Shift_L|ignore','',tw.fill(_input,40))
         self.textoutput.set(f'{_input}')
@@ -340,14 +347,35 @@ class func:
             self.console.config(anchor=tk.NW)
             self.temp += _input
             self.textReplacer(self.temp)
-    def btnSinxfunc(self):
-        self.temp += 'math.sin((math.pi/180)*'
+    def sin(self,_input):
+        return math.sin(math.radians(_input))
+    def asin(self,_input):
+        return math.asin(_input)
+    def cos(self,_input):
+        return math.cos(math.radians(_input))
+    def acos(self,_input):
+        return math.acos(_input)
+    def tan(self,_input):
+        return math.tan(math.radians(_input))
+    def atan(self,_input):
+        return math.atan(_input)
+    def btnSintfunc(self):
+        if self.btnSint.cget('text') == 'sin':
+            self.temp += 'self.sin('
+        elif self.btnSint.cget('text') == 'arc\nsin':
+            self.temp += 'self.asin('
         self.textReplacer(self.temp)
-    def btnCosxfunc(self):
-        self.temp += 'math.cos((math.pi/180)*'
+    def btnCostfunc(self):
+        if self.btnCost.cget('text') == 'cos':
+            self.temp += 'self.cos('
+        elif self.btnCost.cget('text') == 'arc\ncos':
+            self.temp += 'self.acos('
         self.textReplacer(self.temp)
-    def btnTanxfunc(self): 
-        self.temp += 'math.tan((math.pi/180)*'
+    def btnTantfunc(self): 
+        if self.btnTant.cget('text') == 'tan':
+            self.temp += 'self.tan('
+        elif self.btnTant.cget('text') == 'arc\ntan':
+            self.temp += 'self.atan('
         self.textReplacer(self.temp)
     def btnLogfunc(self):
         self.temp += "math.log("
@@ -416,13 +444,7 @@ class func:
             self.textReplacer(self.temp)
     def btnBackspace(self):
         self.console.config(anchor=tk.NW)
-        if self.temp[-23:] == 'math.sin((math.pi/180)*':
-            self.temp = self.temp[:len(self.temp)-23]
-        elif self.temp[-23:] == 'math.cos((math.pi/180)*':
-            self.temp = self.temp[:len(self.temp)-23]
-        elif self.temp[-23:] == 'math.tan((math.pi/180)*':
-            self.temp = self.temp[:len(self.temp)-23]
-        elif self.temp[-15:] == 'math.factorial(':
+        if self.temp[-15:] == 'math.factorial(':
             #print(self.temp[-15:]+'\nこれは階乗です')
             self.temp = self.temp[:len(self.temp)-15]
         elif self.temp[-11:] == 'math.floor(':
@@ -440,12 +462,24 @@ class func:
             self.temp = self.temp[:len(self.temp)-9]
         elif self.temp[-9:] == 'math.log(':
             self.temp = self.temp[:len(self.temp)-9]
+        elif self.temp[-4:] == 'asin(':
+            self.temp = self.temp[:len(self.temp)-4]
+        elif self.temp[-4:] == 'acos(':
+            self.temp = self.temp[:len(self.temp)-4]
+        elif self.temp[-4:] == 'atan(':
+            self.temp = self.temp[:len(self.temp)-4]
+        elif self.temp[-3:] == 'sin(':
+            self.temp = self.temp[:len(self.temp)-3]
+        elif self.temp[-3:] == 'cos(':
+            self.temp = self.temp[:len(self.temp)-3]
+        elif self.temp[-3:] == 'tan(':
+            self.temp = self.temp[:len(self.temp)-3]
         else:
             self.temp = self.temp[:len(self.temp)-1]
         #print(self.temp)
         self.textReplacer(self.temp)
     def btnExit(self):
-        if self.btnExt.cget('text') == 'モード変更':
+        if self.btnExt.cget('text') == 'モード\n変更':
             if self.title == 'EUGC Ver.Dev 電卓モード':
                 self.title = 'EUGC Ver.Dev 関数電卓モード'
                 self.main_win.title(self.title)
