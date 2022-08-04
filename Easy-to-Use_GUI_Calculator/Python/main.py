@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import messagebox, END,ttk
 import os
@@ -12,7 +11,7 @@ class func:
         self.style = ttk.Style()
         self.style.configure("stdButton.TButton",font=('Meiryo',20))
         self.style.configure("stdButton2.TButton",font=('Meiryo',12))
-        self.style.configure("stdButton3.TButton",font=('Meiryo',12))
+        self.style.configure("stdButton3.TButton",font=('Meiryo',14))
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
         if mode == 1:
@@ -26,6 +25,7 @@ class func:
                 text1font = 15
                 text2 = '終了'
                 text2font = 15   
+
             self.main_win.geometry(f'{self.winwid+(self.btnwid*2)}x{self.winhei}+{int((self.scrwid-self.winwid-self.btnwid*2)/2)}+{int((self.scrhei-self.winhei)/2)}')
             self.console.destroy()
             self.btn0.destroy()
@@ -70,15 +70,15 @@ class func:
             self.btnExt =  ttk.Button(self.main_win,text='終了',style="stdButton.TButton",command=lambda: self.btnExit())
             self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
             self.btnFcrl = ttk.Button(self.main_win,text="階乗",style="stdButton.TButton",command=lambda: self.btnFactorial())
-            self.btnSqrt = ttk.Button(self.main_win,text="平方根",style="stdButton2.TButton",command=lambda: self.btnSquareroot())
-            self.btnCil = ttk.Button(self.main_win,text="繰り上げ",style="stdButton2.TButton",command=lambda: self.btnCeil())
-            self.btnFlr = ttk.Button(self.main_win,text="繰り下げ",style="stdButton2.TButton",command=lambda: self.btnFloor())
+            self.btnSqrt = ttk.Button(self.main_win,text="平方根",style="stdButton.TButton",command=lambda: self.btnSquareroot())
+            self.btnCil = ttk.Button(self.main_win,text="繰り上げ",style="stdButton3.TButton",command=lambda: self.btnCeil())
+            self.btnFlr = ttk.Button(self.main_win,text="繰り下げ",style="stdButton3.TButton",command=lambda: self.btnFloor())
             self.btnCma = ttk.Button(self.main_win,text=",",style="stdButton.TButton",command=lambda: self.btnAdd(','))
             self.btnPct = ttk.Button(self.main_win,text='割り算\nの余り',style="stdButton3.TButton",command=lambda: self.btnAdd('%'))
             self.btnBrckL = ttk.Button(self.main_win,text="(",style="stdButton.TButton",command=lambda: self.btnAdd('('))
             self.btnBrckR = ttk.Button(self.main_win,text=")",style="stdButton.TButton",command=lambda: self.btnAdd(')'))
             self.btnGcd = ttk.Button(self.main_win,text="最大\n公約数",style="stdButton3.TButton",command=lambda: self.btnGcdfunc())
-            self.btnExp = ttk.Button(self.main_win,text='eのx乗',style="stdButton2.TButton",command=lambda: self.btnExpfunc())
+            self.btnExp = ttk.Button(self.main_win,text='eのx乗',style="stdButton3.TButton",command=lambda: self.btnExpfunc())
             self.btnLog = ttk.Button(self.main_win,text='yを底とする\nxの対数\n(log(x,y))',style="stdButton4.TButton",command=lambda: self.btnLogfunc())
             self.btnSint = ttk.Button(self.main_win,text='sin',style="stdButton.TButton",command=lambda: self.btnSintfunc())
             self.btnCost = ttk.Button(self.main_win,text='cos',style="stdButton.TButton",command=lambda: self.btnCostfunc())
@@ -287,15 +287,23 @@ class func:
         if self.btnExt.cget('text') == 'モード\n変更':
             self.btnClr.config(text= '消去')
             self.btnExt.config(text= '終了',style="stdButton.TButton")
-            self.btnSint.config(text='sin')
-            self.btnCost.config(text='cos')
-            self.btnTant.config(text='tan')
+            if '関数' in self.title:
+                None
+            else:
+                self.btnSint.config(text='sin')
+                self.btnCost.config(text='cos')
+                self.btnTant.config(text='tan')
+                self.btnFcrl.config(text='階乗')
         else:
             self.btnClr.config(text= '出力')
             self.btnExt.config(text= 'モード\n変更',style="stdButton2.TButton")
-            self.btnSint.config(text='arc\nsin')
-            self.btnCost.config(text='arc\ncos')
-            self.btnTant.config(text='arc\ntan')
+            if not '関数' in self.title:
+                None
+            else:
+                self.btnSint.config(text='arc\nsin')
+                self.btnCost.config(text='arc\ncos')
+                self.btnTant.config(text='arc\ntan')
+                self.btnFcrl.config(text='絶対値')
     def textReplacer(self,_input):
         self._input = re.sub('Num_Lock|Tab|Control_R|Control_L|Shift_R|Shift_L|ignore','',tw.fill(_input,40))
         self.textoutput.set(f'{_input}')
@@ -359,6 +367,10 @@ class func:
         return math.tan(math.radians(_input))
     def atan(self,_input):
         return math.atan(_input)
+    def factorial(self,_input):
+        return math.factorial(_input)
+    def fabs(self,_input):
+        return math.fabs(_input)
     def btnSintfunc(self):
         if self.btnSint.cget('text') == 'sin':
             self.temp += 'self.sin('
@@ -396,7 +408,10 @@ class func:
         self.temp += "math.sqrt("
         self.textReplacer(self.temp)
     def btnFactorial(self):
-        self.temp += "math.factorial("
+        if self.btnFcrl.cget('text') == '階乗':
+            self.temp += "self.factorial("
+        elif self.btnFcrl.cget('text') == '絶対値':
+            self.temp += "self.fabs("
         self.textReplacer(self.temp)
     def btnEnter(self):
         self.console.config(anchor=tk.NW)
