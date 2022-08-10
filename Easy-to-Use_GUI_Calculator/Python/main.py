@@ -136,7 +136,6 @@ class func:
                 self.btnSint.destroy()
                 self.btnCost.destroy()
                 self.btnTant.destroy()
-                self.console.destroy()
             except AttributeError:
                 None
             self.console.destroy()
@@ -202,6 +201,12 @@ class func:
             self.btn0.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
+    def debug_window(self,mode):
+        if mode == 1:
+            self.debug_win = tk.Tk()
+            self.debug_win.title('Debug Window')
+            self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid*2)}+{int((self.scrhei-self.winhei)/2)}')
+            self.debug_win.mainloop()
     def kbd_input(self,keyin1):
         try:
             self.keyin2i = int(keyin1.keysym)
@@ -349,6 +354,28 @@ class func:
             self.main_win.title(self.title)
             self.screenresetter(1)
             mli[3] = 0
+            #mli[4] = 1
+            mli[8] = 2
+        elif  mli[3] == 1 and _input == '3':
+            self.console.config(anchor=tk.NW)
+            self.temp = str()
+            self.textReplacer(self.temp)
+            self.title = 'EUGC Ver.Dev 電卓デバッグモード'
+            self.main_win.title(self.title)
+            self.screenresetter(2)
+            self.debug_window(2)
+            mli[3] = 0
+            #mli[4] = 1
+            mli[8] = 3
+        elif mli[3] == 1 and _input == '4':
+            self.console.config(anchor=tk.NW)
+            self.temp = str()
+            self.textReplacer(self.temp)
+            self.title = 'EUGC Ver.Dev 関数電卓デバッグモード'
+            self.main_win.title(self.title)
+            self.screenresetter(1)
+            self.debug_window(1)
+            mli[3] = 4
             #mli[4] = 1
             mli[8] = 2
         elif mli[4] == 1:
