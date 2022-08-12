@@ -14,6 +14,12 @@ class func:
         self.style.configure("stdButton3.TButton",font=('Meiryo',14))
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
+        if mode == 3:
+            mode = 2
+            self.mode3 = 1
+        if mode == 4:
+            mode = 1
+            self.mode3 = 1
         if mode == 1:
             if mli[3] == 1:
                 text1 = '消去/出力'
@@ -24,8 +30,7 @@ class func:
                 text1 = '消去'
                 text1font = 15
                 text2 = '終了'
-                text2font = 15   
-
+                text2font = 15
             self.main_win.geometry(f'{self.winwid+(self.btnwid*2)}x{self.winhei}+{int((self.scrwid-self.winwid-self.btnwid*2)/2)}+{int((self.scrhei-self.winhei)/2)}')
             self.console.destroy()
             self.btn0.destroy()
@@ -119,6 +124,18 @@ class func:
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
+            if self.mode3 == 1:
+                try:
+                    self.debug_win.destroy()
+                except AttributeError:
+                    None
+                self.debug_win = tk.Toplevel()
+                self.variable = tk.StringVar()
+                self.debug_win.title('Debug Window')
+                self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid*2)}+{int((self.scrhei-self.winhei)/2)}')
+                self.variableviewer = ttk.Label(self.debug_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.variable)
+                self.variableviewer.pack()
+                self.debug_win.mainloop()
         elif mode == 2:
             self.main_win.geometry(f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}')
             try:
@@ -201,12 +218,15 @@ class func:
             self.btn0.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-    def debug_window(self,mode):
-        if mode == 1:
-            self.debug_win = tk.Tk()
-            self.debug_win.title('Debug Window')
-            self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid*2)}+{int((self.scrhei-self.winhei)/2)}')
-            self.debug_win.mainloop()
+            if self.mode3 == 1:
+                try:
+                    self.debug_win.destroy()
+                except AttributeError:
+                    None
+                self.debug_win = tk.Toplevel()
+                self.debug_win.title('Debug Window')
+                self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid)}+{int((self.scrhei-self.winhei)/2)}')
+                self.debug_win.mainloop()
     def kbd_input(self,keyin1):
         try:
             self.keyin2i = int(keyin1.keysym)
@@ -298,10 +318,13 @@ class func:
             if '関数' in self.title:
                 None
             else:
-                self.btnSint.config(text='sin')
-                self.btnCost.config(text='cos')
-                self.btnTant.config(text='tan')
-                self.btnFcrl.config(text='階乗')
+                try:
+                    self.btnSint.config(text='sin')
+                    self.btnCost.config(text='cos')
+                    self.btnTant.config(text='tan')
+                    self.btnFcrl.config(text='階乗')
+                except AttributeError:
+                    None
         else:
             self.btnClr.config(text= '出力')
             self.btnExt.config(text= 'モード\n変更',style="stdButton2.TButton")
@@ -362,8 +385,7 @@ class func:
             self.textReplacer(self.temp)
             self.title = 'EUGC Ver.Dev 電卓デバッグモード'
             self.main_win.title(self.title)
-            self.screenresetter(2)
-            self.debug_window(2)
+            self.screenresetter(3)
             mli[3] = 0
             #mli[4] = 1
             mli[8] = 3
@@ -373,8 +395,7 @@ class func:
             self.textReplacer(self.temp)
             self.title = 'EUGC Ver.Dev 関数電卓デバッグモード'
             self.main_win.title(self.title)
-            self.screenresetter(1)
-            self.debug_window(1)
+            self.screenresetter(4)
             mli[3] = 4
             #mli[4] = 1
             mli[8] = 2
@@ -533,10 +554,18 @@ class func:
                 self.title = 'EUGC Ver.Dev 関数電卓モード'
                 self.main_win.title(self.title)
                 self.screenresetter(1)
+            elif self.title == 'EUGC Ver.Dev 電卓デバッグモード':
+                self.title = 'EUGC Ver.Dev 関数電卓デバッグモード'
+                self.main_win.title(self.title)
+                self.screenresetter(4)
             elif self.title == 'EUGC Ver.Dev 関数電卓モード':
                 self.title = 'EUGC Ver.Dev 電卓モード'
                 self.main_win.title(self.title)
                 self.screenresetter(2)
+            elif self.title == 'EUGC Ver.Dev 関数電卓デバッグモード':
+                self.title = 'EUGC Ver.Dev 電卓デバッグモード'
+                self.main_win.title(self.title)
+                self.screenresetter(3)
         else:
             Messagebox = tk.messagebox.askquestion('EUGC Ver.Dev 終了確認','終了してもよろしいですか？', icon='warning')
             if Messagebox == 'yes':
