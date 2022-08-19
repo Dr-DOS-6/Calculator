@@ -17,24 +17,13 @@ class func:
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
         if mode == 3:
-            if self.modeselector == 1:
-                if self.decfir == 1:
-                    self.orgmode = 3
-                    mode = 2
-                    self.mode3 = 1
-                else:
-                    None
-            else:
-                self.orgmode = 3
-                mode = 2
-                self.mode3 = 1
+            self.orgmode = 3
+            mode = 2
+            self.mode3 = 1
         if mode == 4:
-            if self.modeselector == 1:
-                None
-            else:
-                self.orgmode = 4
-                mode = 1
-                self.mode3 = 1
+            self.orgmode = 4
+            mode = 1
+            self.mode3 = 1
         if mode == 1:
             self.orgmode = 1
             if mli[3] == 1:
@@ -141,22 +130,17 @@ class func:
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
             if self.mode3 == 1:
-                if self.orgmode == 4:
-                    self.decfir = 1
-                    try:
-                        self.debug_win.destroy()
-                    except AttributeError:
-                        None
-                    self.debug_win = tk.Toplevel()
-                    self.variable = tk.StringVar()
-                    self.debug_win.title('Debug Window')
-                    self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid*2)}+{int((self.scrhei-self.winhei)/2)}')
-                    self.variableviewer = ttk.Label(self.debug_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.variable)
-                    self.variableviewer.pack()
-                    self.debug_win.mainloop()
-                else:
-                    self.modeselector = 1
+                try:
+                    self.debug_win.destroy()
+                except AttributeError:
                     None
+                self.debug_win = tk.Toplevel()
+                self.variable = tk.StringVar()
+                self.debug_win.title('Debug Window')
+                self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid*2)}+{int((self.scrhei-self.winhei)/2)}')
+                self.variableviewer = ttk.Label(self.debug_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.variable)
+                self.variableviewer.pack()
+                self.debug_win.mainloop()
         elif mode == 2:
             self.main_win.geometry(f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}')
             try:
