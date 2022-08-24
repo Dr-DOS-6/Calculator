@@ -129,18 +129,6 @@ class func:
             self.btnBrckL.place(x=0,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.btnBrckR.place(x=self.btnwid,y=self.btnhei*6,width=self.btnwid,height=self.btnhei)
             self.mode2 = 1
-            if self.mode3 == 1:
-                try:
-                    self.debug_win.destroy()
-                except AttributeError:
-                    None
-                self.debug_win = tk.Toplevel()
-                self.variable = tk.StringVar()
-                self.debug_win.title('Debug Window')
-                self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid*2)}+{int((self.scrhei-self.winhei)/2)}')
-                self.variableviewer = ttk.Label(self.debug_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.variable)
-                self.variableviewer.pack()
-                self.debug_win.mainloop()
         elif mode == 2:
             self.main_win.geometry(f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}')
             try:
@@ -223,27 +211,6 @@ class func:
             self.btn0.place(x=self.btnwid,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
-            if self.mode3 == 1:
-                #self.p0 = ml.Process(target=self.debug_window1)
-                #self.p1 = ml.Process(target=self.varmonitor)
-                #self.p0.start
-                #self.p1.start
-                if self.orgmode == 3:
-                    try:
-                        self.debug_win.destroy()
-                    except AttributeError:
-                        None
-                    self.debug_win = tk.Toplevel()
-                    self.variable = tk.StringVar()
-                    self.debug_win.title('Debug Window')
-                    self.debug_win.geometry(f'{int(self.btnwid*2)}x{self.btnhei}+{(int((self.scrwid-self.winwid-self.btnwid*2)/2))-int(self.btnwid)}+{int((self.scrhei-self.winhei)/2)}')
-                    self.variableviewer = ttk.Label(self.debug_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.variable)
-                    self.variableviewer.pack()
-                    self.debug_win.mainloop()
-                    self.mode3 = 0
-                else:
-                    self.modeselector = 1
-                    None
     def kbd_input(self,keyin1):
         try:
             self.keyin2i = int(keyin1.keysym)
@@ -266,10 +233,6 @@ class func:
                 #print(self.temp
                 self.textReplacer(self.temp)
     def inputreplacer(self,key_input: str) ->str:
-        try:
-            self.varmonitor()
-        except AttributeError:
-            None
         str(key_input)
         #print(key_input)
         if key_input == 'period':
@@ -398,26 +361,6 @@ class func:
             self.main_win.title(self.title)
             self.screenresetter(1)
             mli[3] = 0
-            #mli[4] = 1
-            mli[8] = 2
-        elif  mli[3] == 1 and _input == '3':
-            self.console.config(anchor=tk.NW)
-            self.temp = str()
-            self.textReplacer(self.temp)
-            self.title = 'EUGC Ver.Dev 電卓デバッグモード'
-            self.main_win.title(self.title)
-            self.screenresetter(3)
-            mli[3] = 0
-            #mli[4] = 1
-            mli[8] = 3
-        elif mli[3] == 1 and _input == '4':
-            self.console.config(anchor=tk.NW)
-            self.temp = str()
-            self.textReplacer(self.temp)
-            self.title = 'EUGC Ver.Dev 関数電卓デバッグモード'
-            self.main_win.title(self.title)
-            self.screenresetter(4)
-            mli[3] = 4
             #mli[4] = 1
             mli[8] = 2
         elif mli[4] == 1:
@@ -593,9 +536,6 @@ class func:
                 self.main_win.destroy()
             else:
                 pass
-    def varmonitor(self):
-        strmli = str(mli)
-        self.variable.set(f'{strmli}')
 class main_win(func):
     def __init__(self):
         self.main_win = tk.Tk()
