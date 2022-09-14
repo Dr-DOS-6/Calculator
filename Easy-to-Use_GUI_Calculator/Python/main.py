@@ -537,14 +537,20 @@ class func:
             else:
                 pass
     def btnChgwinsize(self):
-        self.subwin = tk.Toplevel()
-        self.winhei2 = self.main_win.winfo_height()
-        self.winwid2 = self.main_win.winfo_width()
-        self.scrhei2 = self.main_win.winfo_screenheight()
-        self.scrwid2 = self.main_win.winfo_screenwidth()
-        self.winsize = f'{int(self.winwid2/2)}x{int(self.winhei2/2)}+{int((self.scrwid2-self.winwid2)/2)-int(self.winwid2/2)}+{int((self.scrhei2-self.winhei2)/2)}'
-        self.subwin.geometry(self.winsize)
-        self.subwin.mainloop()
+        if self.subwin.winfo_exists == True:
+            pass
+        else:
+            self.subwin = tk.Toplevel()
+            self.winhei2 = self.main_win.winfo_height()
+            self.winwid2 = self.main_win.winfo_width()
+            self.scrhei2 = self.main_win.winfo_screenheight()
+            self.scrwid2 = self.main_win.winfo_screenwidth()
+            self.winsize = f'{int(self.winwid2/2)}x{int(self.winhei2/2)}+{int((self.scrwid2-self.winwid2)/2)-int(self.winwid2/2)}+{int((self.scrhei2-self.winhei2)/2)}'
+            self.subwin.geometry(self.winsize)
+            self.resinput = tk.Entry(self.subwin,width=20)
+            self.btnressel = tk.Button(self.sub_win,text='確定',style='stdButton.TButton')
+            self.resinput.pack()
+            self.subwin.mainloop()
 class main_win(func):
     def __init__(self):
         self.main_win = tk.Tk()
