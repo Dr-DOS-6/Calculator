@@ -8,11 +8,8 @@ import re
 import multiprocessing as ml
 #Thanks for Staycia930
 mli = [0,0,0,0,0,0,0,0,0,0,0]
-#              0            1              2           3      4      5     6       7         8          9            10          11          12            13                          14      15      16            17                       18                                                          19                                                      20                   21                                     22              23            24       25         26                      27      28           29
-langJa = ['消去/出力','消去/\n出力','終了/\nモード切替','消去','終了','切替','階乗','平方根','繰り上げ','繰り下げ','割り算\nの余り','最大\n公約数','eのx乗','yを底とする\nxの対数\n(log(x,y))','関数','絶対値','電卓モード','関数電卓モード','使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2','入力された式は使用できません。もう一度式を入力してください。','が選択されました。','数値が大きすぎます。一回表示を消去してください。','結果の出力先:','デバッグ','EUGC Ver.Dev','終了確認','終了してもよろしいですか？','確認','モード\n変更','出力']
-#                0                 1                2                3      4       5          6             7          8          9                     10              11    12        13                    14              15                  16                   17                    18                                                                                          19                                              20                                         21                                                   22                        23           24             25           26                               27          28                                                                                             
-langEn = ['Erase/\nOutput','Erase/\nOutput','Exit/\nChange Mode','Erase','Exit','Change','Factorial','Square\nroot','Carry','Carry\nforward','Remainder of division','G.C.D','exp','Logarithm\n(log(x,y))','Function','Absolute\nValue','Calculator Mode','Functions Calculator Mode','Please select the mode that you want to use.\nCalculator Mode:1 Functions Calculator Mode:2',"has selected.","The inputted formula can't be calculated.\nPlease re-input the formula.",'The value is too large.Please erase the display once.','An result was output at:','Debug','EUGC Ver.Dev ','Confirm Exit','Are you sure you want to exit?','Confirm','Mode change','output']
-langset = langEn
+langJa = ['消去/出力','消去/\n出力','終了/\nモード切替','消去','終了','切替','階乗','平方根','繰り上げ','繰り下げ','割り算の余り','最大\n公約数','eのx乗','yを底とするxの対数','関数','絶対値','電卓モード','関数電卓モード','使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2','入力された式は使用できません。もう一度式を入力してください。','が選択されました。','数値が大きすぎます。一回表示を消去してください。','結果の出力先:','デバッグ','EUGC Ver.Dev','終了確認','終了してもよろしいですか？','確認']
+langEn = ['Erase/\nOutput','Erase/\nOutput','Exit/\nChange Mode','Erase','Exit','Change','Factorial','Square\nroot','Carry','Carry\nforward','Remainder of division','G.C.D','exp','Logarithm','Function','Absolute\nValue','Calculator Mode','Functions Calculator Mode','Please select the mode that you want to use.\nCalculator Mode:1 Functions Calculator Mode:2',"The inputted formula can't be calculated.\nPlease re-input the formula.",'The value is too large.Please erase the display once.','An result was output at:','Debug','EUGC Ver.Dev','Confirm Exit','Are you sure you want to exit?','Confirm']
 class func:
     def screenresetter(self,mode):
         self.style = ttk.Style()
@@ -21,25 +18,25 @@ class func:
         self.style.configure("stdButton3.TButton",font=('Meiryo',14))
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
-        #if mode == 3:
-        #    self.orgmode = 3
-        #    mode = 2
-        #    self.mode3 = 1
-        #if mode == 4:
-        #    self.orgmode = 4
-        #    mode = 1
-        #    self.mode3 = 1
+        if mode == 3:
+            self.orgmode = 3
+            mode = 2
+            self.mode3 = 1
+        if mode == 4:
+            self.orgmode = 4
+            mode = 1
+            self.mode3 = 1
         if mode == 1:
             self.orgmode = 1
             if mli[3] == 1:
-                text1 = f'{langset[0]}'
+                text1 = '消去/出力'
                 text1font = 15
-                text2 = f'{langset[2]}'
+                text2 = '終了/\nモード切替'
                 text2font = 12
             else:
-                text1 = f'{langset[3]}'
+                text1 = '消去'
                 text1font = 15
-                text2 = f'{langset[4]}'
+                text2 = '終了'
                 text2font = 15
             self.main_win.geometry(f'{self.winwid+(self.btnwid*2)}x{self.winhei}+{int((self.scrwid-self.winwid-self.btnwid*2)/2)}+{int((self.scrhei-self.winhei)/2)}')
             self.console.destroy()
@@ -79,22 +76,22 @@ class func:
             self.btnAst =  ttk.Button(self.main_win, text="x",style="stdButton.TButton",command=lambda: self.btnAdd('*'))
             self.btnSl =   ttk.Button(self.main_win, text="÷",style="stdButton.TButton",command=lambda: self.btnAdd('/'))
             self.btnEtr =  ttk.Button(self.main_win, text="Enter",style="stdButton.TButton",command=lambda: self.btnEnter())
-            self.btnFn =   ttk.Button(self.main_win, text=f"{langset[5]}",style="stdButton.TButton",command=lambda: self.Fn())
+            self.btnFn =   ttk.Button(self.main_win, text="切替",style="stdButton.TButton",command=lambda: self.Fn())
             self.btnBksp = ttk.Button(self.main_win,text="←",style="stdButton.TButton", command=lambda: self.btnBackspace())
-            self.btnClr =  ttk.Button(self.main_win,text=f"{langset[3]}",style="stdButton.TButton",command=lambda: self.btnClear())
-            self.btnExt =  ttk.Button(self.main_win,text=f'{langset[4]}',style="stdButton.TButton",command=lambda: self.btnExit())
+            self.btnClr =  ttk.Button(self.main_win,text="消去",style="stdButton.TButton",command=lambda: self.btnClear())
+            self.btnExt =  ttk.Button(self.main_win,text='終了',style="stdButton.TButton",command=lambda: self.btnExit())
             self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
-            self.btnFcrl = ttk.Button(self.main_win,text=f"{langset[6]}",style="stdButton.TButton",command=lambda: self.btnFactorial())
-            self.btnSqrt = ttk.Button(self.main_win,text=f"{langset[7]}",style="stdButton.TButton",command=lambda: self.btnSquareroot())
-            self.btnCil = ttk.Button(self.main_win,text=f"{langset[8]}",style="stdButton3.TButton",command=lambda: self.btnCeil())
-            self.btnFlr = ttk.Button(self.main_win,text=f"{langset[9]}",style="stdButton3.TButton",command=lambda: self.btnFloor())
+            self.btnFcrl = ttk.Button(self.main_win,text="階乗",style="stdButton.TButton",command=lambda: self.btnFactorial())
+            self.btnSqrt = ttk.Button(self.main_win,text="平方根",style="stdButton.TButton",command=lambda: self.btnSquareroot())
+            self.btnCil = ttk.Button(self.main_win,text="繰り上げ",style="stdButton3.TButton",command=lambda: self.btnCeil())
+            self.btnFlr = ttk.Button(self.main_win,text="繰り下げ",style="stdButton3.TButton",command=lambda: self.btnFloor())
             self.btnCma = ttk.Button(self.main_win,text=",",style="stdButton.TButton",command=lambda: self.btnAdd(','))
-            self.btnPct = ttk.Button(self.main_win,text=f'{langset[10]}',style="stdButton3.TButton",command=lambda: self.btnAdd('%'))
+            self.btnPct = ttk.Button(self.main_win,text='割り算\nの余り',style="stdButton3.TButton",command=lambda: self.btnAdd('%'))
             self.btnBrckL = ttk.Button(self.main_win,text="(",style="stdButton.TButton",command=lambda: self.btnAdd('('))
             self.btnBrckR = ttk.Button(self.main_win,text=")",style="stdButton.TButton",command=lambda: self.btnAdd(')'))
-            self.btnGcd = ttk.Button(self.main_win,text=f"{langset[11]}",style="stdButton3.TButton",command=lambda: self.btnGcdfunc())
-            self.btnExp = ttk.Button(self.main_win,text=f'{langset[12]}',style="stdButton3.TButton",command=lambda: self.btnExpfunc())
-            self.btnLog = ttk.Button(self.main_win,text=f'{langset[13]}',style="stdButton4.TButton",command=lambda: self.btnLogfunc())
+            self.btnGcd = ttk.Button(self.main_win,text="最大\n公約数",style="stdButton3.TButton",command=lambda: self.btnGcdfunc())
+            self.btnExp = ttk.Button(self.main_win,text='eのx乗',style="stdButton3.TButton",command=lambda: self.btnExpfunc())
+            self.btnLog = ttk.Button(self.main_win,text='yを底とする\nxの対数\n(log(x,y))',style="stdButton4.TButton",command=lambda: self.btnLogfunc())
             self.btnSint = ttk.Button(self.main_win,text='sin',style="stdButton.TButton",command=lambda: self.btnSintfunc())
             self.btnCost = ttk.Button(self.main_win,text='cos',style="stdButton.TButton",command=lambda: self.btnCostfunc())
             self.btnTant = ttk.Button(self.main_win,text='tan',style="stdButton.TButton",command=lambda: self.btnTantfunc())
@@ -190,10 +187,10 @@ class func:
             self.btnAst =  ttk.Button(self.main_win, text="x",style="stdButton.TButton",command=lambda: self.btnAdd('*'))
             self.btnSl =   ttk.Button(self.main_win, text="÷",style="stdButton.TButton",command=lambda: self.btnAdd('/'))
             self.btnEtr =  ttk.Button(self.main_win, text="Enter",style="stdButton.TButton",command=lambda: self.btnEnter())
-            self.btnFn =   ttk.Button(self.main_win, text=f"{langset[5]}",style="stdButton.TButton",command=lambda: self.Fn())
+            self.btnFn =   ttk.Button(self.main_win, text="切替",style="stdButton.TButton",command=lambda: self.Fn())
             self.btnBksp = ttk.Button(self.main_win,text="←",style="stdButton.TButton", command=lambda: self.btnBackspace())
-            self.btnClr =  ttk.Button(self.main_win,text=f"{langset[3]}",style="stdButton.TButton",command=lambda: self.btnClear())
-            self.btnExt =  ttk.Button(self.main_win,text=f'{langset[4]}',style="stdButton.TButton",command=lambda: self.btnExit())
+            self.btnClr =  ttk.Button(self.main_win,text="消去",style="stdButton.TButton",command=lambda: self.btnClear())
+            self.btnExt =  ttk.Button(self.main_win,text='終了',style="stdButton.TButton",command=lambda: self.btnExit())
             self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
             self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
             self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
@@ -301,30 +298,30 @@ class func:
         else:
             return 'ignore'
     def Fn(self):
-        if self.btnExt.cget('text') == f'{langset[28]}':
-            self.btnClr.config(text= f'{langset[3]}')
-            self.btnExt.config(text= f'{langset[4]}',style="stdButton.TButton")
-            if not f'{langset[14]}' in self.title:
+        if self.btnExt.cget('text') == 'モード\n変更':
+            self.btnClr.config(text= '消去')
+            self.btnExt.config(text= '終了',style="stdButton.TButton")
+            if not '関数' in self.title:
                 None
             else:
                 try:
                     self.btnSint.config(text='sin')
                     self.btnCost.config(text='cos')
                     self.btnTant.config(text='tan')
-                    self.btnFcrl.config(text=f'{langset[6]}')
+                    self.btnFcrl.config(text='階乗')
                 except AttributeError:
                     None
-        elif self.btnExt.cget('text') == f'{langset[4]}':
-            self.btnClr.config(text= f'{langset[29]}')
-            self.btnExt.config(text= f'{langset[28]}',style="stdButton2.TButton")
-            if not f'{langset[14]}' in self.title:
+        elif self.btnExt.cget('text') == '終了':
+            self.btnClr.config(text= '出力')
+            self.btnExt.config(text= 'モード\n変更',style="stdButton2.TButton")
+            if not '関数' in self.title:
                 None
             else:
                 try:
                     self.btnSint.config(text='arc\nsin')
                     self.btnCost.config(text='arc\ncos')
                     self.btnTant.config(text='arc\ntan')
-                    self.btnFcrl.config(text=f'{langset[15]}')
+                    self.btnFcrl.config(text='絶対値')
                 except AttributeError:
                     None
     def textReplacer(self,_input):
@@ -352,16 +349,12 @@ class func:
             self.textReplacer(self.temp)
             mli[2] = 0
         #if mli[10] == 0 and _input == '1':
-        #    langSet = langJa
-        #    mli[10] = 1
-        #elif mli[10] == 0 and _input == '2':
-        #    langSet = langEn
-        #    mli[10] = 1
+
         if  mli[3] == 1 and _input == '1':
             self.console.config(anchor=tk.NW)
             self.temp = str()
             self.textReplacer(self.temp)
-            self.title = f'{langset[24]+{langset[16]}}'
+            self.title = 'EUGC Ver.Dev 電卓モード'
             self.main_win.title(self.title)
             self.screenresetter(2)
             mli[3] = 0
@@ -371,7 +364,7 @@ class func:
             self.console.config(anchor=tk.NW)
             self.temp = str()
             self.textReplacer(self.temp)
-            self.title = f'{langset[24]+langset[17]}'
+            self.title = 'EUGC Ver.Dev 関数電卓モード'
             self.main_win.title(self.title)
             self.screenresetter(1)
             mli[3] = 0
@@ -441,18 +434,18 @@ class func:
         self.temp += "math.sqrt("
         self.textReplacer(self.temp)
     def btnFactorial(self):
-        if self.btnFcrl.cget('text') == f'{langset[6]}':
+        if self.btnFcrl.cget('text') == '階乗':
             self.temp += "self.factorial("
-        elif self.btnFcrl.cget('text') == f'{langset[15]}':
+        elif self.btnFcrl.cget('text') == '絶対値':
             self.temp += "self.fabs("
         self.textReplacer(self.temp)
     def btnEnter(self):
         self.console.config(anchor=tk.NW)
         if mli[1] == 0:
             #if mli[10] == 0:
-            #    self.textoutput.set('言語を選んでください。/Please select a language.')
-            #    return
-            self.textoutput.set(f'{langset[18]}')
+                #self.textoutput.set('言語を選んでください。/Please select a language.')
+                #self.Lang
+            self.textoutput.set('使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2 ')
             self.console.config(anchor=tk.NW)
             mli[1] = 1
             mli[3] = 1
@@ -470,16 +463,16 @@ class func:
                 if mli[1] == 0 or mli[6] == 1:
                     pass
                     END
-                elif f'{langset[19]}' or f'{langset[16]+langset[20]}' or f'{langset[17]+langset[20]}' in self.temp:
+                elif '入力された式は使用できません。もう一度式を入力してください。' or '電卓モードが選択されました。' or '関数電卓モードが選択されました。' in self.temp:
                     self.btnClear()
                 else:
                     pass
-                    self.temp += f'{langset[19]}'
+                    self.temp += '入力された式は使用できません。もう一度式を入力してください。'
                     self.textReplacer(self.temp)
             except ZeroDivisionError:
                 pass
             except OverflowError:
-                self.temp = f'{langset[21]}'
+                self.temp = '数値が大きすぎます。一回表示を消去してください。'
                 self.textReplacer(self.temp)
     def btnClear(self):
         self.console.config(anchor=tk.NW)
@@ -530,25 +523,25 @@ class func:
         #print(self.temp)
         self.textReplacer(self.temp)
     def btnExit(self):
-        if self.btnExt.cget('text') == f'{langset[28]}':
-            if self.title == f'{langset[24],langset[16]}':
-                self.title = f'{langset[24],langset[17]}'
+        if self.btnExt.cget('text') == 'モード\n変更':
+            if self.title == 'EUGC Ver.Dev 電卓モード':
+                self.title = 'EUGC Ver.Dev 関数電卓モード'
                 self.main_win.title(self.title)
                 self.screenresetter(1)
-            #elif self.title == '{langset[24]} 電卓デバッグモード':
-            #    self.title = '{langset[24]} 関数電卓デバッグモード'
-            #    self.main_win.title(self.title)
-            #    self.screenresetter(4)
-            elif self.title == f'{langset[24],langset[17]}':
-                self.title = f'{langset[24],langset[16]}'
+            elif self.title == 'EUGC Ver.Dev 電卓デバッグモード':
+                self.title = 'EUGC Ver.Dev 関数電卓デバッグモード'
+                self.main_win.title(self.title)
+                self.screenresetter(4)
+            elif self.title == 'EUGC Ver.Dev 関数電卓モード':
+                self.title = 'EUGC Ver.Dev 電卓モード'
                 self.main_win.title(self.title)
                 self.screenresetter(2)
-            #elif self.title == '{langset[24]} 関数電卓デバッグモード':
-            #    self.title = '{langset[24]} 電卓デバッグモード'
-            #    self.main_win.title(self.title)
-            #    self.screenresetter(3)
+            elif self.title == 'EUGC Ver.Dev 関数電卓デバッグモード':
+                self.title = 'EUGC Ver.Dev 電卓デバッグモード'
+                self.main_win.title(self.title)
+                self.screenresetter(3)
         else:
-            Messagebox = tk.messagebox.askquestion(f'{langset[24]+langset[25]}',f'{langset[26]}', icon='warning')
+            Messagebox = tk.messagebox.askquestion('EUGC Ver.Dev 終了確認','終了してもよろしいですか？', icon='warning')
             if Messagebox == 'yes':
                 self.main_win.destroy()
             else:
@@ -565,7 +558,7 @@ class func:
             self.winsize = f'{int(self.winwid2/2)}x{int(self.winhei2/2)}+{int((self.scrwid2-self.winwid2)/2)-int(self.winwid2/2)}+{int((self.scrhei2-self.winhei2)/2)}'
             self.subwin.geometry(self.winsize)
             self.resinput = tk.Entry(self.subwin,width=20)
-            self.btnressel = tk.Button(self.sub_win,text=f'{langset[27]}',style='stdButton.TButton')
+            self.btnressel = tk.Button(self.sub_win,text='確定',style='stdButton.TButton')
             self.resinput.pack()
             self.subwin.mainloop()
 class main_win(func):
@@ -613,10 +606,10 @@ class main_win(func):
         self.btnAst =  ttk.Button(self.main_win, text="x",style="stdButton.TButton")
         self.btnSl =   ttk.Button(self.main_win, text="÷",style="stdButton.TButton")
         self.btnEtr =  ttk.Button(self.main_win, text="Enter",style="stdButton.TButton",command=lambda: self.btnEnter())
-        self.btnFn =   ttk.Button(self.main_win, text=f"{langset[5]}",style="stdButton.TButton")
+        self.btnFn =   ttk.Button(self.main_win, text="切替",style="stdButton.TButton")
         self.btnBksp = ttk.Button(self.main_win,text="←",style="stdButton.TButton")
-        self.btnClr =  ttk.Button(self.main_win,text=f"{langset[1]}",style="stdButton2.TButton")
-        self.btnExt =  ttk.Button(self.main_win,text=f'{langset[2]}',style="stdButton3.TButton",command=lambda: self.btnExit())
+        self.btnClr =  ttk.Button(self.main_win,text="消去/\n出力",style="stdButton2.TButton")
+        self.btnExt =  ttk.Button(self.main_win,text='終了/\nモード切替',style="stdButton3.TButton",command=lambda: self.btnExit())
         self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
         self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
         self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
