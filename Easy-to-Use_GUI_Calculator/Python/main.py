@@ -352,7 +352,7 @@ class func:
             mli[10] = 1
             mli[11] = 0
         elif mli[10] == 0 and mli[11] == 1 and _input == '2':
-            self.langset = ['Erase/\nExport','Erase/\nExport','Exit/\nSwitch','Erase','Exit','Switch','Factorial','Square\nroot','Carry','Carry\nforward','Remainder of division','G.C.D','exp','Logarithm\n(log(x,y))','Function','Absolute\nValue','Calculator Mode','Functions Calculator Mode','Please select the mode that you want to use.\nCalculator Mode:1 Functions Calculator Mode:2',"has selected.","The inputted formula can't be calculated.\nPlease re-input the formula.",'The value is too large.Please erase the display once.','An result was output at:','Debug','EUGC Ver.Dev ','Confirm Exit','Are you sure you want to exit?','Confirm','Switch','Export']
+            self.langset = ['Erase/\nExport','Erase/\nExport','Exit/\nSwitch','Erase','Exit','Switch','Factorial','Square\nroot','Carry','Carry\nforward','Remainder of division','G.C.D','exp','Logarithm\n(log(x,y))','Function','Absolute\nValue','Calculator Mode','Functions Calculator Mode','Please select the mode that you want to use.\nCalculator Mode:1 \nFunctions Calculator Mode:2',"has selected.","The inputted formula can't be calculated.\nPlease re-input the formula.",'The value is too large.Please erase the display once.','An result was output at:','Debug','EUGC Ver.Dev ','Confirm Exit','Are you sure you want to exit?','Confirm','Switch','Export']
             self.textoutput.set('English has selected.\nPress Enter to proceed.')
             mli[10] = 1
             mli[11] = 0
