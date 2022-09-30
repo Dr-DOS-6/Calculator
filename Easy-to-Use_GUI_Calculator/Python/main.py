@@ -6,6 +6,7 @@ import textwrap as tw
 import math
 import re
 #Thanks for Staycia930
+#Version 1.2
 mli = [0,0,0,0,0,0,0,0,0,0,0,0]
 #                   0            1              2           3      4      5     6       7         8          9            10          11          12            13                          14      15      16            17                       18                                                          19                                                      20                   21                                     22              23            24       25         26                      27      28           29    30
 #     langJa = ['消去/出力','消去/\n出力','終了/\nモード切替','消去','終了','切替','階乗','平方根','繰り上げ','繰り下げ','割り算\nの余り','最大\n公約数','eのx乗','yを底とする\nxの対数\n(log(x,y))','関数','絶対値','電卓モード','関数電卓モード','使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2','入力された式は使用できません。もう一度式を入力してください。','が選択されました。','数値が大きすぎます。一回表示を消去してください。','結果の出力先:','デバッグ','EUGC Ver.Dev ','終了確認','終了してもよろしいですか？','確認','モード\n変更','出力','JA-Jp']
@@ -22,20 +23,11 @@ class func:
             self.style.configure("stdButton4.TButton",font=('Meiryo',10))
             self.style.configure("stdLabel.TLabel",font=('Meiryo',15))
         elif self.langset[-1] == 'US-En':
-        #elif self.langset == ['ID_0','ID_1','ID_2','ID_3','ID_4','ID_5','ID_6','ID_7','ID_8','ID_9','ID_10','ID_11','ID_12','ID_13','ID_14','ID_15','ID_16','ID_17','ID_18','ID_19','ID_20','ID_21','ID_22','ID_23','ID_24','ID_25','ID_26','ID_27','ID_28','ID_29']:
             self.style.configure("stdButton.TButton",font=('Meiryo',20))
             self.style.configure("stdButton2.TButton",font=('Meiryo',18))
             self.style.configure("stdButton3.TButton",font=('Meiryo',14))
             self.style.configure("stdButton4.TButton",font=('Meiryo',12))
             self.style.configure("stdLabel.TLabel",font=('Meiryo',15))
-        #if mode == 3:
-        #    self.orgmode = 3
-        #    mode = 2
-        #    self.mode3 = 1
-        #if mode == 4:
-        #    self.orgmode = 4
-        #    mode = 1
-        #    self.mode3 = 1
         if mode == 1:
             self.main_win.geometry(f'{self.winwid+(self.btnwid*2)}x{self.winhei}+{int((self.scrwid-self.winwid-self.btnwid*2)/2)}+{int((self.scrhei-self.winhei)/2)}')
             self.console.destroy()
@@ -362,13 +354,12 @@ class func:
             self.textReplacer(self.temp)
             mli[2] = 0
         if mli[10] == 0 and mli[11] == 1 and _input == '1':
-            self.langset = ['消去/出力','消去/\n出力','終了/\nモード切替','消去','終了','切替','階乗','平方根','繰り上げ','繰り下げ','割り算\nの余り','最大\n公約数','eのx乗','yを底とする\nxの対数\n(log(x,y))','関数','絶対値','電卓モード','関数電卓モード','使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2','入力された式は使用できません。もう一度式を入力してください。','が選択されました。','数値が大きすぎます。一回表示を消去してください。','結果の出力先:','デバッグ','EUGC Ver.Dev ','終了確認','終了してもよろしいですか？','確認','モード\n変更','出力','JA-Jp']
+            self.langset = ['消去/出力','消去/\n出力','終了/\nモード切替','消去','終了','切替','階乗','平方根','繰り上げ','繰り下げ','割り算\nの余り','最大\n公約数','eのx乗','yを底とする\nxの対数\n(log(x,y))','関数','絶対値','電卓モード','関数電卓モード','使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2','入力された式は使用できません。もう一度式を入力してください。','が選択されました。','数値が大きすぎます。一回表示を消去してください。','結果の出力先:','デバッグ','EUGC Ver.1.2 ','終了確認','終了してもよろしいですか？','確認','モード\n変更','出力','JA-Jp']
             self.textoutput.set('日本語が選択されました。\nEnterキーを押してください。')
             mli[10] = 1
             mli[11] = 0
         elif mli[10] == 0 and mli[11] == 1 and _input == '2':
-            #self.langset = ['ID_0','ID_1','ID_2','ID_3','ID_4','ID_5','ID_6','ID_7','ID_8','ID_9','ID_10','ID_11','ID_12','ID_13','ID_14','ID_15','ID_16','ID_17','ID_18','ID_19','ID_20','ID_21','ID_22','ID_23','ID_24','ID_25','ID_26','ID_27','ID_28','ID_29']
-            self.langset = ['Erase/\nExport','Erase/\nExport','Exit/\nSwitch','Erase','Exit','Switch','Factorial','Square\nroot','Carry','Carry\nforward','Remain\nof divid','G.C.D','exp','Logarithm\n(log(x,y))','Function','Absolute\nValue','Calculator Mode','Functions Calculator Mode','Please select the mode that you want to use.\nCalculator Mode:1 \nFunctions Calculator Mode:2',"has selected.","The inputted formula can't be calculated.\nPlease re-input the formula.",'The value is too large.Please erase the display once.','An result was output at:','Debug','EUGC Ver.Dev ','Confirm Exit','Are you sure you want to exit?','Confirm','Switch','Export','US-En']
+            self.langset = ['Erase/\nExport','Erase/\nExport','Exit/\nSwitch','Erase','Exit','Switch','Factorial','Square\nroot','Carry','Carry\nforward','Remain\nof divid','G.C.D','exp','Logarithm\n(log(x,y))','Function','Absolute\nValue','Calculator Mode','Functions Calculator Mode','Please select the mode that you want to use.\nCalculator Mode:1 \nFunctions Calculator Mode:2',"has selected.","The inputted formula can't be calculated.\nPlease re-input the formula.",'The value is too large.Please erase the display once.','An result was output at:','Debug','EUGC Ver.1.2 ','Confirm Exit','Are you sure you want to exit?','Confirm','Switch','Export','US-En']
             self.textoutput.set('English has selected.\nPress Enter to proceed.')
             mli[10] = 1
             mli[11] = 0
@@ -658,7 +649,7 @@ class main_win(func):
         self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.console.config(anchor=tk.N)
-        self.textoutput.set('Calculator GUI Version 1.0\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
+        self.textoutput.set('Calculator GUI Version 1.2\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.stat = 0
         self.main_win.mainloop()
 main_win()
