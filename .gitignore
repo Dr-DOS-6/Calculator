@@ -1,7 +1,12 @@
 Garbages/
-Dev/
+_pycache_/
 .vscode/
+Easy-to-Use_GUI_Calculator/C++/
+Easy-to-Use_GUI_Calculator/Python/_pycache_/
+Easy-to-Use_GUI_Calculator/Python/build/
+Easy-to-Use_GUI_Calculator/Python/dist/
+Easy-to-Use_GUI_Calculator/Python/main.spec/
 _pycache_/
 main.pyw
 main.spec
-README_Old.txt
+README_Old.txtx
