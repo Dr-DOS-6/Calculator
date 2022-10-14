@@ -5,7 +5,7 @@ import os
 import datetime
 import argparse
 import platform as pf
-def li():
+class li():
     deg = [0,30,45,60,90,120,135,150,180]
     deg_2 = [0,1,2,3,4,5,6,7,8,9]
     sintheta = ['0','1/2','1/√2','√3/2','1','√3/2','1/√2','1/2','0']
