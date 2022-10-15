@@ -630,8 +630,6 @@ class main_win(func):
         self.btnClr =  ttk.Button(self.main_win,text=f"消去/\n出力",style="stdButton2.TButton")
         self.btnExt =  ttk.Button(self.main_win,text=f'終了/\nモード切替',style="stdButton3.TButton",command=lambda: self.btnExit())
         self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
-        self.textscroll = ttk.Scrollbar(self.main_win,orient=tk.VERTICAL,command=self.console.yview)
-        self.console[]
         self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
         self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
         self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
