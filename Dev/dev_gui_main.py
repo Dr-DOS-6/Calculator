@@ -597,8 +597,8 @@ class main_win(func):
         self.fulwinhei = self.scrhei
         self.fulbtnwid = int(self.fulwinwid/4)
         self.fulbtnhei = int(self.fulwinhei/7)
-        self.winwid = int(self.scrwid/4)#360
-        self.winhei = int((self.winwid/9)*16)#630
+        self.winwid = 360
+        self.winhei = 630
         self.btnwid = int(self.winwid/4)
         self.btnhei = int(self.winhei/7)
         self.winsize = f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
@@ -609,6 +609,7 @@ class main_win(func):
         mli[1] = 0
         self.temp = str()
         mli[2] = 0
+        self.conframe = ttk.Frame(self.main_win, width=self.btnwid*4,height=self.btnhei*2)
         self.btn0 =    ttk.Button(self.main_win, text="0",style="stdButton.TButton")
         self.btn1 =    ttk.Button(self.main_win, text="1",style="stdButton.TButton",command=lambda: self.btnAdd('1'))
         self.btn2 =    ttk.Button(self.main_win, text="2",style="stdButton.TButton",command=lambda: self.btnAdd('2'))
@@ -629,8 +630,9 @@ class main_win(func):
         self.btnBksp = ttk.Button(self.main_win,text="←",style="stdButton.TButton")
         self.btnClr =  ttk.Button(self.main_win,text=f"消去/\n出力",style="stdButton2.TButton")
         self.btnExt =  ttk.Button(self.main_win,text=f'終了/\nモード切替',style="stdButton3.TButton",command=lambda: self.btnExit())
-        self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
-        self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
+        self.console = ttk.Label(self.conframe,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
+        self.conframe.pack(fill=tk.BOTH)
+        self.console.pack(fill=tk.BOTH)#place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
         self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
         self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
         self.btnAst.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
