@@ -199,7 +199,7 @@ class func:
             self.btnClr =  ttk.Button(self.main_win,text=f"{self.langset[3]}",style="stdButton.TButton",command=lambda: self.btnClear())
             self.btnExt =  ttk.Button(self.main_win,text=f'{self.langset[4]}',style="stdButton.TButton",command=lambda: self.btnExit())
             self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
-            self.conframe.pack(fill=tk.right,side='left',expand=1)
+            self.conframe.pack(fill=tk.right,side='right',expand=1)
             self.console.pack(fill=tk.BOTH,expand=1)#lace(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
             self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
