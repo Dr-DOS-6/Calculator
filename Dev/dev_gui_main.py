@@ -51,6 +51,7 @@ class func:
             self.btnBksp.destroy()
             self.btnClr.destroy()
             self.btnExt.destroy()
+            self.conframe.destroy()
             if self.langset[-1] == 'US-En': 
                 self.btnFcrl = ttk.Button(self.main_win,text=f"{self.langset[6]}",style="stdButton3.TButton",command=lambda: self.btnFactorial())
                 self.btnSqrt = ttk.Button(self.main_win,text=f"{self.langset[7]}",style="stdButton3.TButton",command=lambda: self.btnSquareroot())
@@ -65,10 +66,11 @@ class func:
                 self.btnFn =   ttk.Button(self.main_win, text=f"{self.langset[5]}",style="stdButton.TButton",command=lambda: self.Fn())       
                 self.btnGcd = ttk.Button(self.main_win,text=f"{self.langset[11]}",style="stdButton3.TButton",command=lambda: self.btnGcdfunc())
                 self.btnExp = ttk.Button(self.main_win,text=f'{self.langset[12]}',style="stdButton3.TButton",command=lambda: self.btnExpfunc())
+            self.conframe = ttk.Frame(self.main_win, width=self.btnwid*4,height=self.btnhei*2)
             self.btnLog = ttk.Button(self.main_win,text=f'{self.langset[13]}',style="stdButton4.TButton",command=lambda: self.btnLogfunc())
             self.btnPct = ttk.Button(self.main_win,text=f'{self.langset[10]}',style="stdButton3.TButton",command=lambda: self.btnAdd('%'))   
             self.btnFlr = ttk.Button(self.main_win,text=f"{self.langset[9]}",style="stdButton3.TButton",command=lambda: self.btnFloor())
-            self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
+            self.console = ttk.Label(self.conframe,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
             self.btn0 =    ttk.Button(self.main_win, text="0",style="stdButton.TButton",command=lambda: self.btnAdd('0'))
             self.btn1 =    ttk.Button(self.main_win, text="1",style="stdButton.TButton",command=lambda: self.btnAdd('1'))
             self.btn2 =    ttk.Button(self.main_win, text="2",style="stdButton.TButton",command=lambda: self.btnAdd('2'))
@@ -94,7 +96,8 @@ class func:
             self.btnSint = ttk.Button(self.main_win,text='sin',style="stdButton.TButton",command=lambda: self.btnSintfunc())
             self.btnCost = ttk.Button(self.main_win,text='cos',style="stdButton.TButton",command=lambda: self.btnCostfunc())
             self.btnTant = ttk.Button(self.main_win,text='tan',style="stdButton.TButton",command=lambda: self.btnTantfunc())
-            self.console.place(x=self.btnwid*2,y=0,width=self.btnwid*4,height=self.btnhei*2)
+            self.console.pack(expand=1,fill=tk.BOTH)#lace(x=self.btnwid*2,y=0,width=self.btnwid*4,height=self.btnhei*2)
+            self.conframe.pack(fill=tk.BOTH,side='left',expand=1)
             self.btnFn.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnSl.place(x=self.btnwid*3,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnAst.place(x=self.btnwid*4,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
@@ -170,10 +173,12 @@ class func:
             self.btnBksp.destroy()
             self.btnClr.destroy()
             self.btnExt.destroy()
+            self.conframe.destroy()
             if self.langset[-1] == 'US-En': 
                 self.btnFn =  ttk.Button(self.main_win, text=f"{self.langset[5]}",style="stdButton2.TButton",command=lambda: self.Fn())         
             elif self.langset[-1] == 'JA-Jp':          
                 self.btnFn =   ttk.Button(self.main_win, text=f"{self.langset[5]}",style="stdButton.TButton",command=lambda: self.Fn())
+            self.conframe = ttk.Frame(self.main_win, width=self.btnwid*4,height=self.btnhei*2)
             self.btn0 =    ttk.Button(self.main_win, text="0",style="stdButton.TButton",command=lambda: self.btnAdd('0'))
             self.btn1 =    ttk.Button(self.main_win, text="1",style="stdButton.TButton",command=lambda: self.btnAdd('1'))
             self.btn2 =    ttk.Button(self.main_win, text="2",style="stdButton.TButton",command=lambda: self.btnAdd('2'))
@@ -194,7 +199,8 @@ class func:
             self.btnClr =  ttk.Button(self.main_win,text=f"{self.langset[3]}",style="stdButton.TButton",command=lambda: self.btnClear())
             self.btnExt =  ttk.Button(self.main_win,text=f'{self.langset[4]}',style="stdButton.TButton",command=lambda: self.btnExit())
             self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
-            self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
+            self.conframe.pack(fill=tk.right,side='right',expand=1)
+            self.console.pack(fill=tk.BOTH,expand=1)#lace(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
             self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
             self.btnAst.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
@@ -589,7 +595,6 @@ class main_win(func):
         self.style.configure("stdButton3.TButton",font=('Meiryo',12))
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
-        self.main_win.resizable(0,0)
         self.main_win.title('EUGC Verdev')
         self.scrwid = self.main_win.winfo_screenwidth()
         self.scrhei = self.main_win.winfo_screenheight()
@@ -597,8 +602,8 @@ class main_win(func):
         self.fulwinhei = self.scrhei
         self.fulbtnwid = int(self.fulwinwid/4)
         self.fulbtnhei = int(self.fulwinhei/7)
-        self.winwid = int(self.scrwid/4)#360
-        self.winhei = int((self.winwid/9)*16)#630
+        self.winwid = 360
+        self.winhei = 630
         self.btnwid = int(self.winwid/4)
         self.btnhei = int(self.winhei/7)
         self.winsize = f'{self.winwid}x{self.winhei}+{int((self.scrwid-self.winwid)/2)}+{int((self.scrhei-self.winhei)/2)}'
@@ -609,6 +614,7 @@ class main_win(func):
         mli[1] = 0
         self.temp = str()
         mli[2] = 0
+        self.conframe = ttk.Frame(self.main_win, width=self.btnwid*4,height=self.btnhei*2)
         self.btn0 =    ttk.Button(self.main_win, text="0",style="stdButton.TButton")
         self.btn1 =    ttk.Button(self.main_win, text="1",style="stdButton.TButton",command=lambda: self.btnAdd('1'))
         self.btn2 =    ttk.Button(self.main_win, text="2",style="stdButton.TButton",command=lambda: self.btnAdd('2'))
@@ -629,10 +635,9 @@ class main_win(func):
         self.btnBksp = ttk.Button(self.main_win,text="←",style="stdButton.TButton")
         self.btnClr =  ttk.Button(self.main_win,text=f"消去/\n出力",style="stdButton2.TButton")
         self.btnExt =  ttk.Button(self.main_win,text=f'終了/\nモード切替',style="stdButton3.TButton",command=lambda: self.btnExit())
-        self.console = ttk.Label(self.main_win,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
-        self.textscroll = ttk.Scrollbar(self.main_win,orient=tk.VERTICAL,command=self.console.yview)
-        self.console[]
-        self.console.place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
+        self.console = ttk.Label(self.conframe,relief="sunken",style="stdLabel.TLabel",anchor=tk.NW,textvariable=self.textoutput)
+        self.conframe.pack(fill=tk.BOTH,side='left',expand=1)
+        self.console.pack(fill=tk.BOTH,expand=1)#place(x=0,y=0,width=self.btnwid*4,height=self.btnhei*2)
         self.btnFn.place(x=0,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
         self.btnSl.place(x=self.btnwid,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
         self.btnAst.place(x=self.btnwid*2,y=self.btnhei*2,width=self.btnwid,height=self.btnhei)
@@ -654,7 +659,7 @@ class main_win(func):
         self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.console.config(anchor=tk.N)
-        self.textoutput.set('Calculator GUI Version dev\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
+        self.textoutput.set('Calculator GUI Version dev\n Dr.GLaDOS© 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.stat = 0
         self.main_win.mainloop()
 main_win()

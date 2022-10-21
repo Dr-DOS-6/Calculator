@@ -649,7 +649,7 @@ class main_win(func):
         self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
         self.console.config(anchor=tk.N)
-        self.textoutput.set('Calculator GUI Version 1.2\n Dr.GLaDOS🄬 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
+        self.textoutput.set('Calculator GUI Version 1.2\n Dr.GLaDOS© 2022\n\nEnterキーを押して下さい...\nPress Enter key to continue...')
         self.stat = 0
         self.main_win.mainloop()
 main_win()
