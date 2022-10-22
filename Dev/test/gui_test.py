@@ -1,0 +1,12 @@
+import tkinter as tk
+root = tk.Tk()
+root.geometry('800x600')
+frame1 = tk.Frame(root,bg="#f0f") 
+label1 = tk.Label(frame1,text='aaaaaaa')
+frame2 = tk.Frame(root,bg="#0f0")
+btn1 = tk.Button(frame2,text='button')
+frame1.pack(fill=tk.BOTH,expand=1,side=tk.TOP)
+frame2.pack(expand=1,side=tk.TOP,after=frame1)
+label1.pack()
+btn1.pack()
+root.mainloop()
