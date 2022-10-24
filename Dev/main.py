@@ -58,7 +58,7 @@ class func:
                 self.btnFn = ttk.Button(self.main_win, text=f"{self.langset[5]}",style="stdButton2.TButton",command=lambda: self.Fn())
                 self.btnGcd = ttk.Button(self.main_win,text=f"{self.langset[11]}",style="stdButton.TButton",command=lambda: self.btnGcdfunc())
                 self.btnExp = ttk.Button(self.main_win,text=f'{self.langset[12]}',style="stdButton.TButton",command=lambda: self.btnExpfunc())               
-            elif self.langset[-1] == 'US-En':
+            elif self.langset[-1] == 'JA-Jp':
                 self.btnFcrl = ttk.Button(self.main_win,text=f"{self.langset[6]}",style="stdButton.TButton",command=lambda: self.btnFactorial())
                 self.btnSqrt = ttk.Button(self.main_win,text=f"{self.langset[7]}",style="stdButton.TButton",command=lambda: self.btnSquareroot())
                 self.btnCil = ttk.Button(self.main_win,text=f"{self.langset[8]}",style="stdButton3.TButton",command=lambda: self.btnCeil())                

@@ -71,25 +71,37 @@ class func:
             self.btnPct = tk.Button(self.main_win,text=f'{self.langset[10]}',command=lambda: self.btnAdd('%'))   
             self.btnFlr = tk.Button(self.main_win,text=f"{self.langset[9]}",command=lambda: self.btnFloor())
             self.console = tk.Label(self.conframe,relief="sunken",anchor=tk.NW,textvariable=self.textoutput)
-            self.btn0 =    tk.Button(self.main_win, text="0",command=lambda: self.btnAdd('0'))
-            self.btn1 =    tk.Button(self.main_win, text="1",command=lambda: self.btnAdd('1'))
-            self.btn2 =    tk.Button(self.main_win, text="2",command=lambda: self.btnAdd('2'))
-            self.btn3 =    tk.Button(self.main_win, text="3",command=lambda: self.btnAdd('3'))
-            self.btn4 =    tk.Button(self.main_win, text="4",command=lambda: self.btnAdd('4'))
-            self.btn5 =    tk.Button(self.main_win, text="5",command=lambda: self.btnAdd('5'))
-            self.btn6 =    tk.Button(self.main_win, text="6",command=lambda: self.btnAdd('6'))
+            
+            
+            
+            self.btnAst =  tk.Button(self.main_win, text="x",command=lambda: self.btnAdd('*'))
+            self.btnSl =   tk.Button(self.main_win, text="÷",command=lambda: self.btnAdd('/'))
+                                     
+            self.btnBksp = tk.Button(self.main_win,text="←", command=lambda: self.btnBackspace())
+
             self.btn7 =    tk.Button(self.main_win, text="7",command=lambda: self.btnAdd('7'))
             self.btn8 =    tk.Button(self.main_win, text="8",command=lambda: self.btnAdd('8'))
             self.btn9 =    tk.Button(self.main_win, text="9",command=lambda: self.btnAdd('9'))
-            self.btnPe =   tk.Button(self.main_win, text=".",command=lambda: self.btnAdd('.'))
+            self.btnEtr =  tk.Button(self.main_win, text="Enter",command=lambda: self.btnEnter())
+
+            self.btn4 =    tk.Button(self.main_win, text="4",command=lambda: self.btnAdd('4'))
+            self.btn5 =    tk.Button(self.main_win, text="5",command=lambda: self.btnAdd('5'))
+            self.btn6 =    tk.Button(self.main_win, text="6",command=lambda: self.btnAdd('6'))
             self.btnPl =   tk.Button(self.main_win, text="+",command=lambda: self.btnAdd('+'))
+
+            self.btn1 =    tk.Button(self.main_win, text="1",command=lambda: self.btnAdd('1'))
+            self.btn2 =    tk.Button(self.main_win, text="2",command=lambda: self.btnAdd('2'))
+            self.btn3 =    tk.Button(self.main_win, text="3",command=lambda: self.btnAdd('3'))
             self.btnMin =  tk.Button(self.main_win, text="-",command=lambda: self.btnAdd('-'))
-            self.btnAst =  tk.Button(self.main_win, text="x",command=lambda: self.btnAdd('*'))
-            self.btnSl =   tk.Button(self.main_win, text="÷",command=lambda: self.btnAdd('/'))
-            self.btnEtr =  tk.Button(self.main_win, text="Enter",command=lambda: self.btnEnter())                         
-            self.btnBksp = tk.Button(self.main_win,text="←", command=lambda: self.btnBackspace())
+            
             self.btnClr =  tk.Button(self.main_win,text=f"{self.langset[3]}",command=lambda: self.btnClear())
-            self.btnExt =  tk.Button(self.main_win,text=f'{self.langset[4]}',command=lambda: self.btnExit())    
+            self.btn0 =    tk.Button(self.main_win, text="0",command=lambda: self.btnAdd('0'))
+            self.btnPe =   tk.Button(self.main_win, text=".",command=lambda: self.btnAdd('.'))
+            self.btnExt =  tk.Button(self.main_win,text=f'{self.langset[4]}',command=lambda: self.btnExit())
+            
+            
+            
+                
             self.btnCma = tk.Button(self.main_win,text=",",command=lambda: self.btnAdd(','))
             self.btnBrckL = tk.Button(self.main_win,text="(",command=lambda: self.btnAdd('('))
             self.btnBrckR = tk.Button(self.main_win,text=")",command=lambda: self.btnAdd(')'))
