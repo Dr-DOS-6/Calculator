@@ -656,12 +656,13 @@ class main_win(func):
         mli[1] = 0
         self.temp = str()
         mli[2] = 0
-        self.conframe =  tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='green',width=self.btnwid*4,height=self.btnhei*4)
-        self.btnframe1 = tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='red', width=self.btnwid*4,height=self.btnhei)
-        self.btnframe2 = tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='blue', width=self.btnwid*4,height=self.btnhei)
-        self.btnframe3 = tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='yellow', width=self.btnwid*4,height=self.btnhei)
-        self.btnframe4 = tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='black', width=self.btnwid*4,height=self.btnhei)
-        self.btnframe5 = tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='orange', width=self.btnwid*4,height=self.btnhei)
+        self.allframe = tk.Frame(self.main_win,relief=tk.RAISED,bd=2,bg='#0072c6',width=self.winwid,height=self.winhei)
+        self.conframe =  tk.Frame(self.allframe,relief=tk.RAISED,bd=2,bg='green')#,width=self.btnwid*4,height=self.btnhei*4)
+        self.btnframe1 = tk.Frame(self.allframe,relief=tk.RAISED,bd=2,bg='red')#, width=self.btnwid*4,height=self.btnhei)
+        self.btnframe2 = tk.Frame(self.allframe,relief=tk.RAISED,bd=2,bg='blue')#, width=self.btnwid*4,height=self.btnhei)
+        self.btnframe3 = tk.Frame(self.allframe,relief=tk.RAISED,bd=2,bg='yellow')#, width=self.btnwid*4,height=self.btnhei)
+        self.btnframe4 = tk.Frame(self.allframe,relief=tk.RAISED,bd=2,bg='black')#, width=self.btnwid*4,height=self.btnhei)
+        self.btnframe5 = tk.Frame(self.allframe,relief=tk.RAISED,bd=2,bg='orange')#, width=self.btnwid*4,height=self.btnhei)
 
         self.console =   tk.Label(self.conframe,relief="sunken",anchor=tk.NW,textvariable=self.textoutput)
 
@@ -690,14 +691,16 @@ class main_win(func):
         self.btnPe =    tk.Button(self.btnframe5,width=self.btnwid,height=self.btnhei, text=".")
         self.btnExt =   tk.Button(self.btnframe5,width=self.btnwid,height=self.btnhei,text=f'終了/\nモード切替',command=lambda: self.btnExit())
 
-        self.conframe.pack(fill='x')
-        self.btnframe1.pack(fill='x')
-        self.btnframe2.pack(fill='x')
-        self.btnframe3.pack(fill='x')
-        self.btnframe4.pack(fill='x')
-        self.btnframe5.pack(fill='x')
+        self.allframe.pack(fill='both',expand=1)
 
-        self.console.grid(column=0,row=0)
+        self.conframe.pack(fill='both')
+        self.btnframe1.pack(fill='both')
+        self.btnframe2.pack(fill='both')
+        self.btnframe3.pack(fill='both')
+        self.btnframe4.pack(fill='both')
+        self.btnframe5.pack(fill='both')
+
+        self.console.pack(fill='both')
 
         self.btnFn.grid(column=0,row=0)
         self.btnSl.grid(column=1,row=0)
