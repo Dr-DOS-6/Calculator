@@ -52,6 +52,11 @@ class func:
             self.btnClr.destroy()
             self.btnExt.destroy()
             self.conframe.destroy()
+            self.btnframe1.destroy()
+            self.btnframe2.destroy()
+            self.btnframe3.destroy()
+            self.btnframe4.destroy()
+            self.btnframe5.destroy()
             if self.langset[-1] == 'US-En': 
                 self.btnFcrl = tk.Button(self.main_win,text=f"{self.langset[6]}",command=lambda: self.btnFactorial())
                 self.btnSqrt = tk.Button(self.main_win,text=f"{self.langset[7]}",command=lambda: self.btnSquareroot())
