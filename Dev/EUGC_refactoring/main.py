@@ -1,18 +1,4 @@
-#coding: UTF-
-import subprocess
-import sys
-
-def install_missing_packages():
-    required_packages = ["tkinter", "os", "textwrap", "math", "re"]
-    for package in required_packages:
-        try:
-            __import__(package)
-        except ImportError:
-            print(f"Package '{package}' is not installed. Installing...")
-            subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-# Call the function at the start of the script
-install_missing_packages()
+#coding: UTF-8
 import tkinter as tk
 from tkinter import messagebox,END,ttk
 import os
@@ -20,7 +6,7 @@ import textwrap as tw
 import math
 import re
 #Thanks for Staycia930
-#Version 1.2.1dev
+#Version 1.2
 mli = [0,0,0,0,0,0,0,0,0,0,0,0]
 #                   0            1              2           3      4      5     6       7         8          9            10          11          12            13                          14      15      16            17                       18                                                          19                                                      20                   21                                     22              23            24       25         26                      27      28           29    30
 #     langJa = ['消去/出力','消去/\n出力','終了/\nモード切替','消去','終了','切替','階乗','平方根','繰り上げ','繰り下げ','割り算\nの余り','最大\n公約数','eのx乗','yを底とする\nxの対数\n(log(x,y))','関数','絶対値','電卓モード','関数電卓モード','使用するモードを選んでください。\n電卓モード:1 関数電卓モード:2','入力された式は使用できません。もう一度式を入力してください。','が選択されました。','数値が大きすぎます。一回表示を消去してください。','結果の出力先:','デバッグ','EUGC Ver.Dev ','終了確認','終了してもよろしいですか？','確認','モード\n変更','出力','JA-Jp']
@@ -230,8 +216,6 @@ class func:
             self.btnPe.place(x=self.btnwid*2,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
             self.btnExt.place(x=self.btnwid*3,y=self.btnhei*2+self.btnhei*4,width=self.btnwid,height=self.btnhei)
     def kbd_input(self,keyin1):
-        if not hasattr(self, 'keyin2'):  # 初期化されていない場合
-            self.keyin2 = ""  # 初期化
         try:
             self.keyin2i = int(keyin1.keysym)
             self.keyin2 = str(self.keyin2)
@@ -314,7 +298,7 @@ class func:
         elif key_input == ')':
             return ')'
         else:
-            return key_input #'ignore'
+            return 'ignore'
     def Fn(self):
         if self.btnExt.cget('text') == f'{self.langset[28]}':
             self.btnClr.config(text= f'{self.langset[3]}')
@@ -579,7 +563,7 @@ class func:
             else:
                 pass
     def btnChgwinsize(self):
-        if hasattr(self, 'subwin') and self.subwin.winfo_exists():  # 属性が存在し、ウィンドウが存在する場合
+        if self.subwin.winfo_exists == True:
             pass
         else:
             self.subwin = tk.Toplevel()
