@@ -729,8 +729,8 @@ def all_calc_code():
         for i in range (0,14):
             if li.block_sym[i] in cal_str:
                 cal_error += 1
-        if cal_error > 0:
-            error_end('input_is_not_calculation_formula','error')
+        #if cal_error > 0:
+        #    error_end('input_is_not_calculation_formula','error')
         cal_int = str(eval(cal))
         print('結果:',cal_int)
         output_5(cal_str,cal_int)
