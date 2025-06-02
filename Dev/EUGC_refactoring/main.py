@@ -218,7 +218,6 @@ class func:
     def kbd_input(self,keyin1):
         try:
             self.keyin2i = int(keyin1.keysym)
-            self.keyin2 = str(self.keyin2)
             self.btnAdd(str(self.keyin2i))
         except:
             replacer = self.inputreplacer(keyin1.keysym)
@@ -236,6 +235,9 @@ class func:
                 self.temp += self.keyin2
                 #print(self.temp
                 self.textReplacer(self.temp)
+    def textReplacer(self,_input):
+        self._input = re.sub('Num_Lock|Tab|Control_R|Control_L|Shift_R|Shift_L|ignore','',tw.fill(_input,40))
+        self.textoutput.set(f'{_input}')
     def inputreplacer(self,key_input: str) ->str:
         str(key_input)
         #print(key_input)
@@ -329,9 +331,7 @@ class func:
                     self.btnFcrl.config(text=f'{self.langset[15]}')
                 except AttributeError:
                     None
-    def textReplacer(self,_input):
-        self._input = re.sub('Num_Lock|Tab|Control_R|Control_L|Shift_R|Shift_L|ignore','',tw.fill(_input,40))
-        self.textoutput.set(f'{_input}')
+
     def btnAdd(self,_input):
         #print(mli[2])
         #print(mli[3])
@@ -571,7 +571,6 @@ class main_win(func):
         self.style.configure("stdButton3.TButton",font=('Meiryo',12))
         self.style.configure("stdButton4.TButton",font=('Meiryo',10))
         self.style.configure("stdLabel.TLabel",font=('Meiryo',12))
-        self.main_win.resizable(0,0)
         self.main_win.title('EUGC Ver1.2')
         self.scrwid = self.main_win.winfo_screenwidth()
         self.scrhei = self.main_win.winfo_screenheight()
